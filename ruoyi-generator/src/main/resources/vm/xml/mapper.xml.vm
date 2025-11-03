@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packageName}.mapper.${ClassName}Mapper">
+
+    <resultMap type="${ClassName}" id="${ClassName}Result">
+        #foreach ($column in $columns)
+            <result property="${column.javaField}" column="${column.columnName}"/>
+        #end
+    </resultMap>
+
+    <sql id="select${ClassName}Vo">
+        select#foreach($column in $columns) $column.columnName#if($foreach.count != $columns.size()),#end#end
+        from ${tableName}
+    </sql>
+
+    <select id="select${ClassName}List" parameterType="${ClassName}" resultMap="${ClassName}Result">
+        <include refid="select${ClassName}Vo"/>
+        <where>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="deptId != null">and dept_id = #{deptId}</if>
+            <if test="tenantId != null">and tenant_id = #{tenantId}</if>
+            <if test="status != null">and status = #{status}</if>
+            #foreach($column in $columns)
+                #set($queryType=$column.queryType)
+                #set($javaField=$column.javaField)
+                #set($javaType=$column.javaType)
+                #set($columnName=$column.columnName)
+                #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+                #if($column.query)
+                    #if($column.queryType == "EQ")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end">
+                            and $columnName = #{$javaField}
+                        </if>
+                    #elseif($queryType == "NE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end">
+                            and $columnName != #{$javaField}
+                        </if>
+                    #elseif($queryType == "GT")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end">
+                            and $columnName &gt; #{$javaField}
+                        </if>
+                    #elseif($queryType == "GTE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end">
+                            and $columnName &gt;= #{$javaField}
+                        </if>
+                    #elseif($queryType == "LT")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end">
+                            and $columnName <![CDATA[ < ]]> #{$javaField}
+                        </if>
+                    #elseif($queryType == "LTE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end">
+                            and $columnName <![CDATA[ <= ]]> #{$javaField}
+                        </if>
+                    #elseif($queryType == "LIKE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end">
+                            and $columnName like concat('%', #{$javaField}, '%')
+                        </if>
+                    #elseif($queryType == "BETWEEN")
+                        <if test="params.begin$AttrName != null and params.begin$AttrName != '' and params.end$AttrName != null and params.end$AttrName != ''">
+                            and $columnName between #{params.begin$AttrName} and #{params.end$AttrName}
+                        </if>
+                    #end
+                #end
+            #end
+            <if test="params.begincreateTime != null and params.begincreateTime != ''"><!-- 开始时间检索 -->
+                <choose>
+                    <when test="'pgsql' == _databaseId || 'hg' == _databaseId">
+                        and create_time::DATE <![CDATA[ >= ]]> concat(#{params.begincreateTime}, ' 00:00:00')
+                    </when>
+                    <otherwise>
+                        and date_format(create_time,'%Y-%m-%d') <![CDATA[ >= ]]>
+                        date_format(#{params.begincreateTime},'%Y-%m-%d')
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="params.endcreateTime != null and params.endcreateTime != ''"><!-- 结束时间检索 -->
+                <choose>
+                    <when test="'pgsql' == _databaseId || 'hg' == _databaseId">
+                        and create_time::DATE <![CDATA[ <= ]]> concat(#{params.endcreateTime}, ' 23:59:59')
+                    </when>
+                    <otherwise>
+                        and date_format(create_time,'%Y-%m-%d') <![CDATA[ <= ]]>
+                        date_format(#{params.endcreateTime},'%Y-%m-%d')
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        order by id desc
+    </select>
+</mapper>
