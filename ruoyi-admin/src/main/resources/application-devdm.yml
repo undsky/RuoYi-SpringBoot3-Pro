@@ -3,7 +3,7 @@ ruoyi:
   env: dev
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
   profile: /Users/jyx/project/RuoyiSpringBoot3/profile
-  siteUrl: http://test.undsky.com
+  siteUrl: https://www.undsky.com
 
 # 数据源配置
 spring:
