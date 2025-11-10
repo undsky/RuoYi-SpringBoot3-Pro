@@ -218,6 +218,7 @@ COMMENT ON COLUMN "ruoyi"."gen_table"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."gen_table"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."gen_table"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."gen_table"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."gen_table" IS '代码生成业务表';
 
 -- ----------------------------
 -- Records of gen_table
@@ -280,6 +281,7 @@ COMMENT ON COLUMN "ruoyi"."gen_table_column"."create_by" IS '创建者';
 COMMENT ON COLUMN "ruoyi"."gen_table_column"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."gen_table_column"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."gen_table_column"."update_time" IS '更新时间';
+COMMENT ON TABLE "ruoyi"."gen_table_column" IS '代码生成业务表字段';
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -300,6 +302,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_blob_triggers"."sched_name" IS '调度名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_blob_triggers"."trigger_name" IS 'qrtz_triggers表trigger_name的外键';
 COMMENT ON COLUMN "ruoyi"."qrtz_blob_triggers"."trigger_group" IS 'qrtz_triggers表trigger_group的外键';
 COMMENT ON COLUMN "ruoyi"."qrtz_blob_triggers"."blob_data" IS '存放持久化Trigger对象';
+COMMENT ON TABLE "ruoyi"."qrtz_blob_triggers" IS 'Blob类型的触发器表';
 
 -- ----------------------------
 -- Records of qrtz_blob_triggers
@@ -318,6 +321,7 @@ CREATE TABLE "ruoyi"."qrtz_calendars" (
 COMMENT ON COLUMN "ruoyi"."qrtz_calendars"."sched_name" IS '调度名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_calendars"."calendar_name" IS '日历名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_calendars"."calendar" IS '存放持久化calendar对象';
+COMMENT ON TABLE "ruoyi"."qrtz_calendars" IS '日历信息表';
 
 -- ----------------------------
 -- Records of qrtz_calendars
@@ -340,6 +344,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_cron_triggers"."trigger_name" IS 'qrtz_triggers�
 COMMENT ON COLUMN "ruoyi"."qrtz_cron_triggers"."trigger_group" IS 'qrtz_triggers表trigger_group的外键';
 COMMENT ON COLUMN "ruoyi"."qrtz_cron_triggers"."cron_expression" IS 'cron表达式';
 COMMENT ON COLUMN "ruoyi"."qrtz_cron_triggers"."time_zone_id" IS '时区';
+COMMENT ON TABLE "ruoyi"."qrtz_cron_triggers" IS 'Cron类型的触发器表';
 
 -- ----------------------------
 -- Records of qrtz_cron_triggers
@@ -378,6 +383,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_fired_triggers"."job_name" IS '任务名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_fired_triggers"."job_group" IS '任务组名';
 COMMENT ON COLUMN "ruoyi"."qrtz_fired_triggers"."is_nonconcurrent" IS '是否并发';
 COMMENT ON COLUMN "ruoyi"."qrtz_fired_triggers"."requests_recovery" IS '是否接受恢复执行';
+COMMENT ON TABLE "ruoyi"."qrtz_fired_triggers" IS '已触发的触发器表';
 
 -- ----------------------------
 -- Records of qrtz_fired_triggers
@@ -410,6 +416,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_job_details"."is_nonconcurrent" IS '是否并发
 COMMENT ON COLUMN "ruoyi"."qrtz_job_details"."is_update_data" IS '是否更新数据';
 COMMENT ON COLUMN "ruoyi"."qrtz_job_details"."requests_recovery" IS '是否接受恢复执行';
 COMMENT ON COLUMN "ruoyi"."qrtz_job_details"."job_data" IS '存放持久化job对象';
+COMMENT ON TABLE "ruoyi"."qrtz_job_details" IS '任务详细信息表';
 
 -- ----------------------------
 -- Records of qrtz_job_details
@@ -426,6 +433,7 @@ CREATE TABLE "ruoyi"."qrtz_locks" (
 ;
 COMMENT ON COLUMN "ruoyi"."qrtz_locks"."sched_name" IS '调度名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_locks"."lock_name" IS '悲观锁名称';
+COMMENT ON TABLE "ruoyi"."qrtz_locks" IS '存储的悲观锁信息表';
 
 -- ----------------------------
 -- Records of qrtz_locks
@@ -442,6 +450,7 @@ CREATE TABLE "ruoyi"."qrtz_paused_trigger_grps" (
 ;
 COMMENT ON COLUMN "ruoyi"."qrtz_paused_trigger_grps"."sched_name" IS '调度名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_paused_trigger_grps"."trigger_group" IS 'qrtz_triggers表trigger_group的外键';
+COMMENT ON TABLE "ruoyi"."qrtz_paused_trigger_grps" IS '暂停的触发器表';
 
 -- ----------------------------
 -- Records of qrtz_paused_trigger_grps
@@ -462,6 +471,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_scheduler_state"."sched_name" IS '调度名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_scheduler_state"."instance_name" IS '实例名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_scheduler_state"."last_checkin_time" IS '上次检查时间';
 COMMENT ON COLUMN "ruoyi"."qrtz_scheduler_state"."checkin_interval" IS '检查间隔时间';
+COMMENT ON TABLE "ruoyi"."qrtz_scheduler_state" IS '调度器状态表';
 
 -- ----------------------------
 -- Records of qrtz_scheduler_state
@@ -486,6 +496,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_simple_triggers"."trigger_group" IS 'qrtz_trigge
 COMMENT ON COLUMN "ruoyi"."qrtz_simple_triggers"."repeat_count" IS '重复的次数统计';
 COMMENT ON COLUMN "ruoyi"."qrtz_simple_triggers"."repeat_interval" IS '重复的间隔时间';
 COMMENT ON COLUMN "ruoyi"."qrtz_simple_triggers"."times_triggered" IS '已经触发的次数';
+COMMENT ON TABLE "ruoyi"."qrtz_simple_triggers" IS '简单触发器的信息表';
 
 -- ----------------------------
 -- Records of qrtz_simple_triggers
@@ -526,6 +537,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_simprop_triggers"."dec_prop_1" IS 'decimal类型
 COMMENT ON COLUMN "ruoyi"."qrtz_simprop_triggers"."dec_prop_2" IS 'decimal类型的trigger的第二个参数';
 COMMENT ON COLUMN "ruoyi"."qrtz_simprop_triggers"."bool_prop_1" IS 'Boolean类型的trigger的第一个参数';
 COMMENT ON COLUMN "ruoyi"."qrtz_simprop_triggers"."bool_prop_2" IS 'Boolean类型的trigger的第二个参数';
+COMMENT ON TABLE "ruoyi"."qrtz_simprop_triggers" IS '同步机制的行锁表';
 
 -- ----------------------------
 -- Records of qrtz_simprop_triggers
@@ -570,6 +582,7 @@ COMMENT ON COLUMN "ruoyi"."qrtz_triggers"."end_time" IS '结束时间';
 COMMENT ON COLUMN "ruoyi"."qrtz_triggers"."calendar_name" IS '日程表名称';
 COMMENT ON COLUMN "ruoyi"."qrtz_triggers"."misfire_instr" IS '补偿执行的策略';
 COMMENT ON COLUMN "ruoyi"."qrtz_triggers"."job_data" IS '存放持久化job对象';
+COMMENT ON TABLE "ruoyi"."qrtz_triggers" IS '触发器详细信息表';
 
 -- ----------------------------
 -- Records of qrtz_triggers
@@ -608,6 +621,7 @@ COMMENT ON COLUMN "ruoyi"."sys_config"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_config"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_config"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_config"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_config" IS '参数配置表';
 
 -- ----------------------------
 -- Records of sys_config
@@ -663,6 +677,7 @@ COMMENT ON COLUMN "ruoyi"."sys_dept"."create_by" IS '创建者';
 COMMENT ON COLUMN "ruoyi"."sys_dept"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_dept"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_dept"."update_time" IS '更新时间';
+COMMENT ON TABLE "ruoyi"."sys_dept" IS '部门表';
 
 -- ----------------------------
 -- Records of sys_dept
@@ -710,6 +725,7 @@ COMMENT ON COLUMN "ruoyi"."sys_dict_data"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_dict_data"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_dict_data"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_dict_data"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_dict_data" IS '字典数据表';
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -775,6 +791,7 @@ COMMENT ON COLUMN "ruoyi"."sys_dict_type"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_dict_type"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_dict_type"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_dict_type"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_dict_type" IS '字典类型表';
 
 -- ----------------------------
 -- Records of sys_dict_type
@@ -829,6 +846,7 @@ COMMENT ON COLUMN "ruoyi"."sys_job"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_job"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_job"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_job"."remark" IS '备注信息';
+COMMENT ON TABLE "ruoyi"."sys_job" IS '定时任务调度表';
 
 -- ----------------------------
 -- Records of sys_job
@@ -866,6 +884,7 @@ COMMENT ON COLUMN "ruoyi"."sys_job_log"."job_message" IS '日志信息';
 COMMENT ON COLUMN "ruoyi"."sys_job_log"."status" IS '执行状态（0正常 1失败）';
 COMMENT ON COLUMN "ruoyi"."sys_job_log"."exception_info" IS '异常信息';
 COMMENT ON COLUMN "ruoyi"."sys_job_log"."create_time" IS '创建时间';
+COMMENT ON TABLE "ruoyi"."sys_job_log" IS '定时任务调度日志表';
 
 -- ----------------------------
 -- Records of sys_job_log
@@ -902,6 +921,7 @@ COMMENT ON COLUMN "ruoyi"."sys_logininfor"."os" IS '操作系统';
 COMMENT ON COLUMN "ruoyi"."sys_logininfor"."status" IS '登录状态（0成功 1失败）';
 COMMENT ON COLUMN "ruoyi"."sys_logininfor"."msg" IS '提示消息';
 COMMENT ON COLUMN "ruoyi"."sys_logininfor"."login_time" IS '访问时间';
+COMMENT ON TABLE "ruoyi"."sys_logininfor" IS '系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -960,6 +980,7 @@ COMMENT ON COLUMN "ruoyi"."sys_menu"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_menu"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_menu"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_menu"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_menu" IS '菜单权限表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1081,6 +1102,7 @@ COMMENT ON COLUMN "ruoyi"."sys_notice"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_notice"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_notice"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_notice"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_notice" IS '通知公告表';
 
 -- ----------------------------
 -- Records of sys_notice
@@ -1133,6 +1155,7 @@ COMMENT ON COLUMN "ruoyi"."sys_oper_log"."status" IS '操作状态（0正常 1�
 COMMENT ON COLUMN "ruoyi"."sys_oper_log"."error_msg" IS '错误消息';
 COMMENT ON COLUMN "ruoyi"."sys_oper_log"."oper_time" IS '操作时间';
 COMMENT ON COLUMN "ruoyi"."sys_oper_log"."cost_time" IS '消耗时间';
+COMMENT ON TABLE "ruoyi"."sys_oper_log" IS '操作日志记录';
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1167,6 +1190,7 @@ COMMENT ON COLUMN "ruoyi"."sys_post"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_post"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_post"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_post"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_post" IS '岗位信息表';
 
 -- ----------------------------
 -- Records of sys_post
@@ -1214,6 +1238,7 @@ COMMENT ON COLUMN "ruoyi"."sys_role"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_role"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_role"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_role"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_role" IS '角色信息表';
 
 -- ----------------------------
 -- Records of sys_role
@@ -1232,6 +1257,7 @@ CREATE TABLE "ruoyi"."sys_role_dept" (
 ;
 COMMENT ON COLUMN "ruoyi"."sys_role_dept"."role_id" IS '角色ID';
 COMMENT ON COLUMN "ruoyi"."sys_role_dept"."dept_id" IS '部门ID';
+COMMENT ON TABLE "ruoyi"."sys_role_dept" IS '角色和部门关联表';
 
 -- ----------------------------
 -- Records of sys_role_dept
@@ -1248,6 +1274,7 @@ CREATE TABLE "ruoyi"."sys_role_menu" (
 ;
 COMMENT ON COLUMN "ruoyi"."sys_role_menu"."role_id" IS '角色ID';
 COMMENT ON COLUMN "ruoyi"."sys_role_menu"."menu_id" IS '菜单ID';
+COMMENT ON TABLE "ruoyi"."sys_role_menu" IS '角色和菜单关联表';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -1308,6 +1335,7 @@ COMMENT ON COLUMN "ruoyi"."sys_user"."create_time" IS '创建时间';
 COMMENT ON COLUMN "ruoyi"."sys_user"."update_by" IS '更新者';
 COMMENT ON COLUMN "ruoyi"."sys_user"."update_time" IS '更新时间';
 COMMENT ON COLUMN "ruoyi"."sys_user"."remark" IS '备注';
+COMMENT ON TABLE "ruoyi"."sys_user" IS '用户信息表';
 
 -- ----------------------------
 -- Records of sys_user
@@ -1325,6 +1353,7 @@ CREATE TABLE "ruoyi"."sys_user_post" (
 ;
 COMMENT ON COLUMN "ruoyi"."sys_user_post"."user_id" IS '用户ID';
 COMMENT ON COLUMN "ruoyi"."sys_user_post"."post_id" IS '岗位ID';
+COMMENT ON TABLE "ruoyi"."sys_user_post" IS '用户与岗位关联表';
 
 -- ----------------------------
 -- Records of sys_user_post
@@ -1342,6 +1371,7 @@ CREATE TABLE "ruoyi"."sys_user_role" (
 ;
 COMMENT ON COLUMN "ruoyi"."sys_user_role"."user_id" IS '用户ID';
 COMMENT ON COLUMN "ruoyi"."sys_user_role"."role_id" IS '角色ID';
+COMMENT ON TABLE "ruoyi"."sys_user_role" IS '用户和角色关联表';
 
 -- ----------------------------
 -- Records of sys_user_role
