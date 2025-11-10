@@ -1292,6 +1292,7 @@ MAXVALUE 9223372036854775807
 START 10
 CACHE 10
 ),
+  "tenant_id" int8,
   "dept_id" int8,
   "user_name" varchar(30) COLLATE "pg_catalog"."default" NOT NULL,
   "nick_name" varchar(30) COLLATE "pg_catalog"."default" NOT NULL,
@@ -1315,6 +1316,7 @@ CACHE 10
 )
 ;
 COMMENT ON COLUMN "ruoyi"."sys_user"."user_id" IS '用户ID';
+COMMENT ON COLUMN "ruoyi"."sys_user"."tenant_id" IS '租户ID';
 COMMENT ON COLUMN "ruoyi"."sys_user"."dept_id" IS '部门ID';
 COMMENT ON COLUMN "ruoyi"."sys_user"."user_name" IS '用户账号';
 COMMENT ON COLUMN "ruoyi"."sys_user"."nick_name" IS '用户昵称';
@@ -1340,7 +1342,7 @@ COMMENT ON TABLE "ruoyi"."sys_user" IS '用户信息表';
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO "ruoyi"."sys_user" VALUES (1, 100, 'admin', 'admin', '00', 'jiangyanxi@live.com', '15553502062', '0', '', '$2a$10$56cMm3yK5AQ2vVqatR.FBuaEePzh13vg0f1ckfjCJKQN0QDwYRyF.', '0', '0', '127.0.0.1', '2025-03-26 15:20:49.058', '2025-03-26 15:20:49.058',0, 'admin', '2024-07-18 08:50:06', '', '2025-03-26 15:20:35.615794', '管理员');
+INSERT INTO "ruoyi"."sys_user" VALUES (1, NULL, 100, 'admin', 'admin', '00', 'jiangyanxi@live.com', '15553502062', '0', '', '$2a$10$56cMm3yK5AQ2vVqatR.FBuaEePzh13vg0f1ckfjCJKQN0QDwYRyF.', '0', '0', '127.0.0.1', '2025-03-26 15:20:49.058', '2025-03-26 15:20:49.058',0, 'admin', '2024-07-18 08:50:06', '', '2025-03-26 15:20:35.615794', '管理员');
 
 -- ----------------------------
 -- Table structure for sys_user_post
