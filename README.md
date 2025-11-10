@@ -22,7 +22,9 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue-springboot3](https://gitee.com/y_project
 ### 前端项目
 - 🖥️ Element Plus 版本：https://github.com/undsky/RuoYi-SpringBoot3-ElementPlus
 - 🎨 Vue3 Prettier 版本：https://github.com/undsky/ruoyi-vue3-prettier
+（ fork from https://gitee.com/codelm/ruoyi-vue3-lmw ）
 - 🐻 BearJia Vue3 使用文档：https://github.com/undsky/BearJia-Vue3/blob/master/docs/ruoyi-usage.md
+（ fork from https://gitee.com/javaxiaobear_admin/bear-jia-vue3 ）
 
 ## ✨ 核心新特性（16 项重大升级）
 
