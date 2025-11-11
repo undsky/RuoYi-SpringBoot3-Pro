@@ -154,6 +154,15 @@ public class PermissionService
      */
     private boolean hasPermissions(Set<String> permissions, String permission)
     {
-        return permissions.contains(Constants.ALL_PERMISSION) || permissions.contains(StringUtils.trim(permission));
+        boolean hasPermission = permissions.contains(Constants.ALL_PERMISSION) || permissions.contains(StringUtils.trim(permission));
+        if (!hasPermission) {
+            for (String permi : permissions) {
+                if (StringUtils.startsWith(StringUtils.trim(permission), permi)) {
+                    hasPermission = true;
+                    break;
+                }
+            }
+        }
+        return hasPermission;
     }
 }
