@@ -1,6 +1,8 @@
 package ${packageName}.service.impl;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,8 +22,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
     #end
 import org.springframework.stereotype.Service;
     #if($table.sub)
-    import java.util.ArrayList;
-
     import org.springframework.transaction.annotation.Transactional;
     import ${packageName}.domain.${subClassName};
     #end
@@ -62,7 +62,7 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper,${Cl
             ${ClassName} ${className} =list.get(i);
             try {
                 QueryWrapper<${ClassName}> queryWrapper = new QueryWrapper<>();
-                List<${ClassName}> checkList = ${className}Mapper.selectList(queryWrapper);
+                List<${ClassName}> checkList = new ArrayList<>(); //${className}Mapper.selectList(queryWrapper);
                 if (checkList.size() == 0) {
                     BeanValidators.validateWithException(validator, ${className});
                     insert${ClassName}(${className});
@@ -74,17 +74,16 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper,${Cl
                     ${className}.setId(checkList.get(0).getId());
                     update${ClassName}(${className});
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、记录" + (i + titleNum + 2) + "：" + ${className}.getId() + " 更新成功")
+                    successMsg.append("<br/>" + successNum + "、记录" + (i + titleNum + 2) + " 更新成功")
                     ;
                 } else {
                     failureNum++;
-                    failureMsg.append("<br/>" + failureNum + "、记录" + (i + titleNum + 2) + "：" + ${className}.getId() + " 已存在")
+                    failureMsg.append("<br/>" + failureNum + "、记录" + (i + titleNum + 2) + " 已存在")
                     ;
                 }
             } catch (Exception e) {
                 failureNum++;
-                String msg = "<br/>" + failureNum + "、记录" + (i + titleNum + 2) + "：" + ${className}.
-                getId() + " 导入失败：";
+                String msg = "<br/>" + failureNum + "、记录" + (i + titleNum + 2) + " 导入失败：";
                 failureMsg.append(msg + e.getMessage());
                 log.error(msg, e);
             }
