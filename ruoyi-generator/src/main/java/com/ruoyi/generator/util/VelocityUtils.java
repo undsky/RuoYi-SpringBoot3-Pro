@@ -277,6 +277,7 @@ public class VelocityUtils {
     public static String getDicts(GenTable genTable) {
         List<GenTableColumn> columns = genTable.getColumns();
         Set<String> dicts = new HashSet<String>();
+        dicts.add("'sys_common_status'");
         addDicts(dicts, columns);
         if (StringUtils.isNotNull(genTable.getSubTable())) {
             List<GenTableColumn> subColumns = genTable.getSubTable().getColumns();
