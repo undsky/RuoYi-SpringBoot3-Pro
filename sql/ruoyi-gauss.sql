@@ -852,7 +852,7 @@ CREATE TABLE "ruoyi"."sys_notice" (
   "notice_id" int4 NOT NULL,
   "notice_title" varchar(50) COLLATE "pg_catalog"."default" NOT NULL,
   "notice_type" char(1) COLLATE "pg_catalog"."default" NOT NULL,
-  "notice_content" bytea,
+  "notice_content" text COLLATE "pg_catalog"."default",
   "status" char(1) COLLATE "pg_catalog"."default" DEFAULT '0'::bpchar,
   "create_by" varchar(64) COLLATE "pg_catalog"."default" DEFAULT NULL::character varying,
   "create_time" timestamp(6),

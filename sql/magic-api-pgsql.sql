@@ -40,7 +40,7 @@ CREATE TABLE "ruoyi"."magic_backup_record" (
   "tag" varchar(32) COLLATE "pg_catalog"."default",
   "type" varchar(32) COLLATE "pg_catalog"."default",
   "name" varchar(64) COLLATE "pg_catalog"."default",
-  "content" bytea,
+  "content" text COLLATE "pg_catalog"."default",
   "create_by" varchar(64) COLLATE "pg_catalog"."default"
 )
 ;

@@ -1083,7 +1083,7 @@ CACHE 1
 ),
   "notice_title" varchar(50) COLLATE "pg_catalog"."default" NOT NULL,
   "notice_type" char(1) COLLATE "pg_catalog"."default" NOT NULL,
-  "notice_content" bytea,
+  "notice_content" text COLLATE "pg_catalog"."default",
   "status" char(1) COLLATE "pg_catalog"."default" DEFAULT '0'::bpchar,
   "create_by" varchar(64) COLLATE "pg_catalog"."default" DEFAULT ''::character varying,
   "create_time" timestamp(6),
