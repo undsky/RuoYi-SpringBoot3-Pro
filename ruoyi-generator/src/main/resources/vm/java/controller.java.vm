@@ -53,7 +53,8 @@ public class ${ClassName}Controller extends BaseController {
 @GetMapping("/list")
     #if($table.crud || $table.sub)
     public TableDataInfo list(${ClassName} ${className}) {
-        IPage<${ClassName}> page = ${className}Service.page${ClassName}(getPage(), getQueryWrapper(${ClassName}.class));
+        QueryWrapper<${ClassName}> queryWrapper = getQueryWrapper(${ClassName}.class);
+        IPage<${ClassName}> page = ${className}Service.page${ClassName}(getPage(), queryWrapper);
         return getDataTableByPage(page);
 
         // startPage();
