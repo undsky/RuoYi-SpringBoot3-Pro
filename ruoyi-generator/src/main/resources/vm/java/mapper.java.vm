@@ -16,12 +16,4 @@ import ${packageName}.domain .${subClassName};
  * @date ${datetime}
  */
 public interface ${ClassName}Mapper extends BaseMapper<${ClassName}> {
-    /**
-     }
-     * 查询${functionName}列表
-     *
-     * @param ${className} ${functionName}
-     * @return ${functionName}集合
-     */
-    public List<${ClassName}> select${ClassName}List(${ClassName} ${className});
 }

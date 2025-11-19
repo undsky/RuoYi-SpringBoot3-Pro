@@ -56,10 +56,6 @@ public class ${ClassName}Controller extends BaseController {
         QueryWrapper<${ClassName}> queryWrapper = getQueryWrapper(${ClassName}.class);
         IPage<${ClassName}> page = ${className}Service.page${ClassName}(getPage(), queryWrapper);
         return getDataTableByPage(page);
-
-        // startPage();
-        // List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
-        // return getDataTable(list);
     }
     #elseif($table.tree)
         public AjaxResult list(${ClassName} ${className}) {

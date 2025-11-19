@@ -80,7 +80,7 @@ private static final long serialVersionUID = 1L;
                 #end
             #end
         private $column.javaType $column.javaField;
-        public static final String $column.columnName.toUpperCase() = "$column.columnName";
+        public static final String $column.javaField.toUpperCase() = "$column.columnName";
 
         #end
     #end
