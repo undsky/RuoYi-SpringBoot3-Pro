@@ -10,23 +10,17 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue-springboot3](https://gitee.com/y_project
 
 本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**、**Cursor/Windsurf AI 智能开发**等企业级功能,适合中大型项目和政企系统快速开发。
 
-## 联系方式
-
-- 🌐 **官方网站**：https://www.undsky.com
-
-## 相关项目
-
-### UniApp 移动端
+## UniApp 移动端
 - 📱 https://github.com/undsky/RuoYi-SpringBoot3-UniApp
 
-### 前端项目
+## 前端项目
 - 🖥️ Element Plus 版本：https://github.com/undsky/RuoYi-SpringBoot3-ElementPlus
 - 🎨 Vue3 Prettier 版本：https://github.com/undsky/ruoyi-vue3-prettier
 （ fork from https://gitee.com/codelm/ruoyi-vue3-lmw ）
 - 🐻 BearJia Vue3 使用文档：https://github.com/undsky/BearJia-Vue3/blob/master/docs/ruoyi-usage.md
 （ fork from https://gitee.com/javaxiaobear_admin/bear-jia-vue3 ）
 
-## ✨ 核心新特性（16 项重大升级）
+## ✨ 核心新特性
 
 ### 1. 🛡️ ClassFinal 代码加密
 
@@ -134,16 +128,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue-springboot3](https://gitee.com/y_project
 - **配置简单**:在 `pom.xml` 中配置服务器信息
 - **部署命令**:`mvn clean package deploy`
 
-### 11. 🔧 Redis 可选配置
-
-Redis 不再是必须的依赖：
-
-- **灵活选择**:可选择是否启用 Redis
-- **注释配置**:默认 Redis 配置为注释状态
-- **本地开发友好**:无需安装 Redis 即可启动项目
-- **生产环境推荐**:生产环境建议开启 Redis 提升性能
-
-### 12. 🌐 多环境配置文件
+### 11. 🌐 多环境配置文件
 
 提供多种数据库、多种环境的配置文件：
 
@@ -155,7 +140,7 @@ application-prodpg.yml    # 生产环境 PostgreSQL
 ...更多数据库配置
 ```
 
-### 13. 🎯 代码生成模板优化
+### 12. 🎯 代码生成模板优化
 
 针对 MyBatis-Plus 优化代码生成模板：
 
@@ -166,163 +151,6 @@ application-prodpg.yml    # 生产环境 PostgreSQL
 - **分页优化**:使用 MyBatis-Plus Page 对象，无需手动配置
 - **代码更精简**:减少样板代码，提高开发效率
 - **低代码结合**:可配合 Magic API 快速开发，双管齐下
-
-### 14. 📈 依赖版本升级
-
-采用最新稳定版本，提升性能和安全性：
-
-| 依赖 | 原版本 | Pro版本 |
-|------|--------|---------|
-| Spring Boot | 3.5.4 | 3.3.5 |
-| MyBatis | 3.0.4 | MyBatis-Plus 3.5+ |
-| OpenAI SDK | ❌ | Latest ⭐ |
-| PageHelper | 2.1.1 | 2.1.0 |
-| FastJson2 | 2.0.58 | 2.0.57 |
-| Oshi | 6.8.3 | 6.8.1 |
-| Springdoc | 2.8.9 | 2.6.0 |
-| Quartz | - | - |
-| Velocity | 2.3 | 2.3 |
-
-### 15. 🎨 三套前端模版
-
-提供三套不同风格的前端解决方案，满足不同项目需求：
-
-- **Element Plus 版本**：基于 Element Plus UI 组件库的经典后台管理系统
-  - 地址：https://github.com/undsky/RuoYi-SpringBoot3-ElementPlus
-  - 特点：成熟稳定、组件丰富、开箱即用
-  - 适用场景：企业级后台管理系统、传统管理平台
-  
-- **Vue3 Prettier 版本**：采用 Prettier 代码格式化的现代化前端
-  - 地址：https://github.com/undsky/ruoyi-vue3-prettier
-  - 特点：代码规范统一、格式化自动、开发体验好
-  - 适用场景：注重代码质量的团队项目、多人协作开发
-  
-- **BearJia Vue3 版本**：更现代化的设计风格和交互体验
-  - 地址：https://github.com/undsky/BearJia-Vue3
-  - 文档：https://github.com/undsky/BearJia-Vue3/blob/master/docs/ruoyi-usage.md
-  - 特点：UI 精美、交互流畅、用户体验优秀
-  - 适用场景：注重用户体验的项目、现代化管理系统
-
-所有前端模版均：
-- ✅ 完美对接后端 API 接口
-- ✅ 支持所有后端功能（用户管理、权限管理、代码生成等）
-- ✅ 开箱即用，无需额外配置
-- ✅ 响应式布局，支持多终端访问
-- ✅ 定期更新维护
-
-### 16. 🎯 Cursor/Windsurf AI 智能开发
-
-内置 AI 开发规则,支持 **Cursor** 和 **Windsurf** 两大 AI IDE,提供卓越的 AI 辅助编码体验：
-
-- **自动代码建议**:AI 按项目规范自动生成代码
-- **代码质量审查**:实时检测代码问题并提供改进建议
-- **最佳实践应用**:自动应用简洁代码原则和设计模式
-- **智能注释**:生成有意义的代码注释
-- **快速重构**:一键重构代码符合规范
-- **团队协作**:统一的编码标准和规范
-- **Context7 集成**:自动获取最新技术文档
-- **双 IDE 支持**:在 Cursor 或 Windsurf 中打开即可使用
-- **规则同步**:两个 IDE 共享相同的开发规则
-
-## 🎯 AI IDE 智能开发(Cursor/Windsurf)
-
-项目内置 AI 开发规则,完美支持 **Cursor** 和 **Windsurf** 两大 AI IDE,提升开发效率和代码质量：
-
-### 规则配置
-
-项目在 `.cursor/rules/` 和 `.windsurf/rules/` 目录下配置了以下规则文件：
-
-| 规则文件 | 说明 | 应用范围 | IDE 支持 |
-|---------|------|---------|---------|
-| `common.md` | 通用开发规则 | 全局应用 | Cursor & Windsurf |
-| `clean-code.md` | 简洁代码指南 | 所有代码文件 | Cursor & Windsurf |
-| `codequality.md` | 代码质量规范 | 所有代码文件 | Cursor & Windsurf |
-| `project.md` | 项目特定规则 | 全局应用 | Cursor & Windsurf |
-
-### 规则内容
-
-**通用规则(common.md)**
-- 角色定位：经验丰富的 SpringBoot3 专家
-- 技术栈：JDK17/21、Spring Boot、MyBatis-Plus、Hutool 等
-- 工作流程：初步评估 → 实施 → 完成总结
-- Context7 集成：自动获取最新技术文档
-
-**简洁代码指南(clean-code.md)**
-- ✅ 使用常量替代魔法数字
-- ✅ 有意义的命名
-- ✅ 智能注释（解释原因而非内容）
-- ✅ 单一职责原则
-- ✅ DRY 原则（不重复代码）
-- ✅ 清晰的代码结构
-- ✅ 封装实现细节
-- ✅ 持续重构
-
-**代码质量规范(codequality.md)**
-- ✅ 验证信息后再呈现
-- ✅ 逐文件修改代码
-- ✅ 不做多余的空格建议
-- ✅ 不总结变更内容
-- ✅ 保留现有代码结构
-- ✅ 单次提供完整编辑
-- ✅ 提供真实文件链接
-
-### 使用方式
-
-**自动应用**
-
-在 **Cursor** 或 **Windsurf** IDE 中打开项目,规则会自动生效：
-
-1. **智能代码建议**
-   - AI 助手会遵循项目规范生成代码
-   - 自动应用最佳实践和设计模式
-
-2. **代码审查**
-   - AI 会根据规则检查代码质量
-   - 提供符合规范的改进建议
-
-3. **快速开发**
-   - **Cursor**: 使用 `Ctrl+K`(或 `Cmd+K`)唤起 AI 助手
-   - **Windsurf**: 使用 `Ctrl+L` 打开 Cascade 面板
-   - 描述需求,AI 会按规则生成代码
-
-**手动触发**
-
-在 Cursor 或 Windsurf 中与 AI 对话时,提及规则名称：
-
-```bash
-请按照 clean-code 规则重构这段代码
-遵循 codequality 规范实现用户登录功能
-```
-
-### 规则优势
-
-| 优势 | 说明 |
-|------|------|
-| 🎯 **一致性** | 团队成员使用统一的编码规范 |
-| ⚡ **效率** | AI 自动遵循最佳实践，减少返工 |
-| 📚 **知识传承** | 新成员快速了解项目标准 |
-| 🔍 **质量保障** | 代码审查自动化，减少低级错误 |
-| 🚀 **快速上手** | 开箱即用的智能开发体验 |
-
-### 自定义规则
-
-如需自定义规则,编辑 `.cursor/rules/` 或 `.windsurf/rules/` 下的文件：
-
-```yaml
----
-description: 自定义规则说明
-globs: "**/*.java"  # 应用的文件类型
-alwaysApply: true   # 是否全局应用
----
-
-# 你的规则内容
-- 规则1
-- 规则2
-```
-
-重启 IDE 或重新加载项目后生效。
-
-> 💡 **提示**: `.cursor/rules/` 和 `.windsurf/rules/` 使用相同的规则文件,只需维护一份即可。
 
 ## 技术栈
 
@@ -370,14 +198,13 @@ alwaysApply: true   # 是否全局应用
 16. ✅ 缓存监控：对系统的缓存信息查询，命令统计等。
 17. ✅ 连接池监视：监视当前系统数据库连接池状态，可进行分析 SQL 找出系统性能瓶颈。
 18. ✨ **三套前端模版**：Element Plus、Vue3 Prettier、BearJia Vue3 三种风格前端（新增）。
-19. ✨ **AI IDE 规则**：内置 Cursor/Windsurf 开发规则,智能代码建议和质量保障（新增）。
-20. ✨ **ClassFinal 代码加密**：字节码加密保护，防止核心业务代码被反编译（新增）。
-21. ✨ **三级等保支持**：密码更新周期、登录失败锁定、IP黑名单等安全策略（新增）。
-22. ✨ **AI 对话能力**：内置 OpenAI 工具类，支持同步和流式对话（新增）。
-23. ✨ **代码生成优化**：针对 MyBatis-Plus 优化的代码生成模板（优化）。
-24. ✨ **地区管理**：省市区三级联动数据管理（新增）。
-25. ✨ **Magic API**：可视化接口开发平台（新增）。
-26. ✨ **多租户管理**：SaaS 多租户数据隔离（新增）。
+19. ✨ **ClassFinal 代码加密**：字节码加密保护，防止核心业务代码被反编译（新增）。
+20. ✨ **三级等保支持**：密码更新周期、登录失败锁定、IP黑名单等安全策略（新增）。
+21. ✨ **AI 对话能力**：内置 OpenAI 工具类，支持同步和流式对话（新增）。
+22. ✨ **代码生成优化**：针对 MyBatis-Plus 优化的代码生成模板（优化）。
+23. ✨ **地区管理**：省市区三级联动数据管理（新增）。
+24. ✨ **Magic API**：可视化接口开发平台（新增）。
+25. ✨ **多租户管理**：SaaS 多租户数据隔离（新增）。
 
 ## 快速开始
 
@@ -986,25 +813,32 @@ docker run -d -p 8087:8087 --name ruoyi ruoyi-springboot3-pro
 ```bash
 mvn clean package deploy
 ```
-
-## 开源协议
-
-本项目遵循 [MIT 协议](LICENSE) 开源，可免费用于个人和企业项目。
-
-## 参与贡献
+## 🤝 参与贡献
 
 欢迎提交 Issue 和 Pull Request！
 
 1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交改动 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 提交 Pull Request
 
-## 技术支持
+## 📄 开源协议
 
-- 官方文档：http://doc.ruoyi.vip
-- Gitee：https://gitee.com/y_project/RuoYi-Vue
-- GitHub：https://github.com/yangzongzhuan/RuoYi-Vue
+本项目基于 [MIT](LICENSE) 协议开源，可免费用于个人和企业项目。
+
+## 🙏 鸣谢
+
+- [若依（RuoYi）](https://gitee.com/y_project/RuoYi-Vue) - 优秀的开源后台管理系统
+- [Spring Boot](https://spring.io/projects/spring-boot) - 企业级 Java 开发框架
+- [MyBatis-Plus](https://baomidou.com/) - 优秀的 MyBatis 增强工具
+- 所有贡献者
+
+## 📞 联系方式
+
+- 网站：[https://www.undsky.com](https://www.undsky.com)
+- GitHub：[https://github.com/undsky/RuoYi-SpringBoot3-Pro](https://github.com/undsky/RuoYi-SpringBoot3-Pro)
+- Issues：[https://github.com/undsky/RuoYi-SpringBoot3-Pro/issues](https://github.com/undsky/RuoYi-SpringBoot3-Pro/issues)
 
 ---
 
