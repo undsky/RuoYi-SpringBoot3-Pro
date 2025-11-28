@@ -4,6 +4,14 @@
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi SpringBoot3 Pro v3.9.0</h1>
 <h4 align="center">基于 SpringBoot 3 + MyBatis-Plus 的企业级快速开发框架</h4>
 
+
+## 平台简介
+
+RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/tree/springboot3/) 基础上的企业级增强版本，保留了原有的所有功能，并新增了多项企业级特性，全部开源免费。
+
+本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**等企业级功能,适合中大型项目和政企系统快速开发。
+
+
 ## 📑 目录导航
 
 - [平台简介](#平台简介)
@@ -22,14 +30,6 @@
 - [开源协议](#开源协议)
 - [鸣谢](#鸣谢)
 - [联系方式](#联系方式)
-
-## 平台简介
-
-RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/tree/springboot3/) 基础上的企业级增强版本，保留了原有的所有功能，并新增了多项企业级特性，全部开源免费。
-
-本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**等企业级功能,适合中大型项目和政企系统快速开发。
-
-
 
 ## 前端项目
 - 🖥️ Element Plus 版本：https://github.com/undsky/RuoYi-SpringBoot3-ElementPlus
