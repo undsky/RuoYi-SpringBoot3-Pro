@@ -4,21 +4,42 @@
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi SpringBoot3 Pro v3.9.0</h1>
 <h4 align="center">基于 SpringBoot 3 + MyBatis-Plus 的企业级快速开发框架</h4>
 
+## 📑 目录导航
+
+- [平台简介](#平台简介)
+- [前端项目](#前端项目)
+- [UniApp 移动端](#uniapp-移动端)
+- [核心新特性](#核心新特性)
+- [技术栈](#技术栈)
+- [内置功能](#内置功能)
+- [快速开始](#快速开始)
+- [使用说明](#使用说明)
+- [项目结构](#项目结构)
+- [与原版对比](#与原版对比)
+- [常见问题](#常见问题)
+- [部署说明](#部署说明)
+- [参与贡献](#参与贡献)
+- [开源协议](#开源协议)
+- [鸣谢](#鸣谢)
+- [联系方式](#联系方式)
+
 ## 平台简介
 
-RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue-springboot3](https://gitee.com/y_project/RuoYi-Vue) 基础上的企业级增强版本，保留了原有的所有功能，并新增了多项企业级特性，全部开源免费。
+RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/tree/springboot3/) 基础上的企业级增强版本，保留了原有的所有功能，并新增了多项企业级特性，全部开源免费。
 
-本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**、**Cursor/Windsurf AI 智能开发**等企业级功能,适合中大型项目和政企系统快速开发。
+本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**等企业级功能,适合中大型项目和政企系统快速开发。
 
-## UniApp 移动端
-- 📱 https://github.com/undsky/RuoYi-SpringBoot3-UniApp
+
 
 ## 前端项目
 - 🖥️ Element Plus 版本：https://github.com/undsky/RuoYi-SpringBoot3-ElementPlus
 - 🎨 Vue3 Prettier 版本：https://github.com/undsky/ruoyi-vue3-prettier
 （ fork from https://gitee.com/codelm/ruoyi-vue3-lmw ）
-- 🐻 BearJia Vue3 使用文档：https://github.com/undsky/BearJia-Vue3/blob/master/docs/ruoyi-usage.md
+- 🐻 BearJia Vue3 版本：https://github.com/undsky/BearJia-Vue3/blob/master/docs/ruoyi-usage.md
 （ fork from https://gitee.com/javaxiaobear_admin/bear-jia-vue3 ）
+
+## UniApp 移动端
+- 📱 [RuoYi-SpringBoot3-UniApp](https://github.com/undsky/RuoYi-SpringBoot3-UniApp)
 
 ## ✨ 核心新特性
 
@@ -100,16 +121,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue-springboot3](https://gitee.com/y_project
 - **透明化使用**:业务代码无感知，框架自动处理
 - 配置开关：`tenant.enable: true/false`
 
-### 8. 🔐 Token 增强配置
-
-相比原版，Token 配置更加灵活：
-
-- **单点登录控制**:`singleLogin` 配置支持多端登录或单端登录
-- **超长有效期**:默认 1 年有效期（525600 分钟），适合企业应用
-- **自定义密钥**:更安全的 Token 密钥配置
-- **灵活过期时间**:可根据业务需求调整
-
-### 9. 📦 ruoyi-biz 业务模块
+### 8. 📦 ruoyi-biz 业务模块
 
 新增独立业务模块，提供标准化开发示例：
 
@@ -119,28 +131,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue-springboot3](https://gitee.com/y_project
 - **定时任务示例**:提供定时任务开发模板
 - 包含地区管理等完整功能示例
 
-### 10. 🚢 Maven 自动部署
-
-集成 wagon-maven-plugin，支持一键部署：
-
-- **FTP 部署**:支持 FTP 服务器自动上传
-- **SFTP 部署**:支持 SFTP 安全文件传输
-- **配置简单**:在 `pom.xml` 中配置服务器信息
-- **部署命令**:`mvn clean package deploy`
-
-### 11. 🌐 多环境配置文件
-
-提供多种数据库、多种环境的配置文件：
-
-```
-application-devmy.yml     # 开发环境 MySQL
-application-devpg.yml     # 开发环境 PostgreSQL
-application-prodmy.yml    # 生产环境 MySQL
-application-prodpg.yml    # 生产环境 PostgreSQL
-...更多数据库配置
-```
-
-### 12. 🎯 代码生成模板优化
+### 9. 🎯 代码生成模板优化
 
 针对 MyBatis-Plus 优化代码生成模板：
 
@@ -197,14 +188,13 @@ application-prodpg.yml    # 生产环境 PostgreSQL
 15. ✅ 服务监控：监视当前系统 CPU、内存、磁盘、堆栈等相关信息。
 16. ✅ 缓存监控：对系统的缓存信息查询，命令统计等。
 17. ✅ 连接池监视：监视当前系统数据库连接池状态，可进行分析 SQL 找出系统性能瓶颈。
-18. ✨ **三套前端模版**：Element Plus、Vue3 Prettier、BearJia Vue3 三种风格前端（新增）。
-19. ✨ **ClassFinal 代码加密**：字节码加密保护，防止核心业务代码被反编译（新增）。
-20. ✨ **三级等保支持**：密码更新周期、登录失败锁定、IP黑名单等安全策略（新增）。
-21. ✨ **AI 对话能力**：内置 OpenAI 工具类，支持同步和流式对话（新增）。
-22. ✨ **代码生成优化**：针对 MyBatis-Plus 优化的代码生成模板（优化）。
-23. ✨ **地区管理**：省市区三级联动数据管理（新增）。
-24. ✨ **Magic API**：可视化接口开发平台（新增）。
-25. ✨ **多租户管理**：SaaS 多租户数据隔离（新增）。
+18. ✨ **ClassFinal 代码加密**：字节码加密保护，防止核心业务代码被反编译（新增）。
+19. ✨ **三级等保支持**：密码更新周期、登录失败锁定、IP黑名单等安全策略（新增）。
+20. ✨ **AI 对话能力**：内置 OpenAI 工具类，支持同步和流式对话（新增）。
+21. ✨ **代码生成优化**：针对 MyBatis-Plus 优化的代码生成模板（优化）。
+22. ✨ **地区管理**：省市区三级联动数据管理（新增）。
+23. ✨ **Magic API**：可视化接口开发平台（新增）。
+24. ✨ **多租户管理**：SaaS 多租户数据隔离（新增）。
 
 ## 快速开始
 
@@ -218,7 +208,7 @@ application-prodpg.yml    # 生产环境 PostgreSQL
   - 达梦数据库 DM8
   - 瀚高数据库 6.2+
   - 高斯数据库 GaussDB
-- Redis（可选，生产环境推荐）
+- Redis
 
 ### 安装步骤
 
@@ -276,11 +266,10 @@ bin\run.bat
 - 系统地址：http://localhost:8087
 - 接口文档：http://localhost:8087/doc.html
 - Magic API：http://localhost:8087/magic/web
-- 默认账号：admin / admin123
+- 默认账号：admin / jyx_692483
 
-6. **启动前端（可选）**
+6. **启动前端**
 
-选择以下任意一套前端模版启动：
 
 **Element Plus 版本（推荐企业级应用）：**
 ```bash
@@ -297,58 +286,6 @@ npm run dev
 # 访问地址：http://localhost:80
 ```
 
-**Vue3 Prettier 版本（推荐团队协作）：**
-```bash
-# 克隆项目
-git clone https://github.com/undsky/ruoyi-vue3-prettier.git
-cd ruoyi-vue3-prettier
-
-# 安装依赖
-pnpm install
-
-# 启动项目
-pnpm dev
-
-# 访问地址：http://localhost:80
-```
-
-**BearJia Vue3 版本（推荐现代化UI）：**
-```bash
-# 克隆项目
-git clone https://github.com/undsky/BearJia-Vue3.git
-cd BearJia-Vue3
-
-# 安装依赖
-npm install
-
-# 启动项目
-npm run dev
-
-# 访问地址：http://localhost:5173
-```
-
-## 使用说明
-
-### 前端模版选择指南
-
-根据项目需求选择合适的前端模版：
-
-**Element Plus 版本**
-- ✅ 适合：企业级后台管理、政府系统、传统管理平台
-- ✅ 优势：成熟稳定、组件丰富、文档完善
-- ✅ 技术栈：Vue3 + Element Plus + Vite
-
-**Vue3 Prettier 版本**
-- ✅ 适合：注重代码质量的团队、多人协作项目
-- ✅ 优势：代码格式统一、开发规范、易于维护
-- ✅ 技术栈：Vue3 + Element Plus + Vite + Prettier
-
-**BearJia Vue3 版本**
-- ✅ 适合：注重用户体验、现代化管理系统
-- ✅ 优势：UI精美、交互流畅、用户体验好
-- ✅ 技术栈：Vue3 + Ant Design Vue + Vite
-
-> 💡 所有前端模版功能完全一致，仅 UI 风格和代码规范不同，可根据团队喜好选择。
 
 ### ClassFinal 代码加密使用
 
@@ -669,7 +606,6 @@ RuoYi-SpringBoot3-Pro
 |------|----------------------|----------------------|
 | Spring Boot | 3.5.4 | 3.3.5 |
 | ORM 框架 | MyBatis | MyBatis-Plus ⭐ |
-| 前端模版 | 1套 | 3套（Element Plus/Prettier/BearJia）⭐ |
 | AI 智能开发 | ❌ | Cursor/Windsurf Rules ⭐ |
 | 代码加密保护 | ❌ | ClassFinal 加密 ⭐ |
 | 三级等保 | 部分支持 | 完整支持 ⭐ |
@@ -678,141 +614,16 @@ RuoYi-SpringBoot3-Pro
 | 多数据库支持 | MySQL | MySQL/PostgreSQL/达梦/瀚高/高斯 ⭐ |
 | 多租户 | ❌ | ✅ ⭐ |
 | Redis | 必须 | 可选 ⭐ |
-| Token 有效期 | 30 分钟 | 525600 分钟（1年）⭐ |
-| 单点登录控制 | ❌ | ✅ ⭐ |
-| Maven 自动部署 | ❌ | FTP/SFTP ⭐ |
 | 业务示例模块 | ❌ | ruoyi-biz ⭐ |
 | 代码生成模板 | MyBatis | MyBatis-Plus 适配 ⭐ |
 | 文件上传大小 | 10MB/20MB | 100MB/200MB ⭐ |
 
-## 常见问题
-
-### 1. 如何使用 ClassFinal 代码加密？
-
-**启用加密：**
-- 代码加密插件默认已配置在 `ruoyi-admin/pom.xml` 中
-- 执行 `mvn clean package` 打包时会自动加密指定的包
-- 加密的包在配置中的 `<packages>` 标签中指定
-
-**运行加密的程序：**
-```bash
-java -jar RuoyiSpringBoot3.jar -pwd=RuoyiSpringBoot3@123456!
-```
-
-**临时禁用加密：**
-- 注释掉 pom.xml 中的 classfinal-maven-plugin 配置
-- 或者删除 `<executions>` 部分
-
-**密码忘记了怎么办？**
-- 加密密码在 `<password>` 标签中，查看 pom.xml 即可
-- 默认密码：`RuoyiSpringBoot3@123456!`
-- ⚠️ 生产环境建议修改为更复杂的密码
-
-### 2. 如何配置三级等保安全策略？
-
-Pro 版本的等保功能通过系统参数配置：
-
-**密码更新周期**：系统管理 → 参数设置 → `sys.account.passwordValidateDays`，设置天数（如90）
-
-**登录失败锁定**：配置 `sys.account.tryLoginCount` 参数，格式为"次数-分钟"（如 5-30）
-
-**初始密码修改**：配置 `sys.account.initPasswordModify` 参数，设置为1启用
-
-**IP黑名单**：配置 `sys.login.blackIPList` 参数，支持通配符和网段
-
-详细配置见"使用说明"章节的三级等保安全配置部分。
-
-### 3. 加密后的代码能反编译吗？
-
-不能。ClassFinal 使用了以下加密技术：
-- 字节码深度加密
-- JNI 本地代码保护
-- 运行时动态解密
-
-即使使用 JD-GUI、Jadx 等反编译工具，也无法还原源代码。
-
-### 4. 密码过期后如何处理？
-
-当密码超过配置的有效期后：
-- 用户登录时系统会自动检测并提示密码已过期
-- 前端会弹出修改密码对话框
-- 用户必须修改密码后才能继续使用系统
-- 修改密码后 `pwd_update_date` 字段自动更新
-
-### 5. 如何手动解锁被锁定的账号？
-
-管理员可以通过以下方式解锁：
-1. 等待锁定时间自动到期
-2. 在系统中重置用户的 `try_count` 字段为0
-3. 清除 Redis 中对应的锁定缓存
-
-### 6. 如何使用 AI 对话功能？
-
-Pro 版本内置了 OpenAI 工具类，使用步骤：
-1. 准备 OpenAI API Key（或兼容 OpenAI 协议的其他 API）
-2. 参考"使用说明"章节的 AI 对话示例代码
-3. 支持同步对话和流式对话两种模式
-4. 可配置代理和自定义 API 地址
-
-工具类位置：`com.ruoyi.common.utils.ai.OpenAI`
-
-### 7. Magic API 无法访问？
-
-确保在 `application.yml` 中正确配置了 Magic API：
-
-```yaml
-magic-api:
-  web: /magic/web
-  prefix: /magic/api
-```
-
-### 8. 多租户不生效？
-
-检查以下配置：
-- `tenant.enable` 是否设置为 `true`
-- 数据库表是否包含 `tenant_id` 字段
-- 表是否在 `ignoreTables` 中
-
-### 9. 如何禁用 Redis？
-
-将 `application.yml` 中的 Redis 配置注释即可，系统会自动使用内存存储。
-
-### 10. 数据库连接失败？
-
-- 检查对应的配置文件（如 `application-devmy.yml`）
-- 确认数据库地址、端口、用户名、密码是否正确
-- 确认数据库已启动并可访问
 
 ## 部署说明
 
-### Docker 部署
+[部署系统](https://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#%E9%83%A8%E7%BD%B2%E7%B3%BB%E7%BB%9F)
 
-```bash
-# 构建镜像
-docker build -t ruoyi-springboot3-pro .
 
-# 运行容器
-docker run -d -p 8087:8087 --name ruoyi ruoyi-springboot3-pro
-```
-
-### Maven 自动部署
-
-配置 `pom.xml` 中的 FTP/SFTP 信息：
-
-```xml
-<configuration>
-    <serverId>RuoyiSpringBoot3</serverId>
-    <fromFile>ruoyi-admin/target/RuoyiSpringBoot3.jar</fromFile>
-    <toFile>RuoyiSpringBoot3.jar</toFile>
-    <url>ftp://your-server-ip:21</url>
-</configuration>
-```
-
-然后执行：
-
-```bash
-mvn clean package deploy
-```
 ## 🤝 参与贡献
 
 欢迎提交 Issue 和 Pull Request！
