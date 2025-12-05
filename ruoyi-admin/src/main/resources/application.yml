@@ -164,6 +164,25 @@ tenant:
   ignoreLoginNames:
     - admin
 
+# OpenAI配置
+openai:
+  # API密钥
+  api-key: sk-xxx
+  # 基础URL
+  base-url: https://api.openai.com/v1
+  # 默认模型
+  model: gpt-4o
+  # 代理配置
+  proxy:
+    # 是否启用代理
+    enabled: false
+    # 代理类型 (HTTP/SOCKS)
+    type: HTTP
+    # 代理主机
+    host: 127.0.0.1
+    # 代理端口
+    port: 7890
+
 # https://www.ssssssss.org/magic-api/pages/config/spring-boot/
 magic-api:
   web: /magic/web
@@ -185,3 +204,4 @@ magic-api:
       msg: message,
       data,
     }
+
