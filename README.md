@@ -13,7 +13,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 
 ![公众号](https://cdn.undsky.com/img/ghss.png)
-> 专注AI应用落地，开发经验分享
+ > 关注公众号，聚焦 AI 应用落地与开发经验分享
 
 ## 📑 目录导航
 
