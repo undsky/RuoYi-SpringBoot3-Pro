@@ -12,6 +12,9 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**等企业级功能,适合中大型项目和政企系统快速开发。
 
 
+![公众号](https://cdn.undsky.com/img/ghss.png)
+> 专注AI应用落地，开发经验分享
+
 ## 📑 目录导航
 
 - [平台简介](#平台简介)
