@@ -108,7 +108,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 | 数据库 | 支持版本 | 配置文件 | 初始化脚本 |
 |--------|---------|---------|-----------|
-| **MySQL** | 8.0+ | application-devmy.yml | ruoyi-mysql.sql |
+| **MySQL** | 5.7+ | application-devmy.yml | ruoyi-mysql.sql |
 | **PostgreSQL** | 12+ | application-devpg.yml | ruoyi-pgsql.sql |
 | **达梦数据库** | DM8+ | application-devdm.yml | ruoyi-dm8.dmp |
 | **瀚高数据库** | 6.2+ | application-devhg.yml | ruoyi-highgo.sql |
@@ -166,7 +166,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 ### 数据库支持
 
-- MySQL 8.0+
+- MySQL 5.7+
 - PostgreSQL 12+
 - 达梦数据库 DM8
 - 瀚高数据库 6.2+
@@ -206,7 +206,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 - JDK 17 或 JDK 21
 - Maven 3.6+
 - 选择以下数据库之一：
-  - MySQL 8.0+
+  - MySQL 5.7+
   - PostgreSQL 12+
   - 达梦数据库 DM8
   - 瀚高数据库 6.2+
