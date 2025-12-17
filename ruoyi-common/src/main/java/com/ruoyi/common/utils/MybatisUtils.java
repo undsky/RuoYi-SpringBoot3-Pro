@@ -5,6 +5,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Map;
 
 @Component
@@ -43,6 +50,145 @@ public class MybatisUtils {
     }
 
     /**
+     * 根据实体类字段类型转换字符串值
+     * 解决 PostgreSQL 中 bigint = character varying / date = character varying 类型不匹配问题
+     *
+     * @param type      实体类类型
+     * @param fieldName 字段名（驼峰命名）
+     * @param value     字符串值
+     * @return 转换后的值
+     */
+    private <T> Object convertValue(Class<T> type, String fieldName, String value) {
+        if (StringUtils.isEmpty(value)) {
+            return value;
+        }
+        try {
+            // 将下划线命名转换为驼峰命名以匹配实体类字段
+            String camelFieldName = toCamelCase(fieldName);
+            Field field = getFieldFromClass(type, camelFieldName);
+            if (field == null) {
+                // 尝试直接使用原字段名
+                field = getFieldFromClass(type, fieldName);
+            }
+            if (field != null) {
+                Class<?> fieldType = field.getType();
+                if (fieldType == Long.class || fieldType == long.class) {
+                    return Long.parseLong(value);
+                } else if (fieldType == Integer.class || fieldType == int.class) {
+                    return Integer.parseInt(value);
+                } else if (fieldType == Double.class || fieldType == double.class) {
+                    return Double.parseDouble(value);
+                } else if (fieldType == Float.class || fieldType == float.class) {
+                    return Float.parseFloat(value);
+                } else if (fieldType == BigDecimal.class) {
+                    return new BigDecimal(value);
+                } else if (fieldType == Boolean.class || fieldType == boolean.class) {
+                    return Boolean.parseBoolean(value);
+                } else if (fieldType == Short.class || fieldType == short.class) {
+                    return Short.parseShort(value);
+                } else if (fieldType == Byte.class || fieldType == byte.class) {
+                    return Byte.parseByte(value);
+                } else if (fieldType == LocalDate.class) {
+                    return parseLocalDate(value);
+                } else if (fieldType == LocalDateTime.class) {
+                    return parseLocalDateTime(value);
+                } else if (fieldType == Date.class) {
+                    return parseDate(value);
+                }
+            }
+        } catch (NumberFormatException e) {
+            // 转换失败，返回原字符串值
+        }
+        return value;
+    }
+
+    /**
+     * 解析 LocalDate，支持多种格式
+     */
+    private LocalDate parseLocalDate(String value) {
+        String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd", "yyyyMMdd"};
+        for (String pattern : patterns) {
+            try {
+                return LocalDate.parse(value, DateTimeFormatter.ofPattern(pattern));
+            } catch (DateTimeParseException ignored) {
+            }
+        }
+        return LocalDate.parse(value);
+    }
+
+    /**
+     * 解析 LocalDateTime，支持多种格式
+     */
+    private LocalDateTime parseLocalDateTime(String value) {
+        String[] patterns = {"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "yyyy/MM/dd HH:mm:ss", "yyyy-MM-dd"};
+        for (String pattern : patterns) {
+            try {
+                if (pattern.equals("yyyy-MM-dd") && value.length() == 10) {
+                    return LocalDate.parse(value, DateTimeFormatter.ofPattern(pattern)).atStartOfDay();
+                }
+                return LocalDateTime.parse(value, DateTimeFormatter.ofPattern(pattern));
+            } catch (DateTimeParseException ignored) {
+            }
+        }
+        return LocalDateTime.parse(value);
+    }
+
+    /**
+     * 解析 Date，支持多种格式
+     */
+    private Date parseDate(String value) {
+        String[] patterns = {"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyy/MM/dd"};
+        for (String pattern : patterns) {
+            try {
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(pattern);
+                return sdf.parse(value);
+            } catch (java.text.ParseException ignored) {
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 从类及其父类中获取字段
+     */
+    private Field getFieldFromClass(Class<?> clazz, String fieldName) {
+        Class<?> currentClass = clazz;
+        while (currentClass != null && currentClass != Object.class) {
+            try {
+                return currentClass.getDeclaredField(fieldName);
+            } catch (NoSuchFieldException e) {
+                currentClass = currentClass.getSuperclass();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 将下划线命名转换为驼峰命名
+     */
+    private String toCamelCase(String underscoreName) {
+        if (StringUtils.isEmpty(underscoreName)) {
+            return underscoreName;
+        }
+        StringBuilder result = new StringBuilder();
+        boolean nextUpperCase = false;
+        for (int i = 0; i < underscoreName.length(); i++) {
+            char c = underscoreName.charAt(i);
+            if (c == '_') {
+                nextUpperCase = true;
+            } else {
+                if (nextUpperCase) {
+                    result.append(Character.toUpperCase(c));
+                    nextUpperCase = false;
+                } else {
+                    result.append(Character.toLowerCase(c));
+                }
+            }
+        }
+        return result.toString();
+    }
+
+    /**
      * 根据请求参数动态构建 MyBatis-Plus 的 QueryWrapper 查询条件
      * 支持的条件方法有：
      * - xxxAsc：升序排序
@@ -70,18 +216,20 @@ public class MybatisUtils {
         Map<String, String> reqParams = ServletUtils.getParamMap(ServletUtils.getRequest());
         if (reqParams != null && reqParams.size() > 0) {
             for (Map.Entry<String, String> entry : reqParams.entrySet()) {
-                if (StringUtils.equals("pageSize", entry.getKey()) || StringUtils.equals("pageNum", entry.getKey())) {
+                if (StringUtils.equals("pageSize", entry.getKey()) || StringUtils.equals("pageNum", entry.getKey()) || StringUtils.equals("action", entry.getKey())) {
                     continue;
                 }
                 if (StringUtils.startsWith(entry.getKey(), "params[")) {
                     String key = extractBracketContent(entry.getKey());
                     if (StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(entry.getValue())) {
                         if (StringUtils.startsWith(key, "begin")) {
-                            queryWrapper.ge(key.substring(5), entry.getValue());
+                            String fieldName = key.substring(5);
+                            queryWrapper.ge(fieldName, convertValue(type, fieldName, entry.getValue()));
                         } else if (StringUtils.startsWith(key, "end")) {
-                            queryWrapper.le(key.substring(3), entry.getValue());
+                            String fieldName = key.substring(3);
+                            queryWrapper.le(fieldName, convertValue(type, fieldName, entry.getValue()));
                         } else {
-                            queryWrapper.eq(key, entry.getValue());
+                            queryWrapper.eq(key, convertValue(type, key, entry.getValue()));
                         }
                     }
                     continue;
@@ -102,21 +250,31 @@ public class MybatisUtils {
                     continue;
                 }
                 if (StringUtils.endsWith(entry.getKey(), "Eq")) {
-                    queryWrapper.eq(entry.getKey().substring(0, entry.getKey().length() - 2), entry.getValue());
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 2);
+                    queryWrapper.eq(fieldName, convertValue(type, fieldName, entry.getValue()));
                 } else if (StringUtils.endsWith(entry.getKey(), "Ne")) {
-                    queryWrapper.ne(entry.getKey().substring(0, entry.getKey().length() - 2), entry.getValue());
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 2);
+                    queryWrapper.ne(fieldName, convertValue(type, fieldName, entry.getValue()));
                 } else if (StringUtils.endsWith(entry.getKey(), "Gt")) {
-                    queryWrapper.gt(entry.getKey().substring(0, entry.getKey().length() - 2), entry.getValue());
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 2);
+                    queryWrapper.gt(fieldName, convertValue(type, fieldName, entry.getValue()));
                 } else if (StringUtils.endsWith(entry.getKey(), "Ge")) {
-                    queryWrapper.ge(entry.getKey().substring(0, entry.getKey().length() - 2), entry.getValue());
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 2);
+                    queryWrapper.ge(fieldName, convertValue(type, fieldName, entry.getValue()));
                 } else if (StringUtils.endsWith(entry.getKey(), "Lt")) {
-                    queryWrapper.lt(entry.getKey().substring(0, entry.getKey().length() - 2), entry.getValue());
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 2);
+                    queryWrapper.lt(fieldName, convertValue(type, fieldName, entry.getValue()));
                 } else if (StringUtils.endsWith(entry.getKey(), "Le")) {
-                    queryWrapper.le(entry.getKey().substring(0, entry.getKey().length() - 2), entry.getValue());
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 2);
+                    queryWrapper.le(fieldName, convertValue(type, fieldName, entry.getValue()));
                 } else if (StringUtils.endsWith(entry.getKey(), "Between")) {
-                    queryWrapper.between(entry.getKey().substring(0, entry.getKey().length() - 7), entry.getValue().split(",")[0], entry.getValue().split(",")[1]);
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 7);
+                    String[] values = entry.getValue().split(",");
+                    queryWrapper.between(fieldName, convertValue(type, fieldName, values[0]), convertValue(type, fieldName, values[1]));
                 } else if (StringUtils.endsWith(entry.getKey(), "NotBetween")) {
-                    queryWrapper.notBetween(entry.getKey().substring(0, entry.getKey().length() - 10), entry.getValue().split(",")[0], entry.getValue().split(",")[1]);
+                    String fieldName = entry.getKey().substring(0, entry.getKey().length() - 10);
+                    String[] values = entry.getValue().split(",");
+                    queryWrapper.notBetween(fieldName, convertValue(type, fieldName, values[0]), convertValue(type, fieldName, values[1]));
                 } else if (StringUtils.endsWith(entry.getKey(), "Like")) {
                     queryWrapper.like(entry.getKey().substring(0, entry.getKey().length() - 4), entry.getValue());
                 } else if (StringUtils.endsWith(entry.getKey(), "NotLike")) {
@@ -134,7 +292,7 @@ public class MybatisUtils {
                 } else if (StringUtils.endsWith(entry.getKey(), "NotIn")) {
                     queryWrapper.notInSql(entry.getKey().substring(0, entry.getKey().length() - 5), entry.getValue());
                 } else {
-                    queryWrapper.eq(entry.getKey(), entry.getValue());
+                    queryWrapper.eq(entry.getKey(), convertValue(type, entry.getKey(), entry.getValue()));
                 }
             }
         }
