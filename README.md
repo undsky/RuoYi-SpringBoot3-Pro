@@ -134,7 +134,18 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 - **定时任务示例**:提供定时任务开发模板
 - 包含地区管理等完整功能示例
 
-### 9. 🎯 代码生成模板优化
+### 9. 📊 Dify 数据库建表工作流
+
+提供 Dify 工作流配置文件，通过 AI 快速生成多数据库建表语句：
+
+- **多数据库支持**：支持 MySQL、PostgreSQL/瀚高、openGauss、SQLite 四种数据库
+- **智能字段命名**：支持拼音或英文两种字段命名规范
+- **标准化表结构**：自动生成包含租户ID、用户ID、部门ID、状态、创建/更新信息等标准字段
+- **索引自动创建**：自动为常用字段创建索引（tenant_id、user_id、dept_id）
+- **简洁输入格式**：只需输入"表名：字段（类型）"即可生成完整建表语句
+- **开箱即用**：导入 `sql/Dify_数据库建表.yml` 到 Dify 即可使用
+
+### 10. 🎯 代码生成模板优化
 
 针对 MyBatis-Plus 优化代码生成模板：
 
@@ -198,6 +209,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 22. ✨ **地区管理**：省市区三级联动数据管理（新增）。
 23. ✨ **Magic API**：可视化接口开发平台（新增）。
 24. ✨ **多租户管理**：SaaS 多租户数据隔离（新增）。
+25. ✨ **Dify 数据库建表**：AI 驱动的多数据库建表语句生成工作流（新增）。
 
 ## 快速开始
 
@@ -570,6 +582,54 @@ tenant:
     - admin
 ```
 
+### Dify 数据库建表工作流
+
+项目提供了 Dify 工作流配置文件，可通过 AI 快速生成多数据库建表语句。
+
+**导入工作流：**
+
+1. 登录 Dify 平台
+2. 创建新应用，选择"导入 DSL"
+3. 上传 `sql/Dify_数据库建表.yml` 文件
+4. 配置 LLM 模型（默认使用通义千问 deepseek-v3）
+
+**使用方式：**
+
+1. 选择目标数据库类型（MySQL / PostgreSQL/瀚高 / openGauss / SQLite）
+2. 选择字段命名规范（拼音 / 英文）
+3. 输入表名和字段信息，格式：`表名：字段1（类型），字段2（类型）`
+
+**输入示例：**
+
+```
+订单：订单号（varchar），金额（decimal），下单时间（datetime）
+商品：商品名称，价格（decimal），库存（int）
+```
+
+**输出示例（MySQL）：**
+
+```sql
+DROP TABLE IF EXISTS `biz_dingdan`;
+CREATE TABLE `biz_dingdan`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `tenant_id` bigint(20) NULL DEFAULT NULL COMMENT '租户ID',
+  `dingdanhao` varchar(50) NULL DEFAULT NULL COMMENT '订单号',
+  `jine` decimal(20,4) NULL DEFAULT NULL COMMENT '金额',
+  `xiadan_shijian` datetime(0) NULL DEFAULT NULL COMMENT '下单时间',
+  -- ... 标准字段
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COMMENT = '订单';
+```
+
+**支持的数据库：**
+
+| 数据库 | 主键类型 | 特点 |
+|--------|---------|------|
+| MySQL | AUTO_INCREMENT | 标准 InnoDB 引擎 |
+| PostgreSQL/瀚高 | IDENTITY | 支持 COMMENT ON 语法 |
+| openGauss | BIGSERIAL | 华为高斯数据库语法 |
+| SQLite | AUTOINCREMENT | 轻量级数据库 |
+
 ### 切换数据库
 
 1. 修改 `application.yml` 中的 `spring.profiles.active`
@@ -593,7 +653,8 @@ RuoYi-SpringBoot3-Pro
 │   ├── ruoyi-pgsql.sql    # PostgreSQL 初始化脚本
 │   ├── ruoyi-dm8.dmp      # 达梦数据库脚本
 │   ├── magic-api-*.sql    # Magic API 脚本
-│   └── region-*.sql       # 地区数据脚本
+│   ├── region-*.sql       # 地区数据脚本
+│   └── Dify_数据库建表.yml  # Dify 建表工作流
 ├── ruoyi-admin             # 管理后台模块
 ├── ruoyi-framework         # 框架核心模块
 ├── ruoyi-system            # 系统模块
@@ -620,6 +681,7 @@ RuoYi-SpringBoot3-Pro
 | 业务示例模块 | ❌ | ruoyi-biz ⭐ |
 | 代码生成模板 | MyBatis | MyBatis-Plus 适配 ⭐ |
 | 文件上传大小 | 10MB/20MB | 100MB/200MB ⭐ |
+| Dify 建表工作流 | ❌ | ✅ ⭐ |
 
 
 ## 部署说明
