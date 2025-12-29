@@ -202,10 +202,10 @@ workflow:
       id: '1746770066983'
       position:
         x: 30
-        y: 311
+        y: 335
       positionAbsolute:
         x: 30
-        y: 311
+        y: 335
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -264,10 +264,10 @@ workflow:
       id: '1746773912525'
       position:
         x: 334
-        y: 311
+        y: 335
       positionAbsolute:
         x: 334
-        y: 311
+        y: 335
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -339,12 +339,13 @@ workflow:
             \ ROW_FORMAT = Dynamic; \n```\n\n### 要求\n---  \n\n+ 一定要保留原表结构的所有内容\n+\
             \ 表名和字段名不能使用简写并且不能包含特殊字符，如果存在大写字母转为小写\n+ 将 `biz_1temp` 替换为`biz_表名小写{{#1746770066983.language#}}`\n\
             + 将 `表模版` 替换为表名\n+ 新增的列名为字段名小写{{#1746770066983.language#}}，注释为原本的字段名，如果未提供类型则由你自主判定\n\
-            + `decimal` 类型使用 `decimal(20,4)`\n+ 只返回 SQL，其他都不要，而且不要用 ```sql ``` 包裹\n\
-            \n### 用户输入表名和字段名格式\n---\n表名：字段（类型）\n**一行代表一张表**"
+            + `decimal` 类型使用 `decimal(20,4)`\n+ 如果 {{#1746770066983.language#}}是英文，避免与数据库关键字冲突\n\
+            + 只返回 SQL，其他都不要，而且不要用 ```sql ``` 包裹\n\n### 用户输入表名和字段名格式\n---\n表名：字段（类型）\n\
+            **一行代表一张表**"
         - id: 0e201e35-3173-42a2-a80c-5dfcfd2872fe
           role: user
           text: '{{#sys.query#}}'
-        selected: false
+        selected: true
         title: MySQL
         type: llm
         variables: []
@@ -354,11 +355,11 @@ workflow:
       id: '1746774003725'
       position:
         x: 638
-        y: 311
+        y: 335
       positionAbsolute:
         x: 638
-        y: 311
-      selected: false
+        y: 335
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -405,8 +406,9 @@ workflow:
             \ PRIMARY KEY (\"id\"); \n```\n\n### 要求\n---  \n\n+ 一定要保留原表结构的所有内容\n+\
             \ 表名和字段名不能使用简写并且不能包含特殊字符，如果存在大写字母转为小写\n+ 将 `biz_1temp` 替换为`biz_表名小写{{#1746770066983.language#}}`\n\
             + 将 `表模版` 替换为表名\n+ 新增的列名为字段名小写{{#1746770066983.language#}}，注释为原本的字段名，如果未提供类型则由你自主判定\n\
-            + `numeric` 类型使用 `numeric(20,4)`\n+ 只返回 SQL，其他都不要，而且不要用 ```sql ``` 包裹\n\
-            + `COMMENT`不要写在`CREATE TABLE`里\n\n### 用户输入表名和字段名格式\n---\n表名：字段（类型）\n**一行代表一张表**"
+            + `numeric` 类型使用 `numeric(20,4)`\n+ 如果 {{#1746770066983.language#}}是英文，避免与数据库关键字冲突\n\
+            + 只返回 SQL，其他都不要，而且不要用 ```sql ``` 包裹\n+ `COMMENT`不要写在`CREATE TABLE`里\n\n\
+            ### 用户输入表名和字段名格式\n---\n表名：字段（类型）\n**一行代表一张表**"
         - id: ed63fffb-2f9e-4232-9c1b-993bb159bc9e
           role: user
           text: '{{#sys.query#}}'
@@ -420,10 +422,10 @@ workflow:
       id: '1746774189852'
       position:
         x: 638
-        y: 456
+        y: 480
       positionAbsolute:
         x: 638
-        y: 456
+        y: 480
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -546,6 +548,8 @@ workflow:
 
             + `numeric` 类型使用 `numeric(20,4)`
 
+            + 如果 {{#1746770066983.language#}}是英文，避免与数据库关键字冲突
+
             + 只返回 SQL，其他都不要，而且不要用 ```sql ``` 包裹
 
             + `COMMENT`不要写在`CREATE TABLE`里
@@ -571,10 +575,10 @@ workflow:
       id: '1746774427645'
       position:
         x: 638
-        y: 601
+        y: 625
       positionAbsolute:
         x: 638
-        y: 601
+        y: 625
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -591,10 +595,10 @@ workflow:
       id: '1746774646142'
       position:
         x: 942
-        y: 311
+        y: 335
       positionAbsolute:
         x: 942
-        y: 311
+        y: 335
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -611,10 +615,10 @@ workflow:
       id: '1746774658109'
       position:
         x: 942
-        y: 456
+        y: 480
       positionAbsolute:
         x: 942
-        y: 456
+        y: 480
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -631,10 +635,10 @@ workflow:
       id: '1746774664716'
       position:
         x: 942
-        y: 601
+        y: 625
       positionAbsolute:
         x: 942
-        y: 601
+        y: 625
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -665,12 +669,12 @@ workflow:
             \ ON `biz_1temp` (`dept_id`);\n```\n\n### 要求\n---  \n\n+ 一定要保留原表结构的所有内容\n\
             + 表名和字段名不能使用简写并且不能包含特殊字符，如果存在大写字母转为小写\n+ 将 `biz_1temp` 替换为`biz_表名小写{{#1746770066983.language#}}`\n\
             + 将 `表模版` 替换为表名\n+ 新增的列名为字段名小写{{#1746770066983.language#}}，如果未提供类型则由你自主判定\n\
-            + 只返回 SQL，其他都不要，而且不要用 ```sql ``` 包裹\n\n### 用户输入表名和字段名格式\n---\n表名：字段（类型）\n\
-            **一行代表一张表**"
+            + 如果 {{#1746770066983.language#}}是英文，避免与数据库关键字冲突\n+ 只返回 SQL，其他都不要，而且不要用\
+            \ ```sql ``` 包裹\n\n### 用户输入表名和字段名格式\n---\n表名：字段（类型）\n**一行代表一张表**"
         - id: 7b0e1925-68a0-4a91-909d-356ba7e40fe1
           role: user
           text: '{{#sys.query#}}'
-        selected: true
+        selected: false
         title: SQLite
         type: llm
         variables: []
@@ -680,11 +684,11 @@ workflow:
       id: '1765511203704'
       position:
         x: 638
-        y: 731.4285714285714
+        y: 770
       positionAbsolute:
         x: 638
-        y: 731.4285714285714
-      selected: true
+        y: 770
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -700,16 +704,16 @@ workflow:
       id: '1765511258000'
       position:
         x: 942
-        y: 731.4285714285714
+        y: 770
       positionAbsolute:
         x: 942
-        y: 731.4285714285714
+        y: 770
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: -5.684341886080802e-14
-      y: 50
+      x: 0
+      y: 0
       zoom: 0.7
