@@ -19,6 +19,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 - [平台简介](#平台简介)
 - [前端项目](#前端项目)
 - [UniApp 移动端](#uniapp-移动端)
+- [开发教程](#开发教程)
 - [核心新特性](#核心新特性)
 - [技术栈](#技术栈)
 - [内置功能](#内置功能)
@@ -44,6 +45,18 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 ## UniApp 移动端
 
 - 📱 [RuoYi-SpringBoot3-UniApp](https://github.com/undsky/RuoYi-SpringBoot3-UniApp)
+
+## 开发教程
+
+- [【RuoYi-SpringBoot3-Pro】：若依企业级增强版 —— 让开发更安全高效](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247483736&idx=1&sn=ccdfd1e6dab86ca812cc65284d694a61&chksm=9b653030ac12b9266e07d7d0e3c78203a069dc2efc6b36e967e55773f0e99ac057d46ec72fb1&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-ElementPlus】：若依前端增强版 —— 功能扩展优化](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247483736&idx=2&sn=712c5a22c0e82ea6667ea15947fa9ea4&chksm=9b653030ac12b92633117d74b922a27007a3a3e7200a7e3d7b0b626e877c760def0bcd18d149&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-UniApp】：一套代码，多端运行的移动端开发方案](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247483736&idx=3&sn=2368005f5f2a7a24fa01aaad9d3d633a&chksm=9b653030ac12b9268c0e466b49fd2fd12529d23bc0a723ab4eaeacc65a505b49d2681a5cfd17&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-Pro】：多数据库支持，再也不用为数据库选型烦恼了](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247483845&idx=1&sn=035ec0354df54f4b2bf5ffff032eccb8&chksm=9b6530adac12b9bb0cf418a78b87530eaa76032997dfcb1422a94284a064034239336eddcbdd&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-Pro】：接入 AI 对话能力](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247484046&idx=1&sn=2c95da8b99898d74f78ecad129990805&chksm=9b6533e6ac12baf0079e16325ed708c9359ba95806b29fb62a463ae88ee4a63ebba679383f17&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-Pro】：使用 Dify + AI 快速生成多数据库建表语句](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247484067&idx=1&sn=cfa89e55f04b1336164b63493d3f5cb1&chksm=9b6533cbac12badd7f30e84570fec61df1b3a90ffa71432b6c327d7888c199122c9b4bd3f649&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-Pro】： 三级等保安全配置](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247484075&idx=1&sn=797f717c43d68fb3729771424b5e0cd7&chksm=9b6533c3ac12bad591bc8de5f2d546c742ebf4d36e019d2e1cc6f48049c8c86f4a24473fa0df&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-Pro】：Magic API 低代码开发](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247484076&idx=1&sn=c995c7c6ca4b6aa928f6a6ddca0de68b&chksm=9b6533c4ac12bad2f17dbeccada7a50736a6ac24064a2544294c20d808926459ce0165d5b5f1&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
+- [【RuoYi-SpringBoot3-Pro】：MyBatis-Plus 集成](https://mp.weixin.qq.com/s?__biz=MzAwOTExOTc1MQ==&mid=2247484089&idx=1&sn=59a3bd21d8252d1072a8adccd7c979e4&chksm=9b6533d1ac12bac7b2751ec1e17cc4b6b181ff89d9df6ae843330211f31a79d363b804fb3d47&scene=178&cur_album_id=4260128209435361290&search_click_id=#rd)
 
 ## ✨ 核心新特性
 
