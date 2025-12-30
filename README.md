@@ -4,16 +4,15 @@
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi SpringBoot3 Pro v3.9.0</h1>
 <h4 align="center">基于 SpringBoot 3 + MyBatis-Plus 的企业级快速开发框架</h4>
 
-
 ## 平台简介
 
 RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/tree/springboot3/) 基础上的企业级增强版本，保留了原有的所有功能，并新增了多项企业级特性，全部开源免费。
 
 本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**等企业级功能,适合中大型项目和政企系统快速开发。
 
-
 ![公众号](https://cdn.undsky.com/img/ghss.png)
- > 关注公众号，聚焦 AI 应用落地与开发经验分享
+
+> 关注公众号，聚焦 AI 应用落地与开发经验分享
 
 ## 📑 目录导航
 
@@ -35,13 +34,15 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 - [联系方式](#联系方式)
 
 ## 前端项目
+
 - 🖥️ Element Plus 版本：https://github.com/undsky/RuoYi-SpringBoot3-ElementPlus
 - 🎨 Vue3 Prettier 版本：https://github.com/undsky/ruoyi-vue3-prettier
-（ fork from https://gitee.com/codelm/ruoyi-vue3-lmw ）
+  （ fork from https://gitee.com/codelm/ruoyi-vue3-lmw ）
 - 🐻 BearJia Vue3 版本：https://github.com/undsky/BearJia-Vue3/blob/master/docs/ruoyi-usage.md
-（ fork from https://gitee.com/javaxiaobear_admin/bear-jia-vue3 ）
+  （ fork from https://gitee.com/javaxiaobear_admin/bear-jia-vue3 ）
 
 ## UniApp 移动端
+
 - 📱 [RuoYi-SpringBoot3-UniApp](https://github.com/undsky/RuoYi-SpringBoot3-UniApp)
 
 ## ✨ 核心新特性
@@ -63,8 +64,8 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 满足国家信息安全等级保护三级要求，内置完善的安全策略：
 
-- **密码更新周期**:可配置密码有效期（0-365天），超期强制修改
-- **登录失败锁定**:支持 N 次失败锁定 M 分钟策略（如 5-30 表示5次失败锁定30分钟）
+- **密码更新周期**:可配置密码有效期（0-365 天），超期强制修改
+- **登录失败锁定**:支持 N 次失败锁定 M 分钟策略（如 5-30 表示 5 次失败锁定 30 分钟）
 - **初始密码强制修改**:首次登录强制修改初始密码
 - **密码过期提醒**:登录时自动检测密码是否过期，提示用户更新
 - **IP 黑名单**:支持 IP 黑名单配置，支持通配符和网段匹配
@@ -106,13 +107,13 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 支持国内外主流数据库，满足不同场景需求：
 
-| 数据库 | 支持版本 | 配置文件 | 初始化脚本 |
-|--------|---------|---------|-----------|
-| **MySQL** | 5.7+ | application-devmy.yml | ruoyi-mysql.sql |
-| **PostgreSQL** | 12+ | application-devpg.yml | ruoyi-pgsql.sql |
-| **达梦数据库** | DM8+ | application-devdm.yml | ruoyi-dm8.dmp |
-| **瀚高数据库** | 6.2+ | application-devhg.yml | ruoyi-highgo.sql |
-| **高斯数据库** | GaussDB | application-devgs.yml | ruoyi-gauss.sql |
+| 数据库         | 支持版本 | 配置文件              | 初始化脚本       |
+| -------------- | -------- | --------------------- | ---------------- |
+| **MySQL**      | 5.7+     | application-devmy.yml | ruoyi-mysql.sql  |
+| **PostgreSQL** | 12+      | application-devpg.yml | ruoyi-pgsql.sql  |
+| **达梦数据库** | DM8+     | application-devdm.yml | ruoyi-dm8.dmp    |
+| **瀚高数据库** | 6.2+     | application-devhg.yml | ruoyi-highgo.sql |
+| **高斯数据库** | GaussDB  | application-devgs.yml | ruoyi-gauss.sql  |
 
 > 💡 切换数据库只需修改 `application.yml` 中的 `spring.profiles.active` 配置
 
@@ -140,7 +141,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 - **多数据库支持**：支持 MySQL、PostgreSQL/瀚高、openGauss、SQLite 四种数据库
 - **智能字段命名**：支持拼音或英文两种字段命名规范
-- **标准化表结构**：自动生成包含租户ID、用户ID、部门ID、状态、创建/更新信息等标准字段
+- **标准化表结构**：自动生成包含租户 ID、用户 ID、部门 ID、状态、创建/更新信息等标准字段
 - **索引自动创建**：自动为常用字段创建索引（tenant_id、user_id、dept_id）
 - **简洁输入格式**：只需输入"表名：字段（类型）"即可生成完整建表语句
 - **开箱即用**：导入 `sql/Dify_数据库建表.yml` 到 Dify 即可使用
@@ -161,19 +162,19 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 ### 后端技术
 
-| 技术 | 版本 | 说明 |
-|------|------|------|
-| Spring Boot | 3.3.5 | 容器 + MVC 框架 |
-| Spring Security | 6.x | 认证和授权框架 |
-| MyBatis-Plus | 3.5+ | ORM 框架（增强版） |
-| OpenAI Java SDK | Latest | AI 对话能力 |
-| Magic API | 2.2.2 | 低代码快速开发平台 |
-| Redis | - | 分布式缓存（可选） |
-| JWT | 0.9.1 | JWT 令牌 |
-| Druid | 1.2.23 | 数据库连接池 |
-| Springdoc | 2.6.0 | API 文档 |
-| Quartz | - | 定时任务 |
-| Velocity | 2.3 | 代码生成模板 |
+| 技术            | 版本   | 说明               |
+| --------------- | ------ | ------------------ |
+| Spring Boot     | 3.3.5  | 容器 + MVC 框架    |
+| Spring Security | 6.x    | 认证和授权框架     |
+| MyBatis-Plus    | 3.5+   | ORM 框架（增强版） |
+| OpenAI Java SDK | Latest | AI 对话能力        |
+| Magic API       | 2.2.2  | 低代码快速开发平台 |
+| Redis           | -      | 分布式缓存（可选） |
+| JWT             | 0.9.1  | JWT 令牌           |
+| Druid           | 1.2.23 | 数据库连接池       |
+| Springdoc       | 2.6.0  | API 文档           |
+| Quartz          | -      | 定时任务           |
+| Velocity        | 2.3    | 代码生成模板       |
 
 ### 数据库支持
 
@@ -203,7 +204,7 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 16. ✅ 缓存监控：对系统的缓存信息查询，命令统计等。
 17. ✅ 连接池监视：监视当前系统数据库连接池状态，可进行分析 SQL 找出系统性能瓶颈。
 18. ✨ **ClassFinal 代码加密**：字节码加密保护，防止核心业务代码被反编译（新增）。
-19. ✨ **三级等保支持**：密码更新周期、登录失败锁定、IP黑名单等安全策略（新增）。
+19. ✨ **三级等保支持**：密码更新周期、登录失败锁定、IP 黑名单等安全策略（新增）。
 20. ✨ **AI 对话能力**：内置 OpenAI 工具类，支持同步和流式对话（新增）。
 21. ✨ **代码生成优化**：针对 MyBatis-Plus 优化的代码生成模板（优化）。
 22. ✨ **地区管理**：省市区三级联动数据管理（新增）。
@@ -248,7 +249,7 @@ psql -U postgres -d ruoyi < sql/region-pgsql.sql
 ```yaml
 spring:
   profiles:
-    active: devmy  # 选择对应的数据库配置文件
+    active: devmy # 选择对应的数据库配置文件
 ```
 
 然后编辑对应的配置文件（如 `application-devmy.yml`），修改数据库连接信息。
@@ -285,8 +286,8 @@ bin\run.bat
 
 6. **启动前端**
 
-
 **Element Plus 版本（推荐企业级应用）：**
+
 ```bash
 # 克隆项目
 git clone https://github.com/undsky/RuoYi-SpringBoot3-ElementPlus.git
@@ -300,7 +301,6 @@ npm run dev
 
 # 访问地址：http://localhost:80
 ```
-
 
 ### ClassFinal 代码加密使用
 
@@ -316,13 +316,13 @@ Pro 版本集成了 ClassFinal 代码加密插件，保护核心业务代码：
     <configuration>
         <!-- 需要加密的包，多个用逗号分隔 -->
         <packages>com.ruoyi.biz</packages>
-        
+
         <!-- 需要加密的配置文件 -->
         <cfgfiles>*.yml</cfgfiles>
-        
+
         <!-- 排除的包，不进行加密 -->
         <excludes>org.spring</excludes>
-        
+
         <!-- 加密密码，运行时需要此密码 -->
         <password>RuoyiSpringBoot3@123456!</password>
     </configuration>
@@ -377,6 +377,7 @@ Pro 版本内置完善的等保三级安全策略，通过系统参数配置即�
 ```
 
 配置后效果：
+
 - 用户密码超过 90 天未更新，登录时会强制提示修改密码
 - 系统自动检测 `pwd_update_date` 字段判断密码是否过期
 
@@ -391,8 +392,9 @@ Pro 版本内置完善的等保三级安全策略，通过系统参数配置即�
 ```
 
 配置后效果：
+
 - 连续 5 次登录失败后，账号自动锁定 30 分钟
-- 锁定期间无法登录，提示"连续5次登录失败，请30分钟后再试"
+- 锁定期间无法登录，提示"连续 5 次登录失败，请 30 分钟后再试"
 - 锁定时间到期或管理员手动解锁后恢复
 
 **3. 初始密码强制修改**
@@ -406,6 +408,7 @@ Pro 版本内置完善的等保三级安全策略，通过系统参数配置即�
 ```
 
 配置后效果：
+
 - 新用户首次登录时，强制修改初始密码
 - 直到修改密码后才能正常使用系统
 
@@ -420,13 +423,15 @@ Pro 版本内置完善的等保三级安全策略，通过系统参数配置即�
 ```
 
 配置后效果：
+
 - 黑名单中的 IP 无法登录系统
-- 支持通配符匹配（如 192.168.1.*）
+- 支持通配符匹配（如 192.168.1.\*）
 - 支持网段匹配（如 10.0.0.0/8）
 
 **数据库支持**
 
 系统会自动跟踪：
+
 - `sys_user.try_count`：记录用户登录失败次数
 - `sys_user.pwd_update_date`：记录密码最后更新时间
 
@@ -469,20 +474,20 @@ System.out.println(response);
 @PostMapping("/chat/stream")
 public ResponseEntity<StreamingResponseBody> chatStream(@RequestBody ChatRequest request) {
     OpenAIClient client = OpenAI.chatClient("your-api-key", "https://api.openai.com/v1", null);
-    
+
     List<AIMessage> messages = Arrays.asList(
         new AIMessage(AIRole.USER, request.getMessage())
     );
-    
+
     ChatCompletionCreateParams params = OpenAI.chatParams("gpt-3.5-turbo", messages);
-    
+
     return OpenAI.chatStream(client, params, new OpenAI.StreamContentListener() {
         @Override
         public void onContent(String content) {
             // 每次接收到增量内容时调用
             System.out.print(content);
         }
-        
+
         @Override
         public void onComplete(String fullContent) {
             // 流式输出完成后调用
@@ -530,7 +535,7 @@ List<SysUser> users = userMapper.selectList(
 
 // 分页查询
 Page<SysUser> page = new Page<>(1, 10);
-userMapper.selectPage(page, 
+userMapper.selectPage(page,
     new LambdaQueryWrapper<SysUser>()
         .orderByDesc(SysUser::getCreateTime)
 );
@@ -573,12 +578,12 @@ public interface UserMapper extends BaseMapper<User> {
 
 ```yaml
 tenant:
-  enable: true              # 是否启用多租户
-  column: tenant_id         # 租户字段名
-  ignoreTables:             # 忽略的表（不进行租户隔离）
+  enable: true # 是否启用多租户
+  column: tenant_id # 租户字段名
+  ignoreTables: # 忽略的表（不进行租户隔离）
     - sys_user
     - sys_role
-  ignoreLoginNames:         # 忽略的用户（不进行租户隔离）
+  ignoreLoginNames: # 忽略的用户（不进行租户隔离）
     - admin
 ```
 
@@ -623,12 +628,12 @@ CREATE TABLE `biz_dingdan`  (
 
 **支持的数据库：**
 
-| 数据库 | 主键类型 | 特点 |
-|--------|---------|------|
-| MySQL | AUTO_INCREMENT | 标准 InnoDB 引擎 |
-| PostgreSQL/瀚高 | IDENTITY | 支持 COMMENT ON 语法 |
-| openGauss | BIGSERIAL | 华为高斯数据库语法 |
-| SQLite | AUTOINCREMENT | 轻量级数据库 |
+| 数据库          | 主键类型       | 特点                 |
+| --------------- | -------------- | -------------------- |
+| MySQL           | AUTO_INCREMENT | 标准 InnoDB 引擎     |
+| PostgreSQL/瀚高 | IDENTITY       | 支持 COMMENT ON 语法 |
+| openGauss       | BIGSERIAL      | 华为高斯数据库语法   |
+| SQLite          | AUTOINCREMENT  | 轻量级数据库         |
 
 ### 切换数据库
 
@@ -666,28 +671,25 @@ RuoYi-SpringBoot3-Pro
 
 ## 与原版对比
 
-| 特性 | RuoYi-Vue-springboot3 | RuoYi-SpringBoot3-Pro |
-|------|----------------------|----------------------|
-| Spring Boot | 3.5.4 | 3.3.5 |
-| ORM 框架 | MyBatis | MyBatis-Plus ⭐ |
-| AI 智能开发 | ❌ | Cursor/Windsurf Rules ⭐ |
-| 代码加密保护 | ❌ | ClassFinal 加密 ⭐ |
-| 三级等保 | 部分支持 | 完整支持 ⭐ |
-| AI 能力 | ❌ | OpenAI 集成 ⭐ |
-| 低代码开发 | ❌ | Magic API ⭐ |
-| 多数据库支持 | MySQL | MySQL/PostgreSQL/达梦/瀚高/高斯 ⭐ |
-| 多租户 | ❌ | ✅ ⭐ |
-| Redis | 必须 | 可选 ⭐ |
-| 业务示例模块 | ❌ | ruoyi-biz ⭐ |
-| 代码生成模板 | MyBatis | MyBatis-Plus 适配 ⭐ |
-| 文件上传大小 | 10MB/20MB | 100MB/200MB ⭐ |
-| Dify 建表工作流 | ❌ | ✅ ⭐ |
-
+| 特性            | RuoYi-Vue-springboot3 | RuoYi-SpringBoot3-Pro              |
+| --------------- | --------------------- | ---------------------------------- |
+| Spring Boot     | 3.5.4                 | 3.3.5                              |
+| ORM 框架        | MyBatis               | MyBatis-Plus ⭐                    |
+| 代码加密保护    | ❌                    | ClassFinal 加密 ⭐                 |
+| 三级等保        | 部分支持              | 完整支持 ⭐                        |
+| AI 能力         | ❌                    | OpenAI 集成 ⭐                     |
+| 低代码开发      | ❌                    | Magic API ⭐                       |
+| 多数据库支持    | MySQL                 | MySQL/PostgreSQL/达梦/瀚高/高斯 ⭐ |
+| 多租户          | ❌                    | ✅ ⭐                              |
+| Redis           | 必须                  | 可选 ⭐                            |
+| 业务示例模块    | ❌                    | ruoyi-biz ⭐                       |
+| 代码生成模板    | MyBatis               | MyBatis-Plus 适配 ⭐               |
+| 文件上传大小    | 10MB/20MB             | 100MB/200MB ⭐                     |
+| Dify 建表工作流 | ❌                    | ✅ ⭐                              |
 
 ## 部署说明
 
 [部署系统](https://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#%E9%83%A8%E7%BD%B2%E7%B3%BB%E7%BB%9F)
-
 
 ## 🤝 参与贡献
 
@@ -719,4 +721,3 @@ RuoYi-SpringBoot3-Pro
 ---
 
 ⭐ 如果觉得项目不错，请点个 Star 支持一下！
-
