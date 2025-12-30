@@ -5,8 +5,7 @@ package com.ruoyi.common.core.domain.model;
  * 
  * @author ruoyi
  */
-public class LoginBody
-{
+public class LoginBody {
     /**
      * 用户名
      */
@@ -27,43 +26,45 @@ public class LoginBody
      */
     private String uuid;
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getCode()
-    {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(String code)
-    {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    public String getUuid()
-    {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid)
-    {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    private Integer smsCode;
+
+    public Integer getSmsCode() {
+        return smsCode;
+    }
+
+    public void setSmsCode(Integer smsCode) {
+        this.smsCode = smsCode;
     }
 }

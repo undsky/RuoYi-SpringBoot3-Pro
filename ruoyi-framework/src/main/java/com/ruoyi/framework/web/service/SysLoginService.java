@@ -1,5 +1,6 @@
 package com.ruoyi.framework.web.service;
 
+import com.ruoyi.framework.sms.SmsHelper;
 import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.UserConstants;
@@ -61,22 +62,26 @@ public class SysLoginService {
     public String login(SysUser sysUser) {
         Authentication authentication = null;
         try {
-            UserDetails userDetails = new LoginUser(sysUser.getUserId(), sysUser.getDeptId(), sysUser, permissionService.getMenuPermission(sysUser));
+            UserDetails userDetails = new LoginUser(sysUser.getUserId(), sysUser.getDeptId(), sysUser,
+                    permissionService.getMenuPermission(sysUser));
             authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                     AuthorityUtils.createAuthorityList("ROLE_DEFAULT"));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(sysUser.getUserName(), Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(sysUser.getUserName(), Constants.LOGIN_FAIL,
+                        MessageUtils.message("user.password.not.match")));
                 throw new UserPasswordNotMatchException();
             } else {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(sysUser.getUserName(), Constants.LOGIN_FAIL, e.getMessage()));
+                AsyncManager.me().execute(
+                        AsyncFactory.recordLogininfor(sysUser.getUserName(), Constants.LOGIN_FAIL, e.getMessage()));
                 throw new ServiceException(e.getMessage());
             }
         } finally {
             AuthenticationContextHolder.clearContext();
         }
-        AsyncManager.me().execute(AsyncFactory.recordLogininfor(sysUser.getUserName(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
+        AsyncManager.me().execute(AsyncFactory.recordLogininfor(sysUser.getUserName(), Constants.LOGIN_SUCCESS,
+                MessageUtils.message("user.login.success")));
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         recordLoginInfo(loginUser.getUserId());
         // 生成token
@@ -92,34 +97,81 @@ public class SysLoginService {
      * @param uuid     唯一标识
      * @return 结果
      */
-    public String login(String username, String password, String code, String uuid) {
+    @org.springframework.beans.factory.annotation.Value("${secondary-verification.enabled:false}")
+    private boolean secondaryVerificationEnabled;
+
+    /**
+     * 登录验证
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @param code     验证码
+     * @param uuid     唯一标识
+     * @return 结果
+     */
+    public String login(String username, String password, String code, String uuid, Integer smsCode) {
         // 验证码校验
-        validateCaptcha(username, code, uuid);
+        if (null == smsCode) {
+            validateCaptcha(username, code, uuid);
+        }
+
         // 登录前置校验
         loginPreCheck(username, password);
         // 用户验证
         Authentication authentication = null;
         try {
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
+                    password);
             AuthenticationContextHolder.setContext(authenticationToken);
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(authenticationToken);
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                        MessageUtils.message("user.password.not.match")));
                 throw new UserPasswordNotMatchException();
             } else {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
+                AsyncManager.me()
+                        .execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
                 throw new ServiceException(e.getMessage());
             }
         } finally {
             AuthenticationContextHolder.clearContext();
         }
-        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
+        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS,
+                MessageUtils.message("user.login.success")));
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+
+        if (secondaryVerificationEnabled) {
+            String phonenumber = loginUser.getUser().getPhonenumber();
+            if (null == smsCode) {
+                if (StringUtils.isEmpty(phonenumber)) {
+                    throw new RuntimeException("您还没有设置手机号，无法完成二次验证，请联系管理员");
+                }
+                try {
+                    SmsHelper.sendCaptcha(phonenumber);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                return "sms";
+            } else {
+                String cachePhone = "captcha:" + phonenumber;
+                Integer cacheSmsCode = redisCache.getCacheObject(cachePhone);
+                if (cacheSmsCode != null && cacheSmsCode.equals(smsCode)) {
+                    redisCache.deleteObject(cachePhone);
+                    recordLoginInfo(loginUser.getUserId());
+                    // 生成token
+                    return tokenService.createToken(loginUser);
+                } else {
+                    throw new RuntimeException("手机验证码错误");
+                }
+            }
+        }
         recordLoginInfo(loginUser.getUserId());
         // 生成token
         return tokenService.createToken(loginUser);
+
     }
 
     /**
@@ -136,12 +188,14 @@ public class SysLoginService {
             String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
             String captcha = redisCache.getCacheObject(verifyKey);
             if (captcha == null) {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                        MessageUtils.message("user.jcaptcha.expire")));
                 throw new CaptchaExpireException();
             }
             redisCache.deleteObject(verifyKey);
             if (!code.equalsIgnoreCase(captcha)) {
-                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                        MessageUtils.message("user.jcaptcha.error")));
                 throw new CaptchaException();
             }
         }
@@ -156,25 +210,29 @@ public class SysLoginService {
     public void loginPreCheck(String username, String password) {
         // 用户名或密码为空 错误
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("not.null")));
+            AsyncManager.me().execute(
+                    AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("not.null")));
             throw new UserNotExistsException();
         }
         // 密码如果不在指定范围内 错误
         if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
                 || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                    MessageUtils.message("user.password.not.match")));
             throw new UserPasswordNotMatchException();
         }
         // 用户名不在指定范围内 错误
         if (username.length() < UserConstants.USERNAME_MIN_LENGTH
                 || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                    MessageUtils.message("user.password.not.match")));
             throw new UserPasswordNotMatchException();
         }
         // IP黑名单校验
         String blackStr = configService.selectConfigByKey("sys.login.blackIPList");
         if (IpUtils.isMatchedIp(blackStr, IpUtils.getIpAddr())) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("login.blocked")));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                    MessageUtils.message("login.blocked")));
             throw new BlackListException();
         }
     }

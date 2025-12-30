@@ -77,8 +77,9 @@ public class SysLoginController {
             throw new RuntimeException(msg);
 
         try {
-            token = loginService.login(username, RsaUtils.decryptByPrivateKey(loginBody.getPassword()), loginBody.getCode(),
-                    loginBody.getUuid());
+            token = loginService.login(username, RsaUtils.decryptByPrivateKey(loginBody.getPassword()),
+                    loginBody.getCode(),
+                    loginBody.getUuid(), loginBody.getSmsCode());
             userService.resetTryCount(username, 0);
         } catch (Exception e) {
             SysUser user = userService.selectUserByUserName(username);
@@ -195,7 +196,8 @@ public class SysLoginController {
 
     // 检查密码是否过期
     public boolean passwordIsExpiration(Date pwdUpdateDate) {
-        Integer passwordValidateDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
+        Integer passwordValidateDays = Convert
+                .toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
         if (passwordValidateDays != null && passwordValidateDays > 0) {
             if (StringUtils.isNull(pwdUpdateDate)) {
                 // 如果从未修改过初始密码，直接提醒过期

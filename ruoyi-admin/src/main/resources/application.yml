@@ -52,7 +52,7 @@ spring:
     # 国际化资源文件路径
     basename: i18n/messages
   profiles:
-    active: devpg
+    active: devmy
   # 文件上传
   servlet:
     multipart:
@@ -198,10 +198,21 @@ magic-api:
     enable: true
     max-history: -1
     table-name: magic_backup_record
-  response: |- 
+  response: |-
     {
       code: code,
       msg: message,
       data,
     }
 
+# 阿里短信配置
+alisms:
+  key: your_access_key_id
+  secret: your_access_key_secret
+  sign: your_sign_name
+  templates:
+    - your_template_code
+
+# 二次验证配置
+secondary-verification:
+  enabled: false
