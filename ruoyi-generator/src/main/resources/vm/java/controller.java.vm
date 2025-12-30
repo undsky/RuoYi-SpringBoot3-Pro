@@ -1,5 +1,6 @@
 package ${packageName}.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.ArrayList;
@@ -59,7 +60,8 @@ public class ${ClassName}Controller extends BaseController {
     }
     #elseif($table.tree)
         public AjaxResult list(${ClassName} ${className}) {
-            List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+            QueryWrapper<${ClassName}> queryWrapper = getQueryWrapper(${ClassName}.class);
+            List<${ClassName}> list = ${className}Service.list(${className});
             return success(list);
         }
     #end
@@ -71,7 +73,9 @@ public class ${ClassName}Controller extends BaseController {
     @Log(title = "${functionName}", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ${ClassName} ${className}) {
-        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        QueryWrapper<${ClassName}> queryWrapper = getQueryWrapper(${ClassName}.class);
+        IPage<${ClassName}> page = ${className}Service.page${ClassName}(getPage(), queryWrapper);
+        List<${ClassName}> list = page.getRecords();
         ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}. class);
         util.exportExcel(response, list, "${functionName}");
     }
