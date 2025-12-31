@@ -235,20 +235,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="updateUserStatus" parameterType="SysUser">
- 		update sys_user set status = #{status} where user_id = #{userId}
+ 		update sys_user set status = #{status},update_time = <choose>
+            <when test="'pgsql' == _databaseId || 'hg' == _databaseId">
+               CURRENT_TIMESTAMP
+            </when>
+            <otherwise>sysdate()</otherwise>
+        </choose> where user_id = #{userId}
 	</update>
 	
 	<update id="updateUserAvatar" parameterType="SysUser">
- 		update sys_user set avatar = #{avatar} where user_name = #{userName}
+ 		update sys_user set avatar = #{avatar},update_time = <choose>
+            <when test="'pgsql' == _databaseId || 'hg' == _databaseId">
+               CURRENT_TIMESTAMP
+            </when>
+            <otherwise>sysdate()</otherwise>
+        </choose> where user_id = #{userId}
 	</update>
-	
+	<update id="updateLoginInfo" parameterType="SysUser">
+		update sys_user set login_ip = #{loginIp}, login_date = #{loginDate} where user_id = #{userId}
+	</update>
 	<update id="resetUserPwd" parameterType="SysUser">
  		update sys_user set pwd_update_date = <choose>
 		<when test="'pgsql' == _databaseId || 'hg' == _databaseId">
 			CURRENT_TIMESTAMP
 		</when>
 		<otherwise>sysdate()</otherwise>
-	</choose>, password = #{password} where user_name = #{userName}
+	</choose>, password = #{password} where user_id = #{userId}
 	</update>
 
 	<update id="resetTryCount" parameterType="SysUser">

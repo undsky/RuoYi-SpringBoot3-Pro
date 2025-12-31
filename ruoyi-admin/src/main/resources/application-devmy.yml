@@ -2,7 +2,7 @@
 ruoyi:
   env: dev
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /Users/jyx/project/RuoyiSpringBoot3/profile
+  profile: D:/ruoyi/uploadPath
   siteUrl: https://www.undsky.com
 
 # 数据源配置
@@ -14,7 +14,7 @@ spring:
       # 主库数据源
       master:
         url: jdbc:mysql://localhost:3306/ruoyi?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: ruoyi
+        username: root
         password: jyx123
       # 从库数据源
       slave:

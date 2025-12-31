@@ -1,5 +1,6 @@
 package com.ruoyi.system.service;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.common.core.domain.entity.SysUser;
 
@@ -155,11 +156,21 @@ public interface ISysUserService
     /**
      * 修改用户头像
      * 
-     * @param userName 用户名
+     * @param userId 用户ID
      * @param avatar 头像地址
      * @return 结果
      */
-    public boolean updateUserAvatar(String userName, String avatar);
+    public boolean updateUserAvatar(Long userId, String avatar);
+
+    /**
+     * 更新用户登录信息（IP和登录时间）
+     * 
+     * @param userId 用户ID
+     * @param loginIp 登录IP地址
+     * @param loginDate 登录时间
+     * @return 结果
+     */
+    public void updateLoginInfo(Long userId, String loginIp, Date loginDate);
 
     /**
      * 重置用户密码
@@ -172,13 +183,12 @@ public interface ISysUserService
     /**
      * 重置用户密码
      * 
-     * @param userName 用户名
+     * @param userId 用户ID
      * @param password 密码
      * @return 结果
      */
-    public int resetUserPwd(String userName, String password);
+    public int resetUserPwd(Long userId, String password);
     public int resetTryCount(String userName, Integer tryCount);
-
     /**
      * 通过用户ID删除用户
      * 

@@ -704,6 +704,12 @@ RuoYi-SpringBoot3-Pro
 
 [部署系统](https://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#%E9%83%A8%E7%BD%B2%E7%B3%BB%E7%BB%9F)
 
+## 请我喝杯咖啡
+
+如果项目对你有帮助，可以请我喝杯咖啡 ☕️
+
+<img src="https://cdn.undsky.com/img/weixin10.jpg" max-width="300" height="500" /> <img src="https://cdn.undsky.com/img/zhifubao10.jpg" max-width="300" height="500" />
+
 ## 🤝 参与贡献
 
 欢迎提交 Issue 和 Pull Request！
