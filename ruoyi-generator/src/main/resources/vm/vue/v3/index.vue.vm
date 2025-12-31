@@ -479,7 +479,7 @@ function ${businessName}GetList() {
 #foreach ($column in $columns)
 #if($column.htmlType == "datetime" && $column.queryType == "BETWEEN")
 #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
-  if (null != ${businessName}Daterange${AttrName} && '' != ${businessName}Daterange${AttrName}) {
+  if (null != ${businessName}Daterange${AttrName}.value && '' != ${businessName}Daterange${AttrName}.value) {
     ${businessName}QueryParams.value.params["begin${AttrName}"] = ${businessName}Daterange${AttrName}.value[0];
     ${businessName}QueryParams.value.params["end${AttrName}"] = ${businessName}Daterange${AttrName}.value[1];
   }

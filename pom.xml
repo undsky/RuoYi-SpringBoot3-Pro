@@ -6,34 +6,35 @@
 
     <groupId>com.ruoyi</groupId>
     <artifactId>ruoyi</artifactId>
-    <version>3.9.0</version>
+    <version>3.9.1</version>
 
     <name>ruoyi</name>
     <url>http://www.ruoyi.vip</url>
     <description>若依管理系统</description>
 
     <properties>
-        <ruoyi.version>3.9.0</ruoyi.version>
+        <ruoyi.version>3.9.1</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <mybatis-spring-boot.version>3.0.3</mybatis-spring-boot.version>
-        <druid.version>1.2.23</druid.version>
-        <bitwalker.version>1.21</bitwalker.version>
+        <mybatis-spring-boot.version>3.0.5</mybatis-spring-boot.version>
+        <druid.version>1.2.27</druid.version>
+        <yauaa.version>7.32.0</yauaa.version>
         <swagger.version>3.0.0</swagger.version>
         <kaptcha.version>2.3.3</kaptcha.version>
-        <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
-        <fastjson.version>2.0.57</fastjson.version>
-        <oshi.version>6.8.1</oshi.version>
-        <commons.io.version>2.19.0</commons.io.version>
+        <pagehelper.boot.version>2.1.1</pagehelper.boot.version>
+        <fastjson.version>2.0.60</fastjson.version>
+        <oshi.version>6.9.1</oshi.version>
+        <commons.io.version>2.21.0</commons.io.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
+        <quartz.version>2.5.2</quartz.version>
         <mysql.version>8.2.0</mysql.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <jakarta.version>6.0.0</jakarta.version>
-        <springdoc.version>2.6.0</springdoc.version>
+        <springdoc.version>2.8.14</springdoc.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -44,7 +45,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.3.5</version>
+                <version>3.5.8</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -58,9 +59,9 @@
 
             <!-- 解析客户端操作系统、浏览器等 -->
             <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${bitwalker.version}</version>
+                <groupId>nl.basjes.parse.useragent</groupId>
+                <artifactId>yauaa</artifactId>
+                <version>${yauaa.version}</version>
             </dependency>
 
             <!-- pagehelper 分页插件 -->
@@ -127,6 +128,13 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- 定时任务 -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
             </dependency>
 
             <!-- 阿里JSON解析器 -->
