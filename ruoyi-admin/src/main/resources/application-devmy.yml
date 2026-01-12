@@ -14,7 +14,7 @@ spring:
       # 主库数据源
       master:
         url: jdbc:mysql://localhost:3306/ruoyi?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: ruoyi
+        username: root
         password: jyx123
       # 从库数据源
       slave:
