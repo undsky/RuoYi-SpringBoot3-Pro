@@ -177,16 +177,16 @@ RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/t
 
 | 技术            | 版本   | 说明               |
 | --------------- | ------ | ------------------ |
-| Spring Boot     | 3.3.5  | 容器 + MVC 框架    |
+| Spring Boot     | 3.5.8  | 容器 + MVC 框架    |
 | Spring Security | 6.x    | 认证和授权框架     |
 | MyBatis-Plus    | 3.5+   | ORM 框架（增强版） |
 | OpenAI Java SDK | Latest | AI 对话能力        |
 | Magic API       | 2.2.2  | 低代码快速开发平台 |
 | Redis           | -      | 分布式缓存（可选） |
 | JWT             | 0.9.1  | JWT 令牌           |
-| Druid           | 1.2.23 | 数据库连接池       |
-| Springdoc       | 2.6.0  | API 文档           |
-| Quartz          | -      | 定时任务           |
+| Druid           | 1.2.27 | 数据库连接池       |
+| Springdoc       | 2.8.14 | API 文档           |
+| Quartz          | 2.5.2  | 定时任务           |
 | Velocity        | 2.3    | 代码生成模板       |
 
 ### 数据库支持
@@ -686,7 +686,7 @@ RuoYi-SpringBoot3-Pro
 
 | 特性            | RuoYi-Vue-springboot3 | RuoYi-SpringBoot3-Pro              |
 | --------------- | --------------------- | ---------------------------------- |
-| Spring Boot     | 3.5.4                 | 3.3.5                              |
+| Spring Boot     | 3.5.4                 | 3.5.8                              |
 | ORM 框架        | MyBatis               | MyBatis-Plus ⭐                    |
 | 代码加密保护    | ❌                    | ClassFinal 加密 ⭐                 |
 | 三级等保        | 部分支持              | 完整支持 ⭐                        |
