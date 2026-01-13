@@ -54,16 +54,6 @@ public class N8n {
      * @param file      要上传的文件
      * @return 响应内容
      */
-    /**
-     * 带文件上传的 Webhook 调用接口
-     *
-     * @param baseUrl   n8n 服务地址
-     * @param webhookId Webhook ID
-     * @param token     认证 Token (可选)
-     * @param payload   附加参数 (可选)
-     * @param file      要上传的文件
-     * @return 响应内容
-     */
     public static String webhookWithFile(String baseUrl, String webhookId, String token, JSONObject payload, java.io.File file) {
         return webhook(baseUrl, webhookId, token, payload, java.util.Collections.singletonList(new Attachment("file", file, file.getName())));
     }
