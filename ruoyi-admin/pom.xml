@@ -138,12 +138,11 @@
                 <artifactId>classfinal-maven-plugin</artifactId>
                 <version>1.4.1</version>
                 <configuration>
-                    <libjars></libjars>
+                    <libjars>ruoyi-biz-3.9.1.jar</libjars>
                     <packages>com.ruoyi.biz</packages>
-                    <cfgfiles>*.yml</cfgfiles>
-                    <excludes>org.spring</excludes>
                     <password>RuoyiSpringBoot3@123456!</password>
                     <code></code>
+                    <debug>true</debug>
                 </configuration>
                 <executions>
                     <execution>
