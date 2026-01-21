@@ -84,6 +84,18 @@ public class BaseController {
     }
 
     /**
+     * 获取查询包装器（支持忽略指定字段）
+     *
+     * @param <T>          实体类型
+     * @param type         实体类类型
+     * @param ignoreFields 忽略的字段列表，这些字段不会被添加到查询条件中
+     * @return 查询包装器实例
+     */
+    protected <T> QueryWrapper<T> getQueryWrapper(Class<T> type, String... ignoreFields) {
+        return mybatisUtils.getQueryWrapper(type, ignoreFields);
+    }
+
+    /**
      * 设置请求排序数据
      */
     protected void startOrderBy() {
@@ -104,7 +116,7 @@ public class BaseController {
     /**
      * 响应请求分页数据
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     protected TableDataInfo getDataTable(List<?> list) {
         TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(HttpStatus.SUCCESS);

@@ -106,7 +106,7 @@ public class MybatisUtils {
      * 解析 LocalDate，支持多种格式
      */
     private LocalDate parseLocalDate(String value) {
-        String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd", "yyyyMMdd"};
+        String[] patterns = { "yyyy-MM-dd", "yyyy/MM/dd", "yyyyMMdd" };
         for (String pattern : patterns) {
             try {
                 return LocalDate.parse(value, DateTimeFormatter.ofPattern(pattern));
@@ -120,7 +120,7 @@ public class MybatisUtils {
      * 解析 LocalDateTime，支持多种格式
      */
     private LocalDateTime parseLocalDateTime(String value) {
-        String[] patterns = {"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "yyyy/MM/dd HH:mm:ss", "yyyy-MM-dd"};
+        String[] patterns = { "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "yyyy/MM/dd HH:mm:ss", "yyyy-MM-dd" };
         for (String pattern : patterns) {
             try {
                 if (pattern.equals("yyyy-MM-dd") && value.length() == 10) {
@@ -137,7 +137,7 @@ public class MybatisUtils {
      * 解析 Date，支持多种格式
      */
     private Date parseDate(String value) {
-        String[] patterns = {"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyy/MM/dd"};
+        String[] patterns = { "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyy/MM/dd" };
         for (String pattern : patterns) {
             try {
                 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(pattern);
@@ -189,6 +189,36 @@ public class MybatisUtils {
     }
 
     /**
+     * 检查参数键是否在忽略字段列表中
+     *
+     * @param paramKey     请求参数的键名
+     * @param ignoreFields 忽略的字段列表
+     * @return 如果应该忽略则返回 true
+     */
+    private boolean isIgnoredField(String paramKey, String[] ignoreFields) {
+        if (ignoreFields == null || ignoreFields.length == 0) {
+            return false;
+        }
+        for (String ignoreField : ignoreFields) {
+            if (StringUtils.isEmpty(ignoreField)) {
+                continue;
+            }
+            // 完全匹配
+            if (StringUtils.equals(paramKey, ignoreField)) {
+                return true;
+            }
+            // 带后缀的匹配 (如 xxxEq, xxxLike 等)
+            if (StringUtils.startsWith(paramKey, ignoreField)) {
+                String suffix = paramKey.substring(ignoreField.length());
+                if (suffix.isEmpty() || Character.isUpperCase(suffix.charAt(0))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * 根据请求参数动态构建 MyBatis-Plus 的 QueryWrapper 查询条件
      * 支持的条件方法有：
      * - xxxAsc：升序排序
@@ -212,11 +242,27 @@ public class MybatisUtils {
      * - xxxNotInSql：NOT IN 查询
      */
     public <T> QueryWrapper<T> getQueryWrapper(Class<T> type) {
+        return getQueryWrapper(type, new String[0]);
+    }
+
+    /**
+     * 根据请求参数动态构建 MyBatis-Plus 的 QueryWrapper 查询条件
+     *
+     * @param type         实体类类型
+     * @param ignoreFields 忽略的字段列表，这些字段不会被添加到查询条件中
+     * @return QueryWrapper
+     */
+    public <T> QueryWrapper<T> getQueryWrapper(Class<T> type, String... ignoreFields) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         Map<String, String> reqParams = ServletUtils.getParamMap(ServletUtils.getRequest());
         if (reqParams != null && reqParams.size() > 0) {
             for (Map.Entry<String, String> entry : reqParams.entrySet()) {
-                if (StringUtils.equals("pageSize", entry.getKey()) || StringUtils.equals("pageNum", entry.getKey()) || StringUtils.equals("action", entry.getKey())) {
+                if (StringUtils.equals("pageSize", entry.getKey()) || StringUtils.equals("pageNum", entry.getKey())
+                        || StringUtils.equals("action", entry.getKey())) {
+                    continue;
+                }
+                // 检查是否在忽略列表中
+                if (isIgnoredField(entry.getKey(), ignoreFields)) {
                     continue;
                 }
                 if (StringUtils.startsWith(entry.getKey(), "params[")) {
@@ -270,11 +316,13 @@ public class MybatisUtils {
                 } else if (StringUtils.endsWith(entry.getKey(), "Between")) {
                     String fieldName = entry.getKey().substring(0, entry.getKey().length() - 7);
                     String[] values = entry.getValue().split(",");
-                    queryWrapper.between(fieldName, convertValue(type, fieldName, values[0]), convertValue(type, fieldName, values[1]));
+                    queryWrapper.between(fieldName, convertValue(type, fieldName, values[0]),
+                            convertValue(type, fieldName, values[1]));
                 } else if (StringUtils.endsWith(entry.getKey(), "NotBetween")) {
                     String fieldName = entry.getKey().substring(0, entry.getKey().length() - 10);
                     String[] values = entry.getValue().split(",");
-                    queryWrapper.notBetween(fieldName, convertValue(type, fieldName, values[0]), convertValue(type, fieldName, values[1]));
+                    queryWrapper.notBetween(fieldName, convertValue(type, fieldName, values[0]),
+                            convertValue(type, fieldName, values[1]));
                 } else if (StringUtils.endsWith(entry.getKey(), "Like")) {
                     queryWrapper.like(entry.getKey().substring(0, entry.getKey().length() - 4), entry.getValue());
                 } else if (StringUtils.endsWith(entry.getKey(), "NotLike")) {
@@ -284,9 +332,11 @@ public class MybatisUtils {
                 } else if (StringUtils.endsWith(entry.getKey(), "LikeLeft")) {
                     queryWrapper.likeLeft(entry.getKey().substring(0, entry.getKey().length() - 8), entry.getValue());
                 } else if (StringUtils.endsWith(entry.getKey(), "NotLikeRight")) {
-                    queryWrapper.notLikeRight(entry.getKey().substring(0, entry.getKey().length() - 12), entry.getValue());
+                    queryWrapper.notLikeRight(entry.getKey().substring(0, entry.getKey().length() - 12),
+                            entry.getValue());
                 } else if (StringUtils.endsWith(entry.getKey(), "NotLikeLeft")) {
-                    queryWrapper.notLikeLeft(entry.getKey().substring(0, entry.getKey().length() - 11), entry.getValue());
+                    queryWrapper.notLikeLeft(entry.getKey().substring(0, entry.getKey().length() - 11),
+                            entry.getValue());
                 } else if (StringUtils.endsWith(entry.getKey(), "In")) {
                     queryWrapper.inSql(entry.getKey().substring(0, entry.getKey().length() - 2), entry.getValue());
                 } else if (StringUtils.endsWith(entry.getKey(), "NotIn")) {
