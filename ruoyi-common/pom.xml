@@ -16,11 +16,18 @@
     </description>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.openai/openai-java -->
+        <dependency>
+            <groupId>com.antherd</groupId>
+            <artifactId>sm-crypto</artifactId>
+            <version>0.3.2.1</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/com.openai/openai-java -->
         <dependency>
             <groupId>com.openai</groupId>
             <artifactId>openai-java</artifactId>
-            <version>2.20.1</version>
+            <version>4.17.0</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -39,6 +46,13 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.8.38</version>
+        </dependency>
+
+        <!-- Bouncy Castle 加密库（Hutool SM2/SM3/SM4 依赖） -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.78.1</version>
         </dependency>
 
         <dependency>
