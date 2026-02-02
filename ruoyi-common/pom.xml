@@ -16,6 +16,19 @@
     </description>
 
     <dependencies>
+<!--        &lt;!&ndash; Sa-Token 权限认证, 在线文档：https://sa-token.cc &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>cn.dev33</groupId>-->
+<!--            <artifactId>sa-token-spring-boot-starter</artifactId>-->
+<!--            <version>1.44.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Sa-Token 整合 RedisTemplate &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>cn.dev33</groupId>-->
+<!--            <artifactId>sa-token-redis-template</artifactId>-->
+<!--            <version>1.44.0</version>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>com.antherd</groupId>
             <artifactId>sm-crypto</artifactId>
