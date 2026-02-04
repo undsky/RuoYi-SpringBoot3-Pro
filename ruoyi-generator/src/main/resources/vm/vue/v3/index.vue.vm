@@ -485,7 +485,7 @@ function ${businessName}GetList() {
   }
 #end
 #end
-  list${BusinessName}(proxy.addDateRange(${businessName}QueryParams.value, dateRange.value, 'create_time')).then(response => {
+  list${BusinessName}(proxy.addDateRange(${businessName}QueryParams.value, dateRange.value, 'create_time', true)).then(response => {
     ${businessName}List.value = response.rows;
     ${businessName}Total.value = response.total;
     ${businessName}Loading.value = false;
