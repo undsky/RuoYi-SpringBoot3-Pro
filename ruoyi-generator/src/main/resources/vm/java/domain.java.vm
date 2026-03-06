@@ -69,7 +69,8 @@ private static final long serialVersionUID = 1L;
             #elseif($column.javaField == 'tenantId')
             @TableField(value = "tenant_id" , fill = FieldFill.INSERT)
             #else
-            @TableField("${column.columnName}" )
+        public static final String $column.javaField.toUpperCase() = "$column.columnName";
+            @TableField(value = $column.javaField.toUpperCase())
             #end
             #if($column.required)
             @NotBlank(message = "${column.columnComment}不能为空")
@@ -80,7 +81,6 @@ private static final long serialVersionUID = 1L;
                 #end
             #end
         private $column.javaType $column.javaField;
-        public static final String $column.javaField.toUpperCase() = "$column.columnName";
 
         #end
     #end
