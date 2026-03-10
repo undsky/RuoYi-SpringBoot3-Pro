@@ -6,16 +6,15 @@
 
 ## 平台简介
 
-RuoYi SpringBoot3 Pro 是在 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue/tree/springboot3/) 基础上的企业级增强版本，保留了原有的所有功能，并新增了多项企业级特性，全部开源免费。
+RuoYi SpringBoot3 Pro 是在 **RuoYi-Vue** 基础上的企业级增强版本，保留了原有的所有功能，并新增了多项企业级特性，全部开源免费。
 
 本项目采用最新技术栈,提供 **代码加密保护**、**三级等保支持**、**AI 对话能力**、**更强大的 ORM 支持**、**多数据库适配**、**低代码开发能力**等企业级功能,适合中大型项目和政企系统快速开发。
 
-| 公众号                                       | 联系我（注明来意）                                                         |
-| -------------------------------------------- | -------------------------------------------------------------- |
-| ![公众号](https://cdn.undsky.com/img/gh.jpg) | ![微信](https://cdn.undsky.com/img/wx.jpg) |
+| 公众号                                       | 微信交流群                                                      |
+| -------------------------------------------- | --------------------------------------------------------------- |
+| ![公众号](https://cdn.undsky.com/img/gh.jpg) | ![微信交流群](https://cdn.undsky.com/img/doudouqun.jpg?v=2.0.1) |
 
 ## 演示项目
-
 
 - 🖥️ Element Plus 版本：http://ry.undsky.com/admin/login?redirect=/index
 - 🎨 Vue3 Prettier 版本：http://ry2.undsky.com/login?redirect=/index
