@@ -1,0 +1,79 @@
+/*
+ * @Description: ${functionName}服务层
+ * @Author: ${author}
+ * @Date: ${datetime}
+ */
+
+const Service = require('egg').Service;
+
+class ${ClassName}Service extends Service {
+
+  /**
+   * 查询${functionName}列表（分页）
+   * @param {object} params - 查询参数
+   * @return {object} 查询结果
+   */
+  async select${ClassName}List(params = {}) {
+    const { ctx } = this;
+    const mapper = ctx.helper.getDB(ctx).${className}Mapper;
+
+    return await ctx.helper.pageQuery(
+      mapper.select${ClassName}ListMapper([], params),
+      params,
+      mapper.db()
+    );
+  }
+
+  /**
+   * 查询${functionName}详情
+   * @param {${pkColumn.javaType}} ${pkColumn.javaField} - ${pkColumn.columnComment}
+   * @return {object} ${functionName}信息
+   */
+  async select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField}) {
+    const { ctx } = this;
+    
+    return await ctx.helper.getDB(ctx).${className}Mapper.select${ClassName}By${pkColumn.capJavaField}([],{${pkColumn.javaField}});
+  }
+
+  /**
+   * 新增${functionName}
+   * @param {object} data - ${functionName}信息
+   * @return {object} 新增结果
+   */
+  async insert${ClassName}(data) {
+    const { ctx } = this;
+    
+    const result = await ctx.helper.getMasterDB(ctx).${className}Mapper.insert${ClassName}([],data);
+    
+    return { code: 200, msg: '新增成功', data: result };
+  }
+
+  /**
+   * 修改${functionName}
+   * @param {object} data - ${functionName}信息
+   * @return {object} 修改结果
+   */
+  async update${ClassName}(data) {
+    const { ctx } = this;
+    
+    const result = await ctx.helper.getMasterDB(ctx).${className}Mapper.update${ClassName}([],data);
+    
+    return { code: 200, msg: '修改成功', data: result };
+  }
+
+  /**
+   * 删除${functionName}
+   * @param {array} ${pkColumn.javaField}s - ${pkColumn.columnComment}数组
+   * @return {object} 删除结果
+   */
+  async delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s) {
+    const { ctx } = this;
+    
+    const result = await ctx.helper.getMasterDB(ctx).${className}Mapper.delete${ClassName}By${pkColumn.capJavaField}s([],{array:${pkColumn.javaField}s});
+    
+    return { code: 200, msg: '删除成功', data: result };
+  }
+}
+
+module.exports = ${ClassName}Service;
+

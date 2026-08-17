@@ -1,0 +1,488 @@
+{
+  "db-doudou": {
+    "scope": "javascript,typescript",
+    "prefix": "db-doudou",
+    "body": ["await service.db.doudou.$0"],
+    "description": ""
+  },
+  // Egg
+  "egg-controller-post": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-post",
+    "body": [
+      "@HttpPost('/$func')",
+      "async ${func}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "$0",
+      "}"
+    ],
+    "description": ""
+  },
+  "egg-controller-get": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-get",
+    "body": [
+      "@HttpGet('/$route')",
+      "async ${index}() {",
+      "const {",
+      "ctx,",
+      "service",
+      "} = this;",
+      "await ctx.render('/$route')",
+      "}"
+    ],
+    "description": ""
+  },
+  "egg-controller-page": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-page",
+    "body": [
+      "@HttpPost('/$page')",
+      "async ${page}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "$0",
+      "const results = await service.db.$mapper.${page}(ctx.helper.page())",
+      "ctx.body = {",
+      "rows: results[0],",
+      "total: results[1][0].total",
+      "}",
+      "}"
+    ],
+    "description": "分页"
+  },
+  "egg-controller-select": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-select",
+    "body": [
+      "@HttpPost('/$select')",
+      "async ${select}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "const { $body } = ctx.request.body",
+      "ctx.body = await service.db.$mapper.${select}($0)",
+      "}"
+    ],
+    "description": "单条查询"
+  },
+  "egg-controller-selects": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-selects",
+    "body": [
+      "@HttpPost('/$selects')",
+      "async ${selects}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "const { $body } = ctx.request.body",
+      "ctx.body = await service.db.$mapper.${selects}($0)",
+      "}"
+    ],
+    "description": "多条查询"
+  },
+  "egg-controller-del": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-del",
+    "body": [
+      "@HttpPost('/$del')",
+      "async ${del}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "const { $id } = ctx.request.body",
+      "await service.db.$mapper.${updateDel}($id)",
+      "ctx.body = $id",
+      "}"
+    ],
+    "description": "删除"
+  },
+  "egg-controller-update": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-update",
+    "body": [
+      "@HttpPost('/$update')",
+      "async ${update}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "const { $id,$body } = ctx.request.body",
+      "await service.db.$mapper.${update}([$body,$id])",
+      "ctx.body = $id",
+      "}"
+    ],
+    "description": "更新"
+  },
+  "egg-controller-insert": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-insert",
+    "body": [
+      "@HttpPost('/$insert')",
+      "async ${insert}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "const { $body } = ctx.request.body",
+      "ctx.body = await service.db.$mapper.${insert}({$body})",
+      "}"
+    ],
+    "description": "插入"
+  },
+  "egg-controller-save": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-save",
+    "body": [
+      "@HttpPost('/$save')",
+      "async ${save}() {",
+      "const {",
+      "ctx,",
+      "service",
+      " } = this;",
+      "let { $id,$body } = ctx.request.body",
+      "if ($id) {",
+      "await service.db.${1:mapper}.${update}([$body,$id])",
+      "} else {",
+      "$id = await service.db.${1:mapper}.${insert}({$body})",
+      "}",
+      "ctx.body = $id",
+      "}"
+    ],
+    "description": "保存（插入/更新）"
+  },
+  "egg-controller-transaction": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-controller-transaction",
+    "body": ["const results = await app.mysql.get('$db').transaction([$0])"],
+    "description": "事务"
+  },
+  "egg-ctx-session": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-ctx-session",
+    "body": ["const { $0 } = ctx.session"],
+    "description": ""
+  },
+  "egg-ctx-request-body": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-ctx-request-body",
+    "body": ["const { $0 } = ctx.request.body"],
+    "description": ""
+  },
+  "egg-ctx-request-query": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-ctx-request-query",
+    "body": ["const { $0 } = ctx.query"],
+    "description": ""
+  },
+  "egg-ctx-request-ip": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-ctx-request-ip",
+    "body": ["const $ip = ctx.request.ip"],
+    "description": ""
+  },
+  "egg-ctx-state-user": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-ctx-state-user",
+    "body": ["const { $0 } = ctx.state.user"],
+    "description": ""
+  },
+  "egg-ctx-header": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-ctx-header",
+    "body": ["ctx.get('$0')"],
+    "description": ""
+  },
+  // https://github.com/BryanDonovan/node-cache-manager
+  "egg-cache-wrap": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-cache-wrap",
+    "body": [
+      "await app.cache.${1|default,redis,fs,memory|}.wrap('$key', async () => {",
+      "$0",
+      "})"
+    ],
+    "description": ""
+  },
+  "egg-cache-set": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-cache-set",
+    "body": ["await app.cache.${1|default,redis,fs,memory|}.set('$key', $val)"],
+    "description": ""
+  },
+  "egg-cache-get": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-cache-get",
+    "body": [
+      "const $val = await app.cache.${1|default,redis,fs,memory|}.get('$key')"
+    ],
+    "description": ""
+  },
+  "egg-cache-del": {
+    "scope": "javascript,typescript",
+    "prefix": "egg-cache-del",
+    "body": ["await app.cache.${1|default,redis,fs,memory|}.del('$key')"],
+    "description": ""
+  },
+  // mybatis
+  "mybatis-ref": {
+    "scope": "xml",
+    "prefix": "mybatis-ref",
+    "body": ["<ref id=\"$id\">", "$0", "</ref>"],
+    "description": "引用"
+  },
+  "mybatis-sql": {
+    "scope": "xml",
+    "prefix": "mybatis-sql",
+    "body": ["<sql id=\"$id\">", "$0", "</sql>"],
+    "description": "语句"
+  },
+  "mybatis-select": {
+    "scope": "xml",
+    "prefix": "mybatis-select",
+    "body": [
+      "<select id=\"$select\">",
+      "select $column from $table where $where limit 1",
+      "</select>"
+    ],
+    "description": "单条查询"
+  },
+  "mybatis-selects": {
+    "scope": "xml",
+    "prefix": "mybatis-selects",
+    "body": [
+      "<selects id=\"$selects\">",
+      "select $column from $table where $where",
+      "</selects>"
+    ],
+    "description": "多条查询"
+  },
+  "mybatis-insert-set": {
+    "scope": "xml",
+    "prefix": "mybatis-insert-set",
+    "body": [
+      "<insert id=\"$insert\">",
+      "insert into $table set ?",
+      "</insert>"
+    ],
+    "description": "单条插入"
+  },
+  "mybatis-insert-values": {
+    "scope": "xml",
+    "prefix": "mybatis-insert-values",
+    "body": [
+      "<insert id=\"$inserts\">",
+      "insert into $table ($columns) values ?",
+      "</insert>"
+    ],
+    "description": "多条插入"
+  },
+  "mybatis-update": {
+    "scope": "xml",
+    "prefix": "mybatis-update",
+    "body": [
+      "<update id=\"$update\">",
+      "update $table set $set where id = ?",
+      "</update>"
+    ],
+    "description": "更新"
+  },
+  "mybatis-update-del": {
+    "scope": "xml",
+    "prefix": "mybatis-update-del",
+    "body": [
+      "<update id=\"$updateDel\">",
+      "update $table set del = 1 where id = ?",
+      "</update>"
+    ],
+    "description": "更新 del 列"
+  },
+  "mybatis-delete": {
+    "scope": "xml",
+    "prefix": "mybatis-delete",
+    "body": [
+      "<delete id=\"$del\">",
+      "delete from $table where id = ?",
+      "</delete>"
+    ],
+    "description": "删除"
+  },
+  "mybatis-cdata": {
+    "scope": "xml",
+    "prefix": "mybatis-cdata",
+    "body": "<![CDATA[ $0 ]]>",
+    "description": "忽略对类 XML 文本的解析"
+  },
+  "mybatis-#": {
+    "scope": "xml",
+    "prefix": "mybatis-#",
+    "body": "#{$0}",
+    "description": "自动用引号包裹"
+  },
+  "mybatis-$": {
+    "scope": "xml",
+    "prefix": "mybatis-$",
+    "body": "${$0}",
+    "description": "原样输出"
+  },
+  "mybatis-if": {
+    "scope": "xml",
+    "prefix": "mybatis-if",
+    "body": ["<if test=\"$test\">", "$0", "</if>"],
+    "description": "条件判断"
+  },
+  "mybatis-where": {
+    "scope": "xml",
+    "prefix": "mybatis-where",
+    "body": ["<where>", "\\${$where}", "</where>"],
+    "description": "插入 where 子句并去除开头的 AND、OR"
+  },
+  "mybatis-set": {
+    "scope": "xml",
+    "prefix": "mybatis-set",
+    "body": ["<set>", "$0", "</set>"],
+    "description": "插入 set 子句并去除末尾的逗号"
+  },
+  "mybatis-trim": {
+    "scope": "xml",
+    "prefix": "mybatis-trim",
+    "body": [
+      "<trim prefix=\"$prefix\" prefixOverrides=\"$prefixOverrides\">",
+      "$0",
+      "</trim>"
+    ],
+    "description": "插入子句并清除开头的指定文本"
+  },
+  "mybatis-choose": {
+    "scope": "xml",
+    "prefix": "mybatis-choose",
+    "body": [
+      "<choose>",
+      "<when test=\"$test\">",
+      "$1",
+      "</when>",
+      "<otherwise>",
+      "$0",
+      "</otherwise>",
+      "</choose>"
+    ],
+    "description": "类似 switch 语法"
+  },
+  "mybatis-foreach": {
+    "scope": "xml",
+    "prefix": "mybatis-foreach",
+    "body": [
+      "<foreach collection=\"$collection\" item=\"$item\" separator=\"$separator\" open=\"$open\" close=\"$close\">",
+      "$0",
+      "</foreach>"
+    ],
+    "description": "遍历集合，以 $separator 分隔，$open 开头，$close 结尾"
+  },
+  "mybatis-bind": {
+    "scope": "xml",
+    "prefix": "mybatis-bind",
+    "body": "<bind name=\"$name\" value=\"'$value'\"/>",
+    "description": "变量绑定"
+  },
+  "mybatis-include": {
+    "scope": "xml",
+    "prefix": "mybatis-include",
+    "body": "<include refid=\"$refid\"/>",
+    "description": "引入语句"
+  },
+  "mybatis-include-property": {
+    "scope": "xml",
+    "prefix": "mybatis-include-property",
+    "body": [
+      "<include refid=\"$refid\">",
+      "<property name=\"$name\" value=\"$value\"/>",
+      "</include>"
+    ],
+    "description": "引入语句"
+  },
+  "mybatis-db": {
+    "scope": "xml",
+    "prefix": "mybatis-db",
+    "body": [
+      "<choose>",
+      "<when test=\"db == 'mysql'\">",
+      "$mysql",
+      "</when>",
+      "<when test=\"db == 'sqlite'\">",
+      "$sqlite",
+      "</when>",
+      "</choose>"
+    ],
+    "description": "针对不同数据库编写语句"
+  },
+  "mybatis-page": {
+    "scope": "xml",
+    "prefix": "mybatis-page",
+    "body": [
+      "<ref id=\"${page}Where\">",
+      " where $0",
+      "</ref>",
+      "<selects id=\"$page\">",
+      "select $columns from $table <include refid=\"${page}Where\"/> limit ?,?;",
+      "select count(*) as total from $table <include refid=\"${page}Where\"/>;",
+      "</selects>"
+    ],
+    "description": "分页"
+  },
+  "mybatis-page-bind": {
+    "scope": "xml",
+    "prefix": "mybatis-page-bind",
+    "body": [
+      "<selects id=\"$page\">",
+      "<bind name=\"where\" value=\"'$where'\"/>",
+      "select $columns from $table <where>\\${where}</where> limit ?,?;",
+      "select count(*) as total from $table <where>\\${where}</where>;",
+      "</selects>"
+    ],
+    "description": "分页"
+  },
+  "mybatis-like": {
+    "scope": "xml",
+    "prefix": "mybatis-like",
+    "body": "$column like concat('%',?,'%')",
+    "description": "模糊查询"
+  },
+  "mybatis-like-bind": {
+    "scope": "xml",
+    "prefix": "mybatis-like-bind",
+    "body": "$column like \\'%'+$0+'%\\'",
+    "description": "模糊查询"
+  },
+  "mybatis-if-like": {
+    "scope": "xml",
+    "prefix": "mybatis-if-like",
+    "body": ["<if test=\"$param\">", "$column like '%\\${$param}%'", "</if>"],
+    "description": "模糊查询"
+  },
+  "mybatis-date": {
+    "scope": "xml",
+    "prefix": "mybatis-date",
+    "body": "DATE_FORMAT($adddate,'%Y-%m-%d') as $adddate",
+    "description": "格式化日期"
+  },
+  "mybatis-time": {
+    "scope": "xml",
+    "prefix": "mybatis-time",
+    "body": "DATE_FORMAT($adddate,'%H:%i') as $adddate",
+    "description": "格式化时间"
+  },
+  "mybatis-datetime": {
+    "scope": "xml",
+    "prefix": "mybatis-datetime",
+    "body": "DATE_FORMAT($adddate,'%Y-%m-%d %H:%i') as $adddate",
+    "description": "格式化日期和时间"
+  }
+}

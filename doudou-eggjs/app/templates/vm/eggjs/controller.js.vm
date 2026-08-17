@@ -1,0 +1,170 @@
+/*
+ * @Description: ${functionName}控制器
+ * @Author: ${author}
+ * @Date: ${datetime}
+ */
+
+const Controller = require('egg').Controller;
+const { Route, HttpGet, HttpPost, HttpPut, HttpDelete } = require('egg-decorator-router');
+const { RequiresPermissions } = require('../../decorator/permission');
+const { Log, BusinessType } = require('../../decorator/log');
+const ExcelUtil = require('../../extend/excel');
+
+module.exports = app => {
+
+  @Route('/${moduleName}/${businessName}')
+  class ${ClassName}Controller extends Controller {
+
+    /**
+     * 查询${functionName}列表
+     * GET /${moduleName}/${businessName}/list
+     * 权限：${permissionPrefix}:list
+     */
+    @RequiresPermissions('${permissionPrefix}:list')
+    @HttpGet('/list')
+    async list() {
+      const { ctx, service } = this;
+
+      try {
+        const params = ctx.query;
+
+        // 查询列表
+        const result = await service.${moduleName}.${businessName}.select${ClassName}List(params);
+
+        ctx.body = {
+          code: 200,
+          msg: "查询成功",
+          ...result,
+        };
+      } catch (err) {
+        ctx.logger.error('查询${functionName}列表失败:', err);
+        ctx.body = {
+          code: 500,
+          msg: err.message || '查询${functionName}列表失败'
+        };
+      }
+    }
+
+    /**
+     * 查询${functionName}详情
+     * GET /${moduleName}/${businessName}/:${pkColumn.javaField}
+     * 权限：${permissionPrefix}:query
+     */
+    @RequiresPermissions('${permissionPrefix}:query')
+    @HttpGet('/:${pkColumn.javaField}')
+    async getInfo() {
+      const { ctx } = this;
+      const { ${pkColumn.javaField} } = ctx.params;
+      
+      const result = await ctx.service.${moduleName}.${businessName}.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
+      
+      ctx.body = { code: 200, msg: '操作成功', data: result };
+    }
+
+    /**
+     * 新增${functionName}
+     * POST /${moduleName}/${businessName}
+     * 权限：${permissionPrefix}:add
+     */
+    @RequiresPermissions('${permissionPrefix}:add')
+    @HttpPost('/')
+    async add() {
+      const { ctx } = this;
+      const data = ctx.request.body;
+      
+      // 添加创建人信息
+      data.createBy = ctx.state.user.userName;
+      data.createTime = ctx.helper.formatDate(new Date());
+      
+      const result = await ctx.service.${moduleName}.${businessName}.insert${ClassName}(data);
+      
+      ctx.body = result;
+    }
+
+    /**
+     * 修改${functionName}
+     * PUT /${moduleName}/${businessName}
+     * 权限：${permissionPrefix}:edit
+     */
+    @RequiresPermissions('${permissionPrefix}:edit')
+    @HttpPut('/')
+    async edit() {
+      const { ctx } = this;
+      const data = ctx.request.body;
+      
+      // 添加更新人信息
+      data.updateBy = ctx.state.user.userName;
+      data.updateTime = ctx.helper.formatDate(new Date());
+      
+      const result = await ctx.service.${moduleName}.${businessName}.update${ClassName}(data);
+      
+      ctx.body = result;
+    }
+
+    
+
+    /**
+     * 删除${functionName}
+     * DELETE /${moduleName}/${businessName}/:${pkColumn.javaField}s
+     * 权限：${permissionPrefix}:remove
+     */
+    @RequiresPermissions('${permissionPrefix}:remove')
+    @HttpDelete('/:${pkColumn.javaField}s')
+    async remove() {
+      const { ctx } = this;
+      const { ${pkColumn.javaField}s } = ctx.params;
+
+      const ${pkColumn.javaField}Array = ${pkColumn.javaField}s.split(',');
+      const result = await ctx.service.${moduleName}.${businessName}.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}Array);
+
+      ctx.body = result;
+    }
+
+    /**
+     * 导出${functionName}
+     * POST /${moduleName}/${businessName}/export
+     * 权限：${permissionPrefix}:export
+     */
+    @Log({ title: '${functionName}', businessType: BusinessType.EXPORT })
+    @RequiresPermissions('${permissionPrefix}:export')
+    @HttpPost('/export')
+    async export() {
+      const { ctx, service } = this;
+
+      try {
+        const params = ctx.request.body;
+
+        // 查询${functionName}列表
+        const result = await service.${moduleName}.${businessName}.select${ClassName}List(params);
+        const list = result.rows || [];
+
+        // 定义 Excel 列配置
+        const columns = [
+#foreach($column in $columns)
+#if($column.list)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+          { header: '${comment}', key: '${column.javaField}', width: 20 },
+#end
+#end
+        ];
+
+        // 导出 Excel
+        ExcelUtil.exportExcel(ctx, list, columns, '${functionName}数据');
+      } catch (err) {
+        ctx.logger.error('导出${functionName}失败:', err);
+        ctx.body = {
+          code: 500,
+          msg: err.message || '导出${functionName}失败'
+        };
+      }
+    }
+  }
+
+  return ${ClassName}Controller;
+};
+

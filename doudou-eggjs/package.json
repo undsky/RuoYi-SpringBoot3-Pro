@@ -1,0 +1,67 @@
+{
+  "name": "doudou-eggjs",
+  "version": "1.1.0",
+  "description": "",
+  "author": "姜彦汐  <https://www.undsky.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/undsky/doudou-eggjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/undsky/doudou-eggjs/issues"
+  },
+  "homepage": "https://github.com/undsky/doudou-eggjs#readme",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "@hackycy/egg-bull": "^0.0.6",
+    "archiver": "^7.0.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "bull": "^4.16.5",
+    "cron-parser": "^4.9.0",
+    "dayjs": "^1.11.10",
+    "egg": "^3",
+    "egg-cors": "^3.0.0",
+    "egg-decorator-router": "^1.0.7",
+    "egg-jwt": "^3.1.7",
+    "egg-scripts": "^2",
+    "fs-extra": "^11.2.0",
+    "lodash": "^4.17.21",
+    "nanoid": "^3.3.7",
+    "node-schedule": "^2.1.1",
+    "doudou-eggjs-cache": "^1",
+    "doudou-eggjs-mybatis": "^1",
+    "doudou-eggjs-mysql": "^1",
+    "doudou-eggjs-pgsql": "^1",
+    "doudou-eggjs-ratelimiter": "^1",
+    "doudou-eggjs-sqlite": "^1",
+    "stream-wormhole": "^2.0.1",
+    "trek-captcha": "^0.4.0",
+    "velocityjs": "^2.1.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/bull": "^3.15.9",
+    "egg-bin": "^5",
+    "eslint": "^8",
+    "eslint-config-egg": "^13",
+    "npm-run-all": "^4.1.5",
+    "doudou-eggjs-cli": "^1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --port=7001 --daemon --title=doudou-eggjs-server",
+    "stop": "egg-scripts stop --title=doudou-eggjs-server",
+    "mapper": "rec mapper",
+    "debug": "node start-debug.js",
+    "dev": "npm-run-all -p mapper debug",
+    "build": "rec build -o dist"
+  }
+}

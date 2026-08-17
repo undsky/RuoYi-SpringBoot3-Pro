@@ -1,0 +1,23 @@
+logs/
+npm-debug.log
+yarn-error.log
+node_modules/
+*-lock.json
+*-lock.yaml
+yarn.lock
+coverage/
+.idea/
+run/
+.DS_Store
+*.sw*
+*.un~
+# 保留手写的类型定义，只忽略自动生成的
+typings/**/*.js
+typings/**/package.json
+.nyc_output/
+
+/app/public/uploads/*
+!/app/public/uploads/.gitkeep
+/cache/*
+!/cache/.gitkeep
+dist
