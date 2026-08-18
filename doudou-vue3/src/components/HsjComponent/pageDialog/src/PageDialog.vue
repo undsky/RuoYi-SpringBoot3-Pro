@@ -84,7 +84,7 @@ const store = businessStore()
 const loading = ref(false)
 const tableSelected = ref([])
 const dialogClass = computed(() => {
-  const pageName = props.pageName.replaceAll('/', '\\/')
+  const pageName = props.pageName.replaceAll('/', '_')
   return `${pageName}Dialog`
 })
 // 判断是编辑还是新建
@@ -165,7 +165,7 @@ const commitClick = async () => {
   }
 }
 // dialog的底部的padding,主要用于表单最右边和footer的最右边保持对齐
-const footerPaddingRight = ref('0px')
+const footerPaddingRight = ref('20px')
 const getFooterPaddingRight = () => {
   const dialogEl = document.querySelector(`.${dialogClass.value}`)
   if (!dialogEl) {
@@ -207,8 +207,10 @@ const getMaxHeight = () => {
   }
 }
 const handleOpened = () => {
-  getMaxHeight()
-  getFooterPaddingRight()
+  nextTick(() => {
+    getMaxHeight()
+    getFooterPaddingRight()
+  })
 }
 defineExpose({
   dialogVisible,

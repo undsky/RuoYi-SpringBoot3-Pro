@@ -34,10 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND user_name like '%' || #{userName} || '%'
 			</if>
 			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-				AND login_time &gt;= #{params.beginTime}
+				AND strftime('%Y%m%d',login_time) &gt;= strftime('%Y%m%d',#{params.beginTime})
 			</if>
 			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-				AND login_time &lt;= #{params.endTime}
+				AND strftime('%Y%m%d',login_time) &lt;= strftime('%Y%m%d',#{params.endTime})
 			</if>
 		</where>
 		order by info_id desc

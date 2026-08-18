@@ -1,5 +1,13 @@
 export default (listeners = {}) => {
   return {
+    rules: {
+      dictName: [
+        { required: true, message: '字典名称不能为空', trigger: 'blur' },
+      ],
+      dictType: [
+        { required: true, message: '字典类型不能为空', trigger: 'blur' },
+      ],
+    },
     formItems: [
       {
         field: 'dictName',
@@ -51,3 +59,4 @@ export default (listeners = {}) => {
     },
   }
 }
+

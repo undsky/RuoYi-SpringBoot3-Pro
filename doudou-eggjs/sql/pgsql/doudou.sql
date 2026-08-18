@@ -110,7 +110,7 @@ CREATE TABLE sys_post (
   post_code     varchar(64)     NOT NULL,
   post_name     varchar(50)     NOT NULL,
   post_sort     integer         NOT NULL,
-  status        char(1)         NOT NULL,
+  status        char(1)         DEFAULT '0',
   create_by     varchar(64)     DEFAULT '',
   create_time   timestamp,
   update_by     varchar(64)     DEFAULT '',
@@ -138,6 +138,7 @@ INSERT INTO sys_post VALUES(1, 'ceo',  '董事长',    1, '0', 'admin', CURRENT_
 INSERT INTO sys_post VALUES(2, 'se',   '项目经理',  2, '0', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
 INSERT INTO sys_post VALUES(3, 'hr',   '人力资源',  3, '0', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
 INSERT INTO sys_post VALUES(4, 'user', '普通员工',  4, '0', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
+SELECT setval('sys_post_post_id_seq', 100);
 
 
 -- ----------------------------
@@ -152,7 +153,7 @@ CREATE TABLE sys_role (
   data_scope           char(1)         DEFAULT '1',
   menu_check_strictly  smallint        DEFAULT 1,
   dept_check_strictly  smallint        DEFAULT 1,
-  status               char(1)         NOT NULL,
+  status               char(1)         DEFAULT '0',
   del_flag             char(1)         DEFAULT '0',
   create_by            varchar(64)     DEFAULT '',
   create_time          timestamp,

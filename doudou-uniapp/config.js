@@ -1,7 +1,6 @@
 // 应用全局配置
 export default {
-  baseUrl: 'https://vue.ruoyi.vip/prod-api',
-  // baseUrl: 'http://localhost:8080',
+  baseUrl: 'http://localhost:7001',
   // 应用信息
   appInfo: {
     // 应用名称
