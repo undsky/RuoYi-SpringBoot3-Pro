@@ -182,11 +182,11 @@ module.exports = (appInfo) => {
   // 数据库映射配置
   config.database = {
     master: {
-      driver: "mysql", // 数据库驱动：mysql, pgsql, sqlite
+      driver: "pgsql", // 数据库驱动：mysql, pgsql, sqlite
       instance: "doudou", // 主库实例名称（写操作）
     },
     slave: {
-      driver: "mysql", // 数据库驱动：mysql, pgsql, sqlite
+      driver: "pgsql", // 数据库驱动：mysql, pgsql, sqlite
       instance: "doudou", // 从库实例名称（读操作），默认同主库
     },
     readWriteSplit: false, // 是否启用读写分离

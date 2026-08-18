@@ -18,6 +18,17 @@ module.exports = (appInfo) => {
    **/
   const config = (exports = {});
 
+  // sqlite 配置
+  config.sqlite = {
+    clients: {
+      doudou: {
+        path: "./cache/doudou.db",
+      },
+    },
+    // 启用驼峰命名转换
+    camelCase: true,
+  };
+
   config.mysql = {
     // 启用驼峰命名转换：数据库字段 user_name -> userName
     camelCase: true,
@@ -31,27 +42,32 @@ module.exports = (appInfo) => {
     },
   };
 
+  // pgsql 配置
+  config.pgsql = {
+    // 启用驼峰命名转换：数据库字段 user_name -> userName
+    camelCase: true,
+    clients: {
+      doudou: {
+        host: "127.0.0.1",
+        port: 5432,
+        user: "postgres",
+        password: "jyx123",
+        database: "doudou",
+        options: "-c search_path=doudou,public",
+      },
+    },
+  };
+
   const redis = {
     port: 6379,
     host: "127.0.0.1",
     password: "",
-    db: 6,
+    db: 0,
   };
 
   config.cache = { redis };
 
   config.ratelimiter = { redis };
-
-  // sqlite 配置
-  config.sqlite = {
-    clients: {
-      doudou: {
-        path: "./cache/doudou.db",
-      },
-    },
-    // 启用驼峰命名转换
-    camelCase: true,
-  };
 
   // egg-bull 配置
   config.bull = {
