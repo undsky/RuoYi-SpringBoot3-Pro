@@ -1,8 +1,8 @@
 {
-  "name": "ruoyi-vue3-lmw-js",
+  "name": "doudou-vue3-lmw-js",
   "version": "4.0.0",
-  "description": "若依管理系统",
-  "author": "若依",
+  "description": "豆豆管理系统",
+  "author": "豆豆",
   "license": "MIT",
   "type": "module",
   "scripts": {

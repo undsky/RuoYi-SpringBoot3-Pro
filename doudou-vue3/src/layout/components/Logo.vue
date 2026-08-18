@@ -45,7 +45,7 @@ const onMenuCollapse = () => {
     <img
       v-if="!config.layout.menuCollapse"
       class="logo-img"
-      src="@/assets/icons/svg/vite.svg"
+      src="/logo.png"
       alt="logo"
     />
     <div

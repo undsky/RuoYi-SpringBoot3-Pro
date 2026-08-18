@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { getNormalPath } from '@/utils/ruoyi'
+import { getNormalPath } from '@/utils/doudou'
 import useTagsViewStore from '@/store/modules/tagsView'
 import { useConfig } from '@/store/modules/layout'
 import usePermissionStore from '@/store/modules/permission'

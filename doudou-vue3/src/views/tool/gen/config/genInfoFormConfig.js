@@ -60,7 +60,7 @@ export default (otherConfig = {}) => {
         label: '生成包路径',
         field: 'packageName',
         type: 'input',
-        tip: '生成在哪个java包下，例如 com.ruoyi.system',
+        tip: '生成在哪个java包下，例如 com.doudou.system',
       },
       {
         label: '生成模块名',

@@ -1,5 +1,5 @@
 import { request } from '@/utils/hsj/service/index'
-import { parseStrEmpty } from '@/utils/ruoyi'
+import { parseStrEmpty } from '@/utils/doudou'
 
 // 查询用户详细
 export function getUser(userId) {

@@ -1,7 +1,7 @@
 export const projectDir = `
 ├── public
 ├── readMeImg
-├── ruoyi-generator
+├── doudou-generator
 │   └── src
 │       └── main
 │           ├── java

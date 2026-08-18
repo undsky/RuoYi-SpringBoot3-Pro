@@ -53,7 +53,7 @@
 <script setup>
 import { isExternal } from '@/utils/validate'
 import AppLink from './Link'
-import { getNormalPath } from '@/utils/ruoyi'
+import { getNormalPath } from '@/utils/doudou'
 const props = defineProps({
   item: {
     type: Object,

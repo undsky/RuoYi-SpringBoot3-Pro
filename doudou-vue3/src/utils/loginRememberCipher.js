@@ -1,6 +1,6 @@
 import { encrypt, decrypt } from '@/utils/jsencrypt.js'
 
-const STORAGE_KEY = 'ruoyi_login_remember_cipher'
+const STORAGE_KEY = 'doudou_login_remember_cipher'
 
 /** 与 React 版一致的读写接口：记住用户名与加密后的密码 */
 export function readStoredLoginCredentials() {

@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 import usePermissionStore from '@/store/modules/permission'
 import { isHttp } from '@/utils/validate'
-import { getNormalPath } from '@/utils/ruoyi'
+import { getNormalPath } from '@/utils/doudou'
 import { computed, nextTick, watch } from 'vue'
 
 const routes = computed(() => usePermissionStore().sidebarRouters)
