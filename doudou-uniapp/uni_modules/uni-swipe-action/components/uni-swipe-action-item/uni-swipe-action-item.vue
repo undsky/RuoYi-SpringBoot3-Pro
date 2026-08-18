@@ -1,13 +1,19 @@
 <template>
 	<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
-	<!-- #ifdef APP-VUE || MP-WEIXIN || H5 -->
+	<!-- #ifdef APP-VUE || APP-HARMONY || MP-WEIXIN || H5 -->
 	<view class="uni-swipe">
-		<!--  #ifdef MP-WEIXIN || VUE3 -->
+		<!--  #ifdef H5 -->
 		<view class="uni-swipe_box" :change:prop="wxsswipe.showWatch" :prop="is_show" :data-threshold="threshold"
 			:data-disabled="disabled" @touchstart="wxsswipe.touchstart" @touchmove="wxsswipe.touchmove"
-			@touchend="wxsswipe.touchend">
-		<!-- #endif -->
-			<!--  #ifndef MP-WEIXIN || VUE3 -->
+			@touchend="wxsswipe.touchend" @mousedown="wxsswipe.mousedown" @mousemove="wxsswipe.mousemove"
+			@mouseup="wxsswipe.mouseup" @mouseleave="wxsswipe.mouseleave">
+			<!-- #endif -->
+			<!--  #ifdef MP-WEIXIN -->
+			<view class="uni-swipe_box" :change:prop="wxsswipe.showWatch" :prop="is_show" :data-threshold="threshold"
+				:data-disabled="disabled" @touchstart="wxsswipe.touchstart" @touchmove="wxsswipe.touchmove"
+				@touchend="wxsswipe.touchend">
+				<!-- #endif -->
+			<!--  #ifndef MP-WEIXIN || H5 -->
 			<view class="uni-swipe_box" :change:prop="renderswipe.showWatch" :prop="is_show" :data-threshold="threshold"
 				:data-disabled="disabled+''" @touchstart="renderswipe.touchstart" @touchmove="renderswipe.touchmove"
 				@touchend="renderswipe.touchend">
@@ -72,7 +78,7 @@
 		</view>
 		<!-- #endif -->
 		<!-- 其他平台使用 js ，长列表性能可能会有影响-->
-		<!-- #ifdef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO || MP-QQ -->
+		<!-- #ifdef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO || MP-QQ || MP-HARMONY -->
 		<view class="uni-swipe">
 			<view class="uni-swipe_box" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend"
 				:style="{transform:moveLeft}" :class="{ani:ani}">
@@ -142,7 +148,7 @@
 	 * @property {Boolean} autoClose = [true|false] 	滑动打开当前组件，是否关闭其他组件
 	 * @property {Number}  threshold 					滑动缺省值
 	 * @property {Array} leftOptions 					左侧选项内容及样式
-	 * @property {Array} rgihtOptions 					右侧选项内容及样式
+	 * @property {Array} rightOptions 					右侧选项内容及样式
 	 * @event {Function} click 							点击选项按钮时触发事件，e = {content,index} ，content（点击内容）、index（下标)
 	 * @event {Function} change 						组件打开或关闭时触发，left\right\none
 	 */

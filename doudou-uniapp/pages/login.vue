@@ -16,7 +16,7 @@
       </view>
       <view class="input-item flex align-center" style="width: 60%;margin: 0px;" v-if="captchaEnabled">
         <view class="iconfont icon-code icon"></view>
-        <input v-model="loginForm.code" type="number" class="input" placeholder="请输入验证码" maxlength="4" />
+        <input v-model="loginForm.code" class="input" placeholder="请输入验证码" maxlength="4" />
         <view class="login-code"> 
           <image :src="codeUrl" @click="getCode" class="login-code-img"></image>
         </view>

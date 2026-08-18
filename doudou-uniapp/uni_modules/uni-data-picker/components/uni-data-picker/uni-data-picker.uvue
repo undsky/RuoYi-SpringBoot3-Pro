@@ -180,7 +180,6 @@
       },
       onFinish() {
         this.selectedPaths = this.getChangeNodes()
-        this.$emit('update:modelValue', this.selectedPaths)
         this.$emit('change', this.selectedPaths)
         this.hide()
       }

@@ -134,9 +134,14 @@ function getDom(instance, ownerInstance) {
 	var rightStyles = {
 		width: 0
 	}
-	leftStyles = leftDom.getBoundingClientRect()
-	rightStyles = rightDom.getBoundingClientRect()
 
+	if (leftDom) {
+		leftStyles = leftDom.getBoundingClientRect()
+	}
+
+	if (rightDom) {
+		rightStyles = rightDom.getBoundingClientRect()
+	}
 	state.leftWidth = leftStyles.width || 0
 	state.rightWidth = rightStyles.width || 0
 	state.threshold = instance.getDataset().threshold
@@ -289,9 +294,9 @@ function stopTouchMove(event) {
 
 function isPC() {
 	var userAgentInfo = navigator.userAgent;
-	var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+	var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod", "Mobile", "Harmony", "HarmonyOS"];
 	var flag = true;
-	for (var v = 0; v < Agents.length - 1; v++) {
+	for (var v = 0; v < Agents.length; v++) {
 		if (userAgentInfo.indexOf(Agents[v]) > 0) {
 			flag = false;
 			break;
