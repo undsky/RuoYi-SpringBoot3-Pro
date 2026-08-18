@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """把音频/视频转成字幕或纯文本，走 n8n 的字幕转换 API。
 
-两种输入自动判断：本地文件走 multipart 上传，http(s) URL 直接交给服务端下载。
+本地文件走 multipart 上传。
 只用标准库，装完 Python 就能跑。
 
 用法见 --help，或 SKILL.md。
@@ -107,11 +107,6 @@ MEDIA_SUFFIXES = {
 }
 
 
-def is_url(s):
-    low = s.lower()
-    return low.startswith("http://") or low.startswith("https://")
-
-
 def api_url(base):
     return base.rstrip("/") + ENDPOINT
 
@@ -153,17 +148,12 @@ def call_api(base, source, params, timeout, want_raw):
     if want_raw:
         fields["raw"] = "true"
 
-    if is_url(source):
-        fields["url"] = source
-        body = json.dumps(fields, ensure_ascii=False).encode("utf-8")
-        content_type = "application/json; charset=utf-8"
-    else:
-        p = Path(source)
-        if not p.is_file():
-            die("找不到文件：%s" % source)
-        if p.suffix.lower() and p.suffix.lower() not in MEDIA_SUFFIXES:
-            warn("%s 不像音视频扩展名，仍然上传试试" % p.suffix)
-        body, content_type = build_multipart(p, fields)
+    p = Path(source)
+    if not p.is_file():
+        die("找不到文件：%s" % source)
+    if p.suffix.lower() and p.suffix.lower() not in MEDIA_SUFFIXES:
+        warn("%s 不像音视频扩展名，仍然上传试试" % p.suffix)
+    body, content_type = build_multipart(p, fields)
 
     req = urllib.request.Request(
         api_url(base), data=body, method="POST",
@@ -220,13 +210,10 @@ def main():
   # 本地文件转 SRT，中文
   whisper.py talk.mp4 --language Chinese
 
-  # 远程 URL 转纯文本
-  whisper.py https://example.com/a.mp3 --format txt
-
   # 存成文件
   whisper.py talk.mp4 --language Chinese -o talk.srt
 """)
-    ap.add_argument("source", help="本地文件路径，或 http(s) URL")
+    ap.add_argument("source", help="本地音视频文件路径")
     ap.add_argument("--language", "-l", default="auto",
                     help="Chinese / English / auto（默认 auto，会多花一次前向）")
     ap.add_argument("--task", default="transcribe",
@@ -305,9 +292,8 @@ def main():
     wh = data.get("whisper") or {}
 
     # 元信息走 stderr，字幕正文走 stdout —— 这样管道里拿到的就是纯字幕
-    print("✓ %s | %s | 时长 %ss | %d 字符"
+    print("✓ %s | 时长 %ss | %d 字符"
           % (data.get("primary_format", "?"),
-             "URL" if data.get("input_mode") == "url" else "上传",
              media.get("duration_seconds", "?"),
              data.get("chars", len(subtitle))), file=sys.stderr)
     print("  语种 %s | 服务端字幕留在 %s"

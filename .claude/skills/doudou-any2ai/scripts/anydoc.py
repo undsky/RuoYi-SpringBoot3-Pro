@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """把文档转成 Markdown，走 n8n 的文档转换 API。
 
-两种输入自动判断：本地文件走 multipart 上传，http(s) URL 直接交给服务端下载。
+本地文件走 multipart 上传。
 只用标准库，装完 Python 就能跑。
 
 用法见 --help，或 SKILL.md。
@@ -40,7 +40,7 @@ ROOT_MARKERS = (".agents", ".claude")
 BASE_ORIGIN = "内置默认值"
 
 # anydoc 解析纯 CPU、不联网，小文件几十毫秒，大 CSV 几百毫秒。
-# 真正的变量是服务端下载 URL 的耗时，所以给 300s 足够宽裕又不会卡死太久。
+# 给 300s 足够宽裕。
 DEFAULT_TIMEOUT = 300
 
 # 服务端 multipart 上传上限
@@ -137,11 +137,6 @@ def resolve_base():
     return FALLBACK_BASE, "内置默认值"
 
 
-def is_url(s):
-    low = s.lower()
-    return low.startswith("http://") or low.startswith("https://")
-
-
 def api_url(base):
     return base.rstrip("/") + ENDPOINT
 
@@ -184,22 +179,15 @@ def call_api(base, source, params, timeout, want_raw):
     if want_raw:
         fields["raw"] = "true"
 
-    if is_url(source):
-        fields["url"] = source
-        body = json.dumps(fields, ensure_ascii=False).encode("utf-8")
-        content_type = "application/json; charset=utf-8"
-    else:
-        p = Path(source)
-        if not p.is_file():
-            die("找不到文件：%s" % source)
-        size_mb = p.stat().st_size / 1048576.0
-        if size_mb > MAX_UPLOAD_MB:
-            die("文件 %.1fMB，超过上传上限 %dMB。\n"
-                "把文件放到容器能访问的地址上，改用 URL 形式传给服务端下载。"
-                % (size_mb, MAX_UPLOAD_MB))
-        if p.suffix.lower() and p.suffix.lower() not in DOC_SUFFIXES:
-            warn("%s 不像文档扩展名，仍然上传试试" % p.suffix)
-        body, content_type = build_multipart(p, fields)
+    p = Path(source)
+    if not p.is_file():
+        die("找不到文件：%s" % source)
+    size_mb = p.stat().st_size / 1048576.0
+    if size_mb > MAX_UPLOAD_MB:
+        die("文件 %.1fMB，超过上传上限 %dMB。" % (size_mb, MAX_UPLOAD_MB))
+    if p.suffix.lower() and p.suffix.lower() not in DOC_SUFFIXES:
+        warn("%s 不像文档扩展名，仍然上传试试" % p.suffix)
+    body, content_type = build_multipart(p, fields)
 
     return _post(base, body, content_type, timeout)
 
@@ -223,8 +211,7 @@ def _post(base, body, content_type, timeout):
             "或设环境变量 %s，或在项目根 / 技能目录的 .env 里写 %s=..."
             % (api_url(base), e.reason, BASE_ORIGIN, ENV_KEY, ENV_KEY))
     except TimeoutError:
-        die("等了 %ds 还没结果。文档解析本身很快，卡住通常是服务端在下载那个 URL。\n"
-            "用 --timeout 加大，或先把文件下到本地再上传。" % timeout)
+        die("等了 %ds 还没结果。可用 --timeout 加大超时时间。" % timeout)
 
 
 def report_error(status, raw_body):
@@ -247,7 +234,7 @@ def report_error(status, raw_body):
         msg += "\n提示：%s" % err["hint"]
     if err.get("stage") == "unsupported":
         msg += ("\n\n这个文件没有可提取的文字层（扫描件、纯图片 PDF）。"
-                "不是故障，需要走 OCR 链路 —— 而 OCR 服务目前还没接通。")
+                "不是故障，需要走 OCR 链路。")
     die(msg)
 
 
@@ -259,9 +246,6 @@ def main():
   # 本地文件转 Markdown，直接看内容
   anydoc.py 报告.docx
 
-  # 远程 URL
-  anydoc.py https://example.com/data.csv
-
   # 存成文件
   anydoc.py 财报.xlsx -o 财报.md
 
@@ -269,13 +253,12 @@ def main():
   anydoc.py 明细.csv --max-chars 20000
 """)
     ap.add_argument("source", metavar="SOURCE",
-                    help="本地文件路径或 http(s) URL。一次一份，"
-                         "多份就多跑几次这个命令")
+                    help="本地文件路径。一次一份，多份就多跑几次这个命令")
     ap.add_argument("-o", "--output",
                     help="Markdown 写到这个文件；不给则正文进 stdout")
     ap.add_argument("--format", "-f", dest="doc_format", default="",
                     help="强制指定格式。**通常留空**，服务端按内容自动判定；"
-                         "只有没扩展名的文件、或 URL 拿不到扩展名的 CSV 才需要填")
+                         "只有没扩展名的文件才需要填")
     ap.add_argument("--max-chars", type=int, default=None,
                     help="Markdown 超过这个字符数就截断。大表格喂模型前用得上")
     ap.add_argument("--json", action="store_true",
@@ -332,10 +315,7 @@ def main():
     fmt = doc.get("format") or doc.get("format_source") or "?"
 
     # 元信息走 stderr，Markdown 正文走 stdout —— 管道里拿到的就是纯 Markdown
-    print("✓ %s | %s | %d 字符"
-          % (fmt,
-             "URL" if data.get("input_mode") == "url" else "上传",
-             len(markdown)), file=sys.stderr)
+    print("✓ %s | %d 字符" % (fmt, len(markdown)), file=sys.stderr)
 
     # 退出码 0 但没内容：anydoc 对残缺文档采取"尽量恢复"策略，转不出东西也会
     # 正常退出。这种情况必须说清楚，否则会被当成"文档内容就是空的"。

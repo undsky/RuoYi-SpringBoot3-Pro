@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """图片/扫描件 OCR，走 n8n 的 PaddleOCR API。
 
-两种输入自动判断：本地文件走 multipart 上传，http(s) URL 直接交给服务端下载。
+本地文件走 multipart 上传。
 只用标准库，装完 Python 就能跑。
 
 用法见 --help，或 SKILL.md。
@@ -140,10 +140,6 @@ def get_base_url(cli_base):
     return FALLBACK_BASE
 
 
-def is_url(src):
-    return src.startswith("http://") or src.startswith("https://")
-
-
 def api_url(base):
     return base.rstrip("/") + ENDPOINT
 
@@ -153,7 +149,7 @@ def check_file_size(path):
     size_mb = path.stat().st_size / (1024 * 1024)
     if size_mb > MAX_UPLOAD_MB:
         die(f"文件 {path.name} 大小 {size_mb:.1f} MB 超过上限 {MAX_UPLOAD_MB} MB。"
-            f"\n提示：改用 URL 方式（服务端下载），或者压缩图片分辨率。")
+            f"\n提示：可尝试压缩图片分辨率或拆分 PDF。")
 
 
 def build_multipart(file_path, fields):
@@ -190,29 +186,18 @@ def call_api(base_url, source, lang, timeout, as_json):
     if lang:
         fields["lang"] = lang
 
-    if is_url(source):
-        # URL 方式
-        fields["url"] = source
-        payload = json.dumps(fields, ensure_ascii=False).encode("utf-8")
-        req = urllib.request.Request(
-            url,
-            data=payload,
-            headers={"Content-Type": "application/json; charset=utf-8", "Accept": "application/json"}
-        )
-    else:
-        # 本地文件上传
-        path = Path(source).resolve()
-        if not path.is_file():
-            die(f"文件不存在：{source}")
+    path = Path(source).resolve()
+    if not path.is_file():
+        die(f"文件不存在：{source}")
 
-        check_file_size(path)
-        body, content_type = build_multipart(path, fields)
+    check_file_size(path)
+    body, content_type = build_multipart(path, fields)
 
-        req = urllib.request.Request(
-            url,
-            data=body,
-            headers={"Content-Type": content_type, "Accept": "application/json"}
-        )
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={"Content-Type": content_type, "Accept": "application/json"}
+    )
 
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -242,14 +227,13 @@ def main():
   %(prog)s screenshot.png
   %(prog)s invoice_en.jpg --lang en
   %(prog)s scan.pdf -o out/scan.txt
-  %(prog)s https://example.com/receipt.jpg
   %(prog)s image.jpg --json
 
 PDF 会自动先尝试 anydoc 提取文字层，失败时降级到 OCR。
 支持语言：ch / en / chinese_cht / japan / korean / french / german / spanish 等 15 种。
         """
     )
-    parser.add_argument("source", help="图片文件路径或 URL")
+    parser.add_argument("source", help="图片或 PDF 文件路径")
     parser.add_argument("-o", "--output", metavar="PATH",
                         help="保存识别结果到文件（不指定则输出到 stdout）")
     parser.add_argument("-l", "--lang", "--language", dest="lang", default="ch",
@@ -264,20 +248,17 @@ PDF 会自动先尝试 anydoc 提取文字层，失败时降级到 OCR。
     args = parser.parse_args()
 
     source = args.source
-    path_obj = Path(source) if not is_url(source) else None
+    path_obj = Path(source)
 
     # 扩展名提示
-    if path_obj and path_obj.suffix.lower() not in IMAGE_SUFFIXES:
+    if path_obj.suffix.lower() not in IMAGE_SUFFIXES:
         warn(f"扩展名 {path_obj.suffix} 不在常见图片/PDF 列表里，可能走错了链路")
 
     base_url = get_base_url(args.base)
 
     # 进度提示（stderr）
-    if is_url(source):
-        print(f"→ 识别远程图片: {source}", file=sys.stderr)
-    else:
-        size_mb = path_obj.stat().st_size / (1024 * 1024)
-        print(f"→ 识别本地文件: {path_obj.name} ({size_mb:.2f} MB)", file=sys.stderr)
+    size_mb = path_obj.stat().st_size / (1024 * 1024)
+    print(f"→ 识别本地文件: {path_obj.name} ({size_mb:.2f} MB)", file=sys.stderr)
 
     result = call_api(base_url, source, args.lang, args.timeout, args.json)
 
