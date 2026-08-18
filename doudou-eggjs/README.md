@@ -123,7 +123,7 @@ doudou-eggjs/
 │   │   ├── system/        # 系统模块服务
 │   │   ├── monitor/       # 监控模块服务
 │   │   ├── tool/          # 工具模块服务
-│   │   ├── ryTask.js      # 定时任务执行类
+│   │   ├── doudouTask.js  # 定时任务执行类
 │   │   └── upload.js      # 文件上传服务
 │   ├── decorator/          # 装饰器
 │   │   ├── permission.js  # 权限控制装饰器
@@ -132,7 +132,7 @@ doudou-eggjs/
 │   │   ├── permission.js  # 权限验证中间件
 │   │   └── formatBody.js  # 响应格式化
 │   ├── queue/             # 队列处理器
-│   │   └── ryTask.js      # 定时任务队列
+│   │   └── doudouTask.js  # 定时任务队列
 │   ├── extend/            # 框架扩展
 │   ├── constant/          # 常量定义
 │   ├── util/              # 工具类

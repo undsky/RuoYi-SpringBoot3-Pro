@@ -7,7 +7,7 @@ type AnyClass = new (...args: any[]) => any;
 type AnyFunc<T = any> = (...args: any[]) => T;
 type CanExportFunc = AnyFunc<Promise<any>> | AnyFunc<IterableIterator<any>>;
 type AutoInstanceType<T, U = T extends CanExportFunc ? T : T extends AnyFunc ? ReturnType<T> : T> = U extends AnyClass ? InstanceType<U> : U;
-import ExportRyTask = require('../../../app/service/ryTask');
+import ExportDoudouTask = require('../../../app/service/doudouTask');
 import ExportUpload = require('../../../app/service/upload');
 import ExportMonitorCache = require('../../../app/service/monitor/cache');
 import ExportMonitorJob = require('../../../app/service/monitor/job');
@@ -89,7 +89,7 @@ import ExportDbSqliteDoudouSysUserRoleMapper = require('../../../app/service/db/
 
 declare module 'egg' {
   interface IService {
-    ryTask: AutoInstanceType<typeof ExportRyTask>;
+    doudouTask: AutoInstanceType<typeof ExportDoudouTask>;
     upload: AutoInstanceType<typeof ExportUpload>;
     monitor: {
       cache: AutoInstanceType<typeof ExportMonitorCache>;

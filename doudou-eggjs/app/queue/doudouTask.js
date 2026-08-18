@@ -14,7 +14,7 @@ module.exports = app => {
   const { client } = app.config.bull;
   
   // 创建 Bull Queue 实例
-  const queue = new Queue('ryTask', {
+  const queue = new Queue('doudouTask', {
     redis: {
       port: client.port,
       host: client.host,
@@ -36,8 +36,8 @@ module.exports = app => {
     try {
       ctx.logger.info(`[Bull] 开始执行任务: ${jobInfo.jobName} (${invokeTarget})`);
       
-      // 调用 ryTask 服务执行任务
-      const result = await ctx.service.ryTask.execute(invokeTarget);
+      // 调用 doudouTask 服务执行任务
+      const result = await ctx.service.doudouTask.execute(invokeTarget);
       
       jobMessage = result.message || '任务执行成功';
       ctx.logger.info(`[Bull] 任务执行成功: ${jobInfo.jobName}`);

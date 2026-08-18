@@ -19,8 +19,8 @@ CREATE TABLE sys_dept (
   update_time       TEXT
 );
 
-INSERT INTO sys_dept VALUES(100,  0,   '0',          '总公司',   0, '豆豆', '15888888888', 'ry@qq.com', '0', '0', 'admin', datetime('now','localtime'), '', NULL);
-INSERT INTO sys_dept VALUES(101,  100, '0,100',      '下属部门', 1, '豆豆', '15888888888', 'ry@qq.com', '0', '0', 'admin', datetime('now','localtime'), '', NULL);
+INSERT INTO sys_dept VALUES(100,  0,   '0',          '总公司',   0, '豆豆', '15888888888', 'doudou@qq.com', '0', '0', 'admin', datetime('now','localtime'), '', NULL);
+INSERT INTO sys_dept VALUES(101,  100, '0,100',      '下属部门', 1, '豆豆', '15888888888', 'doudou@qq.com', '0', '0', 'admin', datetime('now','localtime'), '', NULL);
 
 -- ----------------------------
 -- 2、用户信息表
@@ -533,9 +533,9 @@ CREATE TABLE sys_job (
   PRIMARY KEY (job_id, job_name, job_group)
 );
 
-INSERT INTO sys_job VALUES(1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams',        '0/10 * * * * ?', '3', '1', '1', 'admin', datetime('now','localtime'), '', NULL, '');
-INSERT INTO sys_job VALUES(2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(''ry'')',  '0/15 * * * * ?', '3', '1', '1', 'admin', datetime('now','localtime'), '', NULL, '');
-INSERT INTO sys_job VALUES(3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(''ry'', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'admin', datetime('now','localtime'), '', NULL, '');
+INSERT INTO sys_job VALUES(1, '系统默认（无参）', 'DEFAULT', 'doudouTask.doudouNoParams',        '0/10 * * * * ?', '3', '1', '1', 'admin', datetime('now','localtime'), '', NULL, '');
+INSERT INTO sys_job VALUES(2, '系统默认（有参）', 'DEFAULT', 'doudouTask.doudouParams(''doudou'')',  '0/15 * * * * ?', '3', '1', '1', 'admin', datetime('now','localtime'), '', NULL, '');
+INSERT INTO sys_job VALUES(3, '系统默认（多参）', 'DEFAULT', 'doudouTask.doudouMultipleParams(''doudou'', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'admin', datetime('now','localtime'), '', NULL, '');
 
 -- ----------------------------
 -- 16、定时任务调度日志表

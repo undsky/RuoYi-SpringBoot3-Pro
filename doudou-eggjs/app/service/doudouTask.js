@@ -6,11 +6,11 @@
 
 const { Service } = require('egg');
 
-class RyTask extends Service {
+class DoudouTask extends Service {
   /**
    * 无参数任务
    */
-  async ryNoParams() {
+  async doudouNoParams() {
     const { ctx } = this;
     ctx.logger.info('执行无参方法');
     
@@ -20,11 +20,16 @@ class RyTask extends Service {
     };
   }
 
+  // 兼容历史调用
+  async ryNoParams() {
+    return this.doudouNoParams();
+  }
+
   /**
    * 单参数任务
    * @param {string} params - 参数
    */
-  async ryParams(params) {
+  async doudouParams(params) {
     const { ctx } = this;
     ctx.logger.info(`执行有参方法：${params}`);
     
@@ -32,6 +37,11 @@ class RyTask extends Service {
       success: true,
       message: `执行有参方法成功，参数: ${params}`
     };
+  }
+
+  // 兼容历史调用
+  async ryParams(params) {
+    return this.doudouParams(params);
   }
 
   /**
@@ -42,7 +52,7 @@ class RyTask extends Service {
    * @param {number} d - 浮点型参数
    * @param {number} i - 整型参数
    */
-  async ryMultipleParams(s, b, l, d, i) {
+  async doudouMultipleParams(s, b, l, d, i) {
     const { ctx } = this;
     ctx.logger.info(
       `执行多参方法： 字符串类型${s}，布尔类型${b}，长整型${l}，浮点型${d}，整形${i}`
@@ -55,9 +65,14 @@ class RyTask extends Service {
     };
   }
 
+  // 兼容历史调用
+  async ryMultipleParams(s, b, l, d, i) {
+    return this.doudouMultipleParams(s, b, l, d, i);
+  }
+
   /**
    * 执行指定的任务方法
-   * @param {string} invokeTarget - 调用目标字符串，格式：ryTask.methodName 或 ryTask.methodName(params)
+   * @param {string} invokeTarget - 调用目标字符串，格式：doudouTask.methodName 或 doudouTask.methodName(params)
    */
   async execute(invokeTarget) {
     const { ctx } = this;
@@ -73,7 +88,7 @@ class RyTask extends Service {
       const { className, methodName, params } = result;
       
       // 检查类名是否匹配
-      if (className !== 'ryTask') {
+      if (className !== 'doudouTask' && className !== 'ryTask') {
         throw new Error(`不支持的任务类: ${className}`);
       }
 
@@ -142,5 +157,4 @@ class RyTask extends Service {
   }
 }
 
-module.exports = RyTask;
-
+module.exports = DoudouTask;

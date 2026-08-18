@@ -251,7 +251,8 @@ class ScheduleUtils {
     // 定义白名单规则
     // 只允许调用特定的类和方法
     const whiteListPatterns = [
-      /^ryTask\./,           // 允许 ryTask 类的方法
+      /^doudouTask\./,       // 允许 doudouTask 类的方法
+      /^ryTask\./,           // 兼容 ryTask 类的方法
       /^systemTask\./,       // 允许 systemTask 类的方法
       // 可以添加更多白名单规则
     ];

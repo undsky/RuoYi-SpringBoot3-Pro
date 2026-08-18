@@ -7,7 +7,7 @@ type AnyClass = new (...args: any[]) => any;
 type AnyFunc<T = any> = (...args: any[]) => T;
 type CanExportFunc = AnyFunc<Promise<any>> | AnyFunc<IterableIterator<any>>;
 type AutoInstanceType<T, U = T extends CanExportFunc ? T : T extends AnyFunc ? ReturnType<T> : T> = U extends AnyClass ? InstanceType<U> : U;
-import ExportRyTask = require('../../../app/queue/ryTask');
+import ExportDoudouTask = require('../../../app/queue/doudouTask');
 
 declare module 'egg' {
   interface Application {
@@ -15,6 +15,6 @@ declare module 'egg' {
   }
 
   interface T_queue {
-    ryTask: AutoInstanceType<typeof ExportRyTask>;
+    doudouTask: AutoInstanceType<typeof ExportDoudouTask>;
   }
 }

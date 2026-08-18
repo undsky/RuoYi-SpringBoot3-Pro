@@ -408,9 +408,9 @@ class JobService extends Service {
 
     // 根据类名创建实例
     let taskInstance;
-    if (className === "ryTask") {
-      const RyTask = require("../ryTask");
-      taskInstance = new RyTask(ctx);
+    if (className === "doudouTask" || className === "ryTask") {
+      const DoudouTask = require("../doudouTask");
+      taskInstance = new DoudouTask(ctx);
     } else {
       throw new Error(`不支持的任务类: ${className}`);
     }
@@ -481,7 +481,7 @@ class JobService extends Service {
       // 使用 removeRepeatable 方法，通过 cron + key 精确匹配
       try {
         // 尝试删除可能存在的旧任务（使用新格式的 key）
-        await app.queue.ryTask.removeRepeatable({
+        await app.queue.doudouTask.removeRepeatable({
           cron: job.cronExpression,
           key: uniqueId,
         });
@@ -493,13 +493,13 @@ class JobService extends Service {
 
       // 还需要尝试删除旧格式的任务（cron 可能变了）
       // 获取所有 repeat jobs，找到相同 jobId 的任务
-      const repeatableJobs = await app.queue.ryTask.getRepeatableJobs();
+      const repeatableJobs = await app.queue.doudouTask.getRepeatableJobs();
       for (const repeatJob of repeatableJobs) {
         // 检查是否是同一个 job（通过 id 或 key 中包含的信息）
         if (repeatJob.id && repeatJob.id.includes(`${job.jobId}:`)) {
           ctx.logger.info(`[Bull] 发现旧任务，准备删除: ${repeatJob.key}`);
           try {
-            await app.queue.ryTask.removeRepeatable({
+            await app.queue.doudouTask.removeRepeatable({
               cron: repeatJob.cron,
               key: repeatJob.id || undefined,
             });
@@ -512,7 +512,7 @@ class JobService extends Service {
       }
 
       // 添加新的重复任务
-      await app.queue.ryTask.add(
+      await app.queue.doudouTask.add(
         {
           invokeTarget: job.invokeTarget,
           jobInfo: {
@@ -581,7 +581,7 @@ class JobService extends Service {
       const uniqueId = `${job.jobId}:${job.invokeTarget}`;
 
       // 获取所有重复任务
-      const repeatableJobs = await app.queue.ryTask.getRepeatableJobs();
+      const repeatableJobs = await app.queue.doudouTask.getRepeatableJobs();
 
       ctx.logger.info(
         `[Bull] 查找要删除的任务: ${job.jobName}, uniqueId: ${uniqueId}`
@@ -595,7 +595,7 @@ class JobService extends Service {
           ctx.logger.info(
             `[Bull] 找到匹配任务（新格式），准备删除: ${repeatJob.key}`
           );
-          await app.queue.ryTask.removeRepeatableByKey(repeatJob.key);
+          await app.queue.doudouTask.removeRepeatableByKey(repeatJob.key);
           ctx.logger.info(`[Bull] 删除定时任务成功: ${job.jobName}`);
           deleted = true;
           break;
@@ -612,7 +612,7 @@ class JobService extends Service {
             ctx.logger.info(
               `[Bull] 找到匹配任务（旧格式），准备删除: ${repeatJob.key}`
             );
-            await app.queue.ryTask.removeRepeatableByKey(repeatJob.key);
+            await app.queue.doudouTask.removeRepeatableByKey(repeatJob.key);
             ctx.logger.info(`[Bull] 删除定时任务成功: ${job.jobName}`);
             deleted = true;
             break;
@@ -651,7 +651,7 @@ class JobService extends Service {
 
     try {
       // 立即添加任务到队列（不使用命名任务，使用默认处理器）
-      await app.queue.ryTask.add(
+      await app.queue.doudouTask.add(
         {
           invokeTarget: job.invokeTarget,
           jobInfo: {

@@ -106,7 +106,7 @@ Controller 内部普遍是 `try/catch` + `ctx.logger.error` + 返回 `{ code: 50
 
 **认证与密码**：登录见 [app/service/system/login.js](app/service/system/login.js)，密码 bcrypt 存储，错误次数限制在 `app/service/system/password.js`，参数取自 `config.user.password`。Token 用 `jwtid: ${Date.now()}_${userId}`，登出把 `jti` 写入黑名单。
 
-**定时任务**：数据库 `sys_job` 存 cron，[app/service/monitor/job.js](app/service/monitor/job.js) 用 `app.queue.ryTask` 的 repeatable job 落地调度，`jobId:invokeTarget` 作唯一 key；实际业务方法在 [app/service/ryTask.js](app/service/ryTask.js)，`invokeTarget` 只允许 `ryTask.*` 这类白名单前缀。执行结果写 `sys_job_log`。
+**定时任务**：数据库 `sys_job` 存 cron，[app/service/monitor/job.js](app/service/monitor/job.js) 用 `app.queue.doudouTask` 的 repeatable job 落地调度，`jobId:invokeTarget` 作唯一 key；实际业务方法在 [app/service/doudouTask.js](app/service/doudouTask.js)，`invokeTarget` 允许 `doudouTask.*`（兼容 `ryTask.*`）这类白名单前缀。执行结果写 `sys_job_log`。
 
 **代码生成**：[app/service/tool/gen.js](app/service/tool/gen.js) + `app/templates/vm/**` velocity 模板，可产出 Controller、Service、Mapper XML、Vue 页面、api.js 与菜单 SQL，按驱动分目录。
 

@@ -39,8 +39,8 @@ COMMENT ON COLUMN sys_dept.update_time IS '更新时间';
 -- ----------------------------
 -- 初始化-部门表数据
 -- ----------------------------
-INSERT INTO sys_dept VALUES(100,  0,   '0',          '总公司',   0, '豆豆', '15888888888', 'ry@qq.com', '0', '0', 'admin', CURRENT_TIMESTAMP, '', NULL);
-INSERT INTO sys_dept VALUES(101,  100, '0,100',      '下属部门', 1, '豆豆', '15888888888', 'ry@qq.com', '0', '0', 'admin', CURRENT_TIMESTAMP, '', NULL);
+INSERT INTO sys_dept VALUES(100,  0,   '0',          '总公司',   0, '豆豆', '15888888888', 'doudou@qq.com', '0', '0', 'admin', CURRENT_TIMESTAMP, '', NULL);
+INSERT INTO sys_dept VALUES(101,  100, '0,100',      '下属部门', 1, '豆豆', '15888888888', 'doudou@qq.com', '0', '0', 'admin', CURRENT_TIMESTAMP, '', NULL);
 SELECT setval('sys_dept_dept_id_seq', 200);
 
 
@@ -781,9 +781,9 @@ COMMENT ON COLUMN sys_job.update_by IS '更新者';
 COMMENT ON COLUMN sys_job.update_time IS '更新时间';
 COMMENT ON COLUMN sys_job.remark IS '备注信息';
 
-INSERT INTO sys_job VALUES(1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams',        '0/10 * * * * ?', '3', '1', '1', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
-INSERT INTO sys_job VALUES(2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(''ry'')',  '0/15 * * * * ?', '3', '1', '1', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
-INSERT INTO sys_job VALUES(3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(''ry'', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
+INSERT INTO sys_job VALUES(1, '系统默认（无参）', 'DEFAULT', 'doudouTask.doudouNoParams',        '0/10 * * * * ?', '3', '1', '1', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
+INSERT INTO sys_job VALUES(2, '系统默认（有参）', 'DEFAULT', 'doudouTask.doudouParams(''doudou'')',  '0/15 * * * * ?', '3', '1', '1', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
+INSERT INTO sys_job VALUES(3, '系统默认（多参）', 'DEFAULT', 'doudouTask.doudouMultipleParams(''doudou'', true, 2000L, 316.50D, 100)',  '0/20 * * * * ?', '3', '1', '1', 'admin', CURRENT_TIMESTAMP, '', NULL, '');
 SELECT setval('sys_job_job_id_seq', 100);
 
 
