@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "doudou-any2ai": {
+      "source": "..\\doudou-any2ai-skill\\",
+      "sourceUrl": "..\\doudou-any2ai-skill\\",
+      "sourceType": "git",
+      "skillPath": "SKILL.md",
+      "computedHash": "4f559f9a0a55330c34b2ce7db176c2f53aa23eeb6d810059ee02cc2ae9f365e4"
+    }
+  }
+}
