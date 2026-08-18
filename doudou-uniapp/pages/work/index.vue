@@ -1,18 +1,9 @@
 <template>
   <view class="work-container">
-    <!-- 轮播图 -->
-    <uni-swiper-dot class="uni-swiper-dot-box" :info="data" :current="current" field="content">
-      <swiper class="swiper-box" :current="swiperDotIndex" @change="changeSwiper">
-        <swiper-item v-for="(item, index) in data" :key="index">
-          <view class="swiper-item" @click="clickBannerItem(item)">
-            <image :src="item.image" mode="aspectFill" :draggable="false" />
-          </view>
-        </swiper-item>
-      </swiper>
-    </uni-swiper-dot>
-
     <!-- 宫格组件 -->
-    <uni-section title="系统管理" type="line"></uni-section>
+    <view class="title-wrap">
+      <uni-title type="h3" title="系统管理"></uni-title>
+    </view>
     <view class="grid-body">
       <uni-grid :column="4" :showBorder="false" @change="changeGrid">
         <uni-grid-item>
@@ -75,20 +66,9 @@
 </template>
 
 <script setup>
-  import { ref, getCurrentInstance } from "vue"
+  import { getCurrentInstance } from "vue"
 
   const { proxy } = getCurrentInstance()
-  const current = ref(0)
-  const swiperDotIndex = ref(0)
-  const data = ref([{ image: '/static/images/banner/banner01.jpg' }, { image: '/static/images/banner/banner02.jpg' }, { image: '/static/images/banner/banner03.jpg' }])
-
-  function clickBannerItem(item) {
-    console.info(item)
-  }
-
-  function changeSwiper(e) {
-    current.value = e.detail.current
-  }
 
   function changeGrid(e) {
     proxy.$modal.showToast('模块建设中~')
@@ -112,6 +92,10 @@
   }
   /* #endif */
 
+  .title-wrap {
+    padding: 0 10px;
+  }
+
   .text {
     text-align: center;
     font-size: 26rpx;
@@ -127,45 +111,5 @@
     align-items: center;
     justify-content: center;
     padding: 15px 0;
-  }
-
-  .uni-margin-wrap {
-    width: 690rpx;
-    width: 100%;
-    ;
-  }
-
-  .swiper {
-    height: 300rpx;
-  }
-
-  .swiper-box {
-    height: 150px;
-  }
-
-  .swiper-item {
-    /* #ifndef APP-NVUE */
-    display: flex;
-    /* #endif */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    height: 300rpx;
-    line-height: 300rpx;
-  }
-
-  @media screen and (min-width: 500px) {
-    .uni-swiper-dot-box {
-      width: 400px;
-      /* #ifndef APP-NVUE */
-      margin: 0 auto;
-      /* #endif */
-      margin-top: 8px;
-    }
-
-    .image {
-      width: 100%;
-    }
   }
 </style>

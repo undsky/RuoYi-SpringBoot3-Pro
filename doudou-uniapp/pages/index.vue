@@ -2,7 +2,7 @@
   <view class="content">
     <image class="logo" src="@/static/logo.png"></image>
     <view class="text-area">
-      <text class="title">Hello RuoYi</text>
+      <text class="title">Hello DouDou</text>
     </view>
   </view>
 </template>

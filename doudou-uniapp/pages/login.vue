@@ -3,7 +3,7 @@
     <view class="logo-content align-center justify-center flex">
       <image style="width: 100rpx;height: 100rpx;" :src="globalConfig.appInfo.logo" mode="widthFix">
       </image>
-      <text class="title">若依移动端登录</text>
+      <text class="title">豆豆移动端登录</text>
     </view>
     <view class="login-form-content">
       <view class="input-item flex align-center">
@@ -27,11 +27,6 @@
       <view class="reg text-center" v-if="register">
         <text class="text-grey1">没有账号？</text>
         <text @click="handleUserRegister" class="text-blue">立即注册</text>
-      </view>
-      <view class="xieyi text-center">
-        <text class="text-grey1">登录即代表同意</text>
-        <text @click="handleUserAgrement" class="text-blue">《用户协议》</text>
-        <text @click="handlePrivacy" class="text-blue">《隐私协议》</text>
       </view>
     </view>
      
@@ -62,18 +57,6 @@
   // 用户注册
   function handleUserRegister() {
     proxy.$tab.redirectTo(`/pages/register`)
-  }
-
-  // 隐私协议
-  function handlePrivacy() {
-    let site = globalConfig.appInfo.agreements[0]
-    proxy.$tab.navigateTo(`/pages/common/webview/index?title=${site.title}&url=${site.url}`)
-  }
-
-  // 用户协议
-  function handleUserAgrement() {
-    let site = globalConfig.appInfo.agreements[1]
-    proxy.$tab.navigateTo(`/pages/common/webview/index?title=${site.title}&url=${site.url}`)
   }
 
   // 获取图形验证码
@@ -190,11 +173,6 @@
       
       .reg {
         margin-top: 15px;
-      }
-      
-      .xieyi {
-        color: #333;
-        margin-top: 20px;
       }
       
       .login-code {

@@ -6,7 +6,7 @@ import constant from '@/utils/constant'
 import { isHttp, isEmpty } from "@/utils/validate"
 import { getInfo, login, logout } from '@/api/login'
 import { getToken, removeToken, setToken } from '@/utils/auth'
-import defAva from '@/static/images/profile.jpg'
+import defAva from '@/static/logo.png'
 
 const baseUrl = config.baseUrl
 

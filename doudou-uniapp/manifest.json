@@ -1,5 +1,5 @@
 {
-    "name" : "若依移动端",
+    "name" : "豆豆移动端",
     "appid" : "__UNI__25A9D80",
     "description" : "",
     "versionName" : "1.2.0",
@@ -62,7 +62,7 @@
             "port" : 9090,
             "https" : false
         },
-        "title" : "RuoYi-App",
+        "title" : "DouDou-App",
         "router" : {
             "mode" : "hash",
             "base" : "./"

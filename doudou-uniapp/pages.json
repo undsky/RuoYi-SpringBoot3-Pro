@@ -12,7 +12,7 @@
   }, {
     "path": "pages/index",
     "style": {
-      "navigationBarTitleText": "若依移动端框架",
+      "navigationBarTitleText": "豆豆移动端框架",
       "navigationStyle": "custom"
     }
   }, {
@@ -51,11 +51,6 @@
       "navigationBarTitleText": "应用设置"
     }
   }, {
-    "path": "pages/mine/help/index",
-    "style": {
-      "navigationBarTitleText": "常见问题"
-    }
-  }, {
     "path": "pages/mine/about/index",
     "style": {
       "navigationBarTitleText": "关于我们"
@@ -72,31 +67,31 @@
     }
   }],
   "tabBar": {
-    "color": "#000000",
-    "selectedColor": "#000000",
+    "color": "#707070",
+    "selectedColor": "#007aff",
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [{
         "pagePath": "pages/index",
-        "iconPath": "static/images/tabbar/home.png",
-        "selectedIconPath": "static/images/tabbar/home_.png",
+        "iconPath": "static/images/tabbar/home.svg",
+        "selectedIconPath": "static/images/tabbar/home_.svg",
         "text": "首页"
       }, {
         "pagePath": "pages/work/index",
-        "iconPath": "static/images/tabbar/work.png",
-        "selectedIconPath": "static/images/tabbar/work_.png",
+        "iconPath": "static/images/tabbar/work.svg",
+        "selectedIconPath": "static/images/tabbar/work_.svg",
         "text": "工作台"
       }, {
         "pagePath": "pages/mine/index",
-        "iconPath": "static/images/tabbar/mine.png",
-        "selectedIconPath": "static/images/tabbar/mine_.png",
+        "iconPath": "static/images/tabbar/mine.svg",
+        "selectedIconPath": "static/images/tabbar/mine_.svg",
         "text": "我的"
       }
     ]
   },
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "RuoYi",
+    "navigationBarTitleText": "DouDou",
     "navigationBarBackgroundColor": "#FFFFFF"
   }
 }

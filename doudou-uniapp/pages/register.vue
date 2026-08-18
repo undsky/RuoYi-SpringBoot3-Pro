@@ -3,7 +3,7 @@
     <view class="logo-content align-center justify-center flex">
       <image style="width: 100rpx;height: 100rpx;" :src="globalConfig.appInfo.logo" mode="widthFix">
       </image>
-      <text class="title">若依移动端注册</text>
+      <text class="title">豆豆移动端注册</text>
     </view>
     <view class="login-form-content">
       <view class="input-item flex align-center">
