@@ -40,17 +40,17 @@ description: 按文件类型将任意本地文件转换为 AI 友好的文本（
 
 ### 产物存哪里
 
-转换结果默认保存在项目根目录下的 `resources/any2ai/` 目录中：
+转换结果默认保存在项目根目录下的 `resources/any2ai/` 目录中，默认文件名追加本地时间戳（年月日时分秒），例如 `resources/any2ai/口播-20260819153012.srt`：
 
 | 场景       | 怎么执行                                                                                     |
 | ---------- | -------------------------------------------------------------------------------------------- |
-| **默认**（未明确指定） | 默认输出到 `resources/any2ai/`（如 `-o resources/any2ai/xxx.ext`），执行前告知用户将写入该位置 |
+| **默认**（未明确指定） | 默认输出到 `resources/any2ai/`，文件名追加 `-年月日时分秒`（如 `-20260819153012`），执行前告知用户将写入该位置 |
 | 自定义目录 | 用户明确给出了存放路径（如 "存到 out/"），则按用户指定路径保存，目录不存在会自动建             |
 | 不用保存   | 用户明确说明 "不用存" 或 "我就看看内容"，则不传 `-o`，正文只走 stdout，内容留在对话里         |
 
 ```bash
 # 默认情况（用户未明确指定路径，默认存入 resources/any2ai/）
-python3 scripts/whisper.py data/口播.mp4 -l Chinese -o resources/any2ai/口播.srt
+python3 scripts/whisper.py data/口播.mp4 -l Chinese -o resources/any2ai/口播-20260819153012.srt
 
 # 用户指定了自定义目录
 python3 scripts/whisper.py data/口播.mp4 -l Chinese -o out/口播.srt
@@ -70,7 +70,7 @@ python3 scripts/whisper.py 播客.mp3 --format txt
 
 # 存成文件（默认存到 resources/any2ai/，或用户指定路径）
 python3 scripts/whisper.py media/talk.mp4 -l English \
-  -o resources/any2ai/talk.srt
+  -o resources/any2ai/talk-20260819153012.srt
 ```
 
 ### 选参数
@@ -83,7 +83,7 @@ python3 scripts/whisper.py media/talk.mp4 -l English \
 | `--task`            | 只有用户明确要"翻成英文"时才用 `translate`。要译成其他语言，先 `transcribe` 拿原文再自己译                                              |
 | `--model`           | **留空。** 服务端预置了 medium 权重，换别的可能触发模型下载并在离线环境失败                                                             |
 | `--threads`         | 别动，默认 4                                                                                                                            |
-| `-o`                | 产物输出路径。默认存到 `resources/any2ai/`；用户指定路径则按指定路径；用户明确说不存则不传。见 **产物存哪里**                                     |
+| `-o`                | 产物输出路径。默认存到 `resources/any2ai/` 且文件名追加 `-年月日时分秒`；用户指定路径则按指定路径；用户明确说不存则不传。见 **产物存哪里**         |
 
 `--json` 会打印完整响应（含 media 时长、编解码、服务端产物路径等元信息）。平时不用，
 它会把正文塞进 JSON 字符串，转义后可读性差。
@@ -123,7 +123,7 @@ CPU 推理，实测耗时约为**音频时长的 0.72–0.95 倍**：30 秒的�
 python3 scripts/anydoc.py 报告.docx
 
 # 存成文件（默认存到 resources/any2ai/，或用户指定路径）
-python3 scripts/anydoc.py 报表/财报.xlsx -o resources/any2ai/财报.md
+python3 scripts/anydoc.py 报表/财报.xlsx -o resources/any2ai/财报-20260819153012.md
 
 # 大表格截断，避免撑爆上下文
 python3 scripts/anydoc.py 明细.csv --max-chars 20000
@@ -135,7 +135,7 @@ python3 scripts/anydoc.py 明细.csv --max-chars 20000
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--format` / `-f` | **通常留空。** anydoc 按文件内容判定，比扩展名可靠。只有一种情况要填：文件没有扩展名 |
 | `--max-chars`     | 大表格喂模型前用。截断只影响返回的内容，服务端产物始终是全文                                                                                                    |
-| `-o`              | 产物输出路径。默认存到 `resources/any2ai/`；用户指定路径则按指定路径；用户明确说不存则不传。见 **产物存哪里**                                     |
+| `-o`              | 产物输出路径。默认存到 `resources/any2ai/` 且文件名追加 `-年月日时分秒`；用户指定路径则按指定路径；用户明确说不存则不传。见 **产物存哪里**         |
 | `--json`          | 要服务端产物路径、字节数这些元信息时用。平时不用                                                                                                                |
 
 `--format` 填错**不会报错** —— anydoc 会按你指定的格式硬解，返回 200 和一堆乱码。
@@ -170,7 +170,7 @@ python3 scripts/paddleocr.py screenshot.png
 python3 scripts/paddleocr.py invoice_en.jpg -l en
 
 # 存成文件（默认存到 resources/any2ai/，或用户指定路径）
-python3 scripts/paddleocr.py scan.png -o resources/any2ai/scan.txt
+python3 scripts/paddleocr.py scan.png -o resources/any2ai/scan-20260819153012.txt
 
 # PDF 扫描件（自动先尝试 anydoc 提取，失败时降级 OCR）
 python3 scripts/paddleocr.py scan.pdf
@@ -181,7 +181,7 @@ python3 scripts/paddleocr.py scan.pdf
 | 参数            | 什么时候需要动                                                                                                            |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `--lang` / `-l` | 默认 `ch`（中文）。识别英文或特定外文素材时指定（支持 `en` `chinese_cht` `japan` `korean` `french` `german` 等 15 种）    |
-| `-o`            | 产物输出路径。默认存到 `resources/any2ai/`；用户指定路径则按指定路径；用户明确说不存则不传。见 **产物存哪里**                                     |
+| `-o`            | 产物输出路径。默认存到 `resources/any2ai/` 且文件名追加 `-年月日时分秒`；用户指定路径则按指定路径；用户明确说不存则不传。见 **产物存哪里**         |
 | `--json`        | 要服务端路径、字符数、文本框数等元信息时用。平时不用                                                                      |
 | `--base`        | 单次覆盖 API 地址，不改配置文件                                                                                           |
 | `--timeout`     | 默认 300 秒，通常够用                                                                                                     |
