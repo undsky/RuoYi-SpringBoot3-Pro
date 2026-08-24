@@ -46,10 +46,11 @@ CREATE TABLE sys_user (
   create_time       TEXT,
   update_by         TEXT        DEFAULT '',
   update_time       TEXT,
-  remark            TEXT        DEFAULT NULL
+  remark            TEXT        DEFAULT NULL,
+  uuid              TEXT        DEFAULT NULL
 );
 
-INSERT INTO sys_user VALUES(1,  103, 'admin', '豆豆', '00', 'undsky@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', datetime('now','localtime'), datetime('now','localtime'), 'admin', datetime('now','localtime'), '', NULL, '管理员');
+INSERT INTO sys_user VALUES(1,  103, 'admin', '豆豆', '00', 'undsky@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', datetime('now','localtime'), datetime('now','localtime'), 'admin', datetime('now','localtime'), '', NULL, '管理员', lower(hex(randomblob(4)) || '-' || hex(randomblob(2)) || '-4' || substr(hex(randomblob(2)),2) || '-' || substr('AB89',1+(abs(random()) % 4),1) || substr(hex(randomblob(2)),2) || '-' || hex(randomblob(6))));
 
 -- ----------------------------
 -- 3、岗位信息表

@@ -69,6 +69,7 @@ CREATE TABLE sys_user (
   update_by         varchar(64)     DEFAULT '',
   update_time       timestamp,
   remark            varchar(500)    DEFAULT NULL,
+  uuid              varchar(36)     DEFAULT NULL,
   PRIMARY KEY (user_id)
 );
 
@@ -93,11 +94,12 @@ COMMENT ON COLUMN sys_user.create_time IS '创建时间';
 COMMENT ON COLUMN sys_user.update_by IS '更新者';
 COMMENT ON COLUMN sys_user.update_time IS '更新时间';
 COMMENT ON COLUMN sys_user.remark IS '备注';
+COMMENT ON COLUMN sys_user.uuid IS '用户唯一标识';
 
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-INSERT INTO sys_user VALUES(1,  103, 'admin', '豆豆', '00', 'undsky@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP, '', NULL, '管理员');
+INSERT INTO sys_user VALUES(1,  103, 'admin', '豆豆', '00', 'undsky@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'admin', CURRENT_TIMESTAMP, '', NULL, '管理员', gen_random_uuid()::varchar);
 SELECT setval('sys_user_user_id_seq', 100);
 
 

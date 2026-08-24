@@ -5,6 +5,7 @@
  */
 
 const Service = require("egg").Service;
+const crypto = require("crypto");
 const { DataScope } = require("../../decorator/dataScope");
 
 class UserService extends Service {
@@ -258,6 +259,11 @@ class UserService extends Service {
 
     // 设置创建信息
     user.createBy = ctx.state.user.userName;
+
+    // uuid 由服务端生成，直接覆盖入参中的同名字段。
+    // 控制器把 ctx.request.body 整体透传下来，若沿用客户端传值，
+    // 调用方就能自行指定甚至伪造他人的 uuid
+    user.uuid = crypto.randomUUID();
 
     // 插入用户
     const result = await ctx.helper

@@ -6,6 +6,7 @@
 
 const Service = require("egg").Service;
 const captcha = require("trek-captcha");
+const crypto = require("crypto");
 const { nanoid } = require("nanoid");
 const dayjs = require("dayjs");
 const { CacheConstants } = require("../../constant");
@@ -80,6 +81,7 @@ class LoginService extends Service {
       password: hashedPassword,
       status: "0",
       delFlag: "0",
+      uuid: crypto.randomUUID(),
       createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
     });
 
