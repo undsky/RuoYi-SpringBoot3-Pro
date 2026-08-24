@@ -70,11 +70,17 @@ module.exports = app => {
       const { ctx, service } = this;
       
       try {
-        const user = ctx.request.body;
+        const { nickName, email, phonenumber, sex } = ctx.request.body;
         const userId = ctx.state.user.userId;
         
-        // 设置当前用户ID
-        user.userId = userId;
+        // 仅允许修改安全的基础个人资料字段
+        const user = {
+          userId,
+          nickName,
+          email,
+          phonenumber,
+          sex,
+        };
         
         // 校验手机号是否唯一
         if (user.phonenumber) {

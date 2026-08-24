@@ -370,21 +370,35 @@ module.exports = app => {
     /**
      * 修改状态
      * PUT /api/system/user/changeStatus
+     * 权限：system:user:edit
      */
+    @Log({ title: '用户管理', businessType: BusinessType.UPDATE })
+    @RequiresPermissions('system:user:edit')
     @HttpPut('/changeStatus')
     async changeStatus() {
       const { ctx, service } = this;
       
       try {
         const user = ctx.request.body;
+        const targetUserId = parseInt(user.userId);
         
-        // 校验用户是否允许操作
-        service.system.user.checkUserAllowed(user);
+        // 校验用户是否允许操作（禁止修改超级管理员状态）
+        service.system.user.checkUserAllowed({ userId: targetUserId });
         
         // 校验数据权限
-        await service.system.user.checkUserDataScope(user.userId);
+        await service.system.user.checkUserDataScope(targetUserId);
+        
+        // 禁止当前登录用户停用自身账号
+        if (ctx.state.user && ctx.state.user.userId === targetUserId && user.status === '1') {
+          ctx.body = {
+            code: 500,
+            msg: '不能停用当前登录用户账号'
+          };
+          return;
+        }
         
         // 设置更新者
+        user.userId = targetUserId;
         user.updateBy = ctx.state.user.userName;
         
         // 修改状态
@@ -406,16 +420,22 @@ module.exports = app => {
     /**
      * 查询授权角色
      * GET /api/system/user/authRole/:userId
+     * 权限：system:user:query
      */
+    @RequiresPermissions('system:user:query')
     @HttpGet('/authRole/:userId')
     async authRole() {
       const { ctx, service } = this;
       
       try {
         const { userId } = ctx.params;
+        const parsedUserId = parseInt(userId);
+        
+        // 校验数据权限
+        await service.system.user.checkUserDataScope(parsedUserId);
         
         // 查询用户信息
-        const user = await service.system.user.selectUserById(parseInt(userId));
+        const user = await service.system.user.selectUserById(parsedUserId);
         
         if (!user) {
           ctx.body = {
@@ -426,10 +446,10 @@ module.exports = app => {
         }
         
         // 查询用户角色
-        const roles = await service.system.role.selectRolesByUserId(parseInt(userId));
+        const roles = await service.system.role.selectRolesByUserId(parsedUserId);
         
         // 过滤掉管理员角色（非管理员用户不能分配管理员角色）
-        const isAdmin = ctx.helper.isAdmin(parseInt(userId));
+        const isAdmin = ctx.helper.isAdmin(parsedUserId);
         const filteredRoles = isAdmin ? roles : roles.filter(r => !ctx.helper.isAdmin(r.roleId));
         
         ctx.body = {
@@ -450,24 +470,41 @@ module.exports = app => {
     /**
      * 用户授权
      * PUT /api/system/user/authRole
+     * 权限：system:user:edit
      */
+    @Log({ title: '用户管理', businessType: BusinessType.GRANT })
+    @RequiresPermissions('system:user:edit')
     @HttpPut('/authRole')
     async insertAuthRole() {
       const { ctx, service } = this;
       
       try {
         const { userId, roleIds } = ctx.query;
+        const parsedUserId = parseInt(userId);
         
         // 校验数据权限
-        await service.system.user.checkUserDataScope(userId);
+        await service.system.user.checkUserDataScope(parsedUserId);
         
         // 解析角色ID数组
         const roleIdArray = typeof roleIds === 'string' 
-          ? roleIds.split(',').map(id => parseInt(id))
-          : roleIds;
+          ? roleIds.split(',').filter(Boolean).map(id => parseInt(id))
+          : (Array.isArray(roleIds) ? roleIds.map(id => parseInt(id)) : []);
+        
+        // 校验角色数据权限及非管理员防提权
+        const isCurrentAdmin = ctx.helper.isAdmin(ctx.state.user.userId);
+        for (const roleId of roleIdArray) {
+          if (!isCurrentAdmin && ctx.helper.isAdmin(roleId)) {
+            ctx.body = {
+              code: 500,
+              msg: '非管理员用户不能分配超级管理员角色'
+            };
+            return;
+          }
+          await service.system.role.checkRoleDataScope(roleId);
+        }
         
         // 用户授权
-        await service.system.user.insertUserAuth(userId, roleIdArray);
+        await service.system.user.insertUserAuth(parsedUserId, roleIdArray);
         
         ctx.body = {
           code: 200,

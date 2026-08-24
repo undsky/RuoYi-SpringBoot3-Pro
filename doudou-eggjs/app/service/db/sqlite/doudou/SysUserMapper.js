@@ -97,6 +97,14 @@ class SysUserMapperService extends Service {
         return await this.db().update(this.updateUserMapper(values, params));
     }
 
+    updateUserProfileMapper(values, params) {
+        return this.mapper('updateUserProfile', values, params);
+    }
+
+    async updateUserProfile(values, params) {
+        return await this.db().update(this.updateUserProfileMapper(values, params));
+    }
+
     updateUserStatusMapper(values, params) {
         return this.mapper('updateUserStatus', values, params);
     }

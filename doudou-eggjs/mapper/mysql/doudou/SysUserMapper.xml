@@ -200,6 +200,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		where user_id = #{userId}
 	</update>
 	
+	<update id="updateUserProfile" parameterType="SysUser">
+ 		update sys_user
+ 		<set>
+ 			<if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
+ 			<if test="email != null">email = #{email},</if>
+ 			<if test="phonenumber != null">phonenumber = #{phonenumber},</if>
+ 			<if test="sex != null and sex != ''">sex = #{sex},</if>
+ 			<if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where user_id = #{userId}
+	</update>
+	
 	<update id="updateUserStatus" parameterType="SysUser">
  		update sys_user set status = #{status}, update_time = sysdate() where user_id = #{userId}
 	</update>

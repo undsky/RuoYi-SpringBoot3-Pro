@@ -229,24 +229,37 @@ class UserService extends Service {
   checkUserAllowed(user) {
     const { ctx } = this;
 
-    if (user.userId && ctx.helper.isAdmin(user.userId)) {
+    if (user && user.userId && ctx.helper.isAdmin(parseInt(user.userId))) {
       throw new Error("不允许操作超级管理员用户");
     }
   }
 
   /**
-   * 校验用户是否有数据权�?
+   * 校验用户是否有数据权限
    * @param {number} userId - 用户ID
    */
   async checkUserDataScope(userId) {
     const { ctx } = this;
 
-    // 管理员拥有所有数据权�?
+    if (!userId) return;
+
+    const parsedUserId = parseInt(userId);
+
+    // 管理员拥有所有数据权限
     if (ctx.helper.isAdmin(ctx.state.user.userId)) {
       return;
     }
 
-    // TODO: 实现数据权限校验
+    // 操作本人数据允许通过
+    if (ctx.state.user.userId === parsedUserId) {
+      return;
+    }
+
+    // 查询目标用户是否在当前用户的数据权限范围内
+    const users = await this.selectUserList({ userId: parsedUserId });
+    if (!users || users.length === 0) {
+      throw new Error("没有权限访问用户数据！");
+    }
   }
 
   /**
@@ -520,13 +533,20 @@ class UserService extends Service {
   async updateUserProfile(user) {
     const { ctx } = this;
 
-    // 设置更新信息
-    user.updateBy = ctx.state.user.userName;
+    const safeProfile = {
+      userId: user.userId,
+      nickName: user.nickName,
+      email: user.email,
+      phonenumber: user.phonenumber,
+      sex: user.sex,
+      avatar: user.avatar,
+      updateBy: ctx.state.user.userName,
+    };
 
-    // 更新用户
+    // 更新用户个人信息
     const result = await ctx.helper
       .getMasterDB(ctx)
-      .sysUserMapper.updateUser([], user);
+      .sysUserMapper.updateUserProfile([], safeProfile);
 
     return result;
   }
