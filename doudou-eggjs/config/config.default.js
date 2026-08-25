@@ -134,26 +134,44 @@ module.exports = (appInfo) => {
   };
 
   config.onerror = {
-    all(err, ctx) {
-      const type = ctx.accepts("json", "html", "text") || "text";
-      const isUnauthorized = "UnauthorizedError" === err.name;
-      const status = isUnauthorized ? 200 : (err.status || 500);
-      const code = isUnauthorized ? 401 : (err.status || 500);
-      const msg = isUnauthorized ? "UnauthorizedError" : (err.message || "Internal Server Error");
-
-      ctx.status = status;
-      ctx.set("Content-Type", "application/json; charset=utf-8");
-
-      const resObj = {
-        code,
-        msg,
-      };
-
-      if (type === "json") {
-        ctx.body = resObj;
-      } else {
-        ctx.body = JSON.stringify(resObj);
+    accepts(ctx) {
+      if (ctx.acceptJSON) return "json";
+      if (ctx.acceptJSONP) return "js";
+      return "json"; // 纯 API 后端服务，默认返回 JSON 错误
+    },
+    json(err, ctx) {
+      if ("UnauthorizedError" === err.name) {
+        ctx.status = 200;
+        ctx.body = {
+          code: 401,
+          msg: "UnauthorizedError",
+        };
+        return;
       }
+      const status = err.status || 500;
+      ctx.status = status;
+      ctx.body = {
+        code: status,
+        msg: err.message || "Internal Server Error",
+      };
+    },
+    html(err, ctx) {
+      if ("UnauthorizedError" === err.name) {
+        ctx.status = 200;
+        ctx.type = "application/json";
+        ctx.body = JSON.stringify({
+          code: 401,
+          msg: "UnauthorizedError",
+        });
+        return;
+      }
+      const status = err.status || 500;
+      ctx.status = status;
+      ctx.type = "application/json";
+      ctx.body = JSON.stringify({
+        code: status,
+        msg: err.message || "Internal Server Error",
+      });
     },
   };
 
