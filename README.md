@@ -33,3 +33,5 @@
 
 - [nodejs](https://nodejs.org/zh-cn/download)
 - [python](https://www.python.org/downloads/)
+
+这里不要出现任何技术性描述，只写傻瓜式开发流程！！！
