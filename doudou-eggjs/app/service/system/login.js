@@ -160,13 +160,13 @@ class LoginService extends Service {
   /**
    * 记录在线用户信息
    * @param {object} user - 用户信息
-   * @param {string} token - Token
+   * @param {string} jti - JWT ID（不要传入完整 JWT）
    */
-  async recordOnlineUser(user, token) {
+  async recordOnlineUser(user, jti) {
     const { app, ctx } = this;
 
     const onlineUser = {
-      tokenId: token,
+      tokenId: jti,
       userId: user.userId,
       userName: user.userName,
       deptName: user.deptName || "",
@@ -175,8 +175,8 @@ class LoginService extends Service {
       expireTime: dayjs().add(7, 'day').format('YYYY-MM-DD HH:mm:ss'), // 7天后过期
     };
 
-    // 存储到 Redis（与 Token 过期时间一致）
-    const cacheKey = CacheConstants.LOGIN_TOKEN_KEY + user.userId;
+    // 按会话 jti 存储，支持同一用户多端在线；与 Token 过期时间一致
+    const cacheKey = CacheConstants.LOGIN_TOKEN_KEY + jti;
     await app.cache.default.set(cacheKey, onlineUser, {
       ttl: 7 * 24 * 60 * 60,
     });
@@ -185,7 +185,7 @@ class LoginService extends Service {
   /**
    * 删除在线用户信息
    * @param {string} jti - Token ID
-   * @param {number|string} [userId] - 用户ID
+   * @param {number|string} [userId] - 用户ID（兼容旧版按 userId 存的缓存）
    */
   async removeOnlineUser(jti, userId) {
     const { app } = this;
@@ -193,9 +193,10 @@ class LoginService extends Service {
     // 将 Token 加入黑名单
     if (jti) {
       await app.cache.default.set(jti, "revoked", { ttl: 7 * 24 * 60 * 60 });
+      await app.cache.default.del(CacheConstants.LOGIN_TOKEN_KEY + jti);
     }
 
-    // 删除在线用户缓存
+    // 兼容旧版按 userId 存储的在线记录
     if (userId) {
       await app.cache.default.del(CacheConstants.LOGIN_TOKEN_KEY + userId);
     }

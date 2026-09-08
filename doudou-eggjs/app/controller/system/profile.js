@@ -47,7 +47,7 @@ module.exports = app => {
         ctx.body = {
           code: 200,
           msg: '操作成功',
-          data: user,
+          data: ctx.helper.sanitizeUser(user),
           roleGroup,
           postGroup
         };

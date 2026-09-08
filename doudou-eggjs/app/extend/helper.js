@@ -104,6 +104,20 @@ module.exports = {
   },
 
   /**
+   * 剔除用户对象中的敏感字段（密码哈希等），供 API 响应使用。
+   * 不修改原对象，避免影响后续还需要 password 的内部逻辑（如改密校验）。
+   * @param {object} user - 用户对象
+   * @return {object|null}
+   */
+  sanitizeUser(user) {
+    if (!user) {
+      return user;
+    }
+    const { password, ...safeUser } = user;
+    return safeUser;
+  },
+
+  /**
    * 获取数据库访问对象（基于配置，自动读写分离）
    * @param {import('egg').Context} ctx - 上下文对象
    * @param {boolean} [forWrite=false] - 是否用于写操作，默认 false（读操作）

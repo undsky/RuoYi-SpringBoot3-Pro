@@ -126,6 +126,17 @@ module.exports = (appInfo) => {
   const _appPath = path.join(appInfo.baseDir, "app");
   config.uploadRelPath = path.join(config.static.prefix, "uploads");
   config.uploadAbsPath = path.join(_appPath, config.uploadRelPath);
+  // 服务端权威扩展名白名单。multipart.whitelist 是框架层拦截，这里再拦一次，
+  // 避免配置被覆盖或文件名无扩展名时把可执行内容写进静态目录。
+  config.upload = {
+    allowExtensions: [
+      ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".wbmp",
+      ".mp3", ".wav",
+      ".mp4", ".avi",
+      ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt",
+      ".zip", ".gz", ".tgz", ".gzip",
+    ],
+  };
 
   config.siteFile = {
     "/favicon.ico": fs.readFileSync(

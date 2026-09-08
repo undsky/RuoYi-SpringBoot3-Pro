@@ -17,12 +17,22 @@ module.exports = app => {
     /**
      * 文件上传
      * POST /api/common/upload
+     * 说明：需登录；扩展名由服务端白名单二次校验。不挂权限字符，
+     * 与若依个人中心/通用上传一致，避免 sys_menu 无对应权限导致全员 403。
      */
     @HttpPost('/upload')
     async upload() {
       const { ctx, service } = this;
-      
+
       try {
+        if (!ctx.state.user || !ctx.state.user.userId) {
+          ctx.body = {
+            code: 401,
+            msg: '请先登录'
+          };
+          return;
+        }
+
         // 上传文件
         const result = await service.upload.stream();
         
@@ -37,7 +47,7 @@ module.exports = app => {
       } catch (err) {
         ctx.logger.error('文件上传失败:', err);
         ctx.body = {
-          code: 500,
+          code: err.status || 500,
           msg: err.message || '文件上传失败'
         };
       }

@@ -38,9 +38,10 @@ module.exports = (app) => {
           deptId: user.deptId,
         };
 
+        const jti = `${Date.now()}_${user.userId}`;
         const token = app.jwt.sign(tokenData, secret, {
           expiresIn,
-          jwtid: `${Date.now()}_${user.userId}`,
+          jwtid: jti,
         });
 
         // 4. 记录登录日志
@@ -51,8 +52,8 @@ module.exports = (app) => {
           ctx
         );
 
-        // 5. 存储在线用户信息到 Redis
-        await service.system.login.recordOnlineUser(user, token);
+        // 5. 存储在线用户信息到 Redis（只存 jti，不存完整 JWT）
+        await service.system.login.recordOnlineUser(user, jti);
 
         ctx.body = {
           code: 200,

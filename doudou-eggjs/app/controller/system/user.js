@@ -103,7 +103,7 @@ module.exports = app => {
         ctx.body = {
           code: 200,
           msg: '操作成功',
-          data: user,
+          data: ctx.helper.sanitizeUser(user),
           postIds,
           roleIds,
           roles: filteredRoles,
@@ -455,7 +455,7 @@ module.exports = app => {
         ctx.body = {
           code: 200,
           msg: '操作成功',
-          user,
+          user: ctx.helper.sanitizeUser(user),
           roles: filteredRoles
         };
       } catch (err) {
