@@ -1,17 +1,45 @@
 {
   "version": 1,
   "skills": {
+    "doudou-dev": {
+      "source": "..\\doudou-ai-coding-skills\\",
+      "sourceUrl": "..\\doudou-ai-coding-skills\\",
+      "sourceType": "git",
+      "skillPath": "skills/doudou-dev/SKILL.md",
+      "computedHash": "7c7d1e88daeb867b02ec747e0073f0079a6fa044c48cd85a296f9ffc555e7c53"
+    },
+    "doudou-product": {
+      "source": "..\\doudou-ai-coding-skills\\",
+      "sourceUrl": "..\\doudou-ai-coding-skills\\",
+      "sourceType": "git",
+      "skillPath": "skills/doudou-product/SKILL.md",
+      "computedHash": "9f05e9c04d3e38f273d27c4aee007184ff89f69542d75572bdad1f6f255704ea"
+    },
+    "doudou-test": {
+      "source": "..\\doudou-ai-coding-skills\\",
+      "sourceUrl": "..\\doudou-ai-coding-skills\\",
+      "sourceType": "git",
+      "skillPath": "skills/doudou-test/SKILL.md",
+      "computedHash": "dd0da48d32d50c83796c00601ce7e1670816cb5d8de6444288835c92502a4991"
+    },
+    "doudou-wiki": {
+      "source": "..\\doudou-llm-wiki-skill\\",
+      "sourceUrl": "..\\doudou-llm-wiki-skill\\",
+      "sourceType": "git",
+      "skillPath": "SKILL.md",
+      "computedHash": "517e5aa2b37be3614cdafb6ec03f1d6e4b813acd64744fef79f5a6bb303e7995"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
-      "computedHash": "93f53fd1c0352d3d7ec17b8f73d7351bf76f4821e55d123c9d2abc2c53ba48e4"
+      "computedHash": "106acf230014cbb43ca34e6410371321b56ca742f9ee0442e8ec05bf02eb0384"
     },
     "ui-ux-pro-max": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
-      "computedHash": "523b8063c07eedd2b8a1ca94d7a0be9ad340026bd9f21a1eda0b6be2a855298f"
+      "computedHash": "3f1e66e08e3d1d3feaf2a3187705022812e0bece8ff5bee80fe7cf782f26fe8b"
     }
   }
 }
