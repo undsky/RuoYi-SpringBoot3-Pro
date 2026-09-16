@@ -10,7 +10,8 @@ const whiteList = [
 
 // 检查地址白名单
 function checkWhite(url) {
-  const path = url.split('?')[0]
+  const raw = url.split('?')[0]
+  const path = raw.startsWith('/') ? raw : '/' + raw
   return whiteList.indexOf(path) !== -1
 }
 
@@ -19,9 +20,12 @@ let list = ["navigateTo", "redirectTo", "reLaunch", "switchTab"]
 list.forEach(item => {
   uni.addInterceptor(item, {
     invoke(to) {
+      const raw = to.url.split('?')[0]
+      const path = raw.startsWith('/') ? raw : '/' + raw
       if (getToken()) {
-        if (to.url === loginPage) {
-          uni.reLaunch({ url: "/" })
+        if (path === loginPage) {
+          uni.reLaunch({ url: "/pages/index" })
+          return false
         }
         return true
       } else {

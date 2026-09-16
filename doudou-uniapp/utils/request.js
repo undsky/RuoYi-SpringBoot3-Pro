@@ -24,7 +24,7 @@ const request = config => {
     uni.request({
         method: config.method || 'get',
         timeout: config.timeout ||  timeout,
-        url: config.baseUrl || baseUrl + config.url,
+        url: (config.baseUrl || baseUrl) + config.url,
         data: config.data,
         header: config.header,
         dataType: 'json'

@@ -23,13 +23,18 @@ export default function upload(config) {
   return new Promise((resolve, reject) => {
     uni.uploadFile({
       timeout: config.timeout || timeout,
-      url: baseUrl + config.url,
+      url: (config.baseUrl || baseUrl) + config.url,
       filePath: config.filePath,
       name: config.name || 'file',
       header: config.header,
       formData: config.formData,
       success: (res) => {
-        let result = JSON.parse(res.data)
+        let result
+        try {
+          result = typeof res.data === 'string' ? JSON.parse(res.data) : res.data
+        } catch (e) {
+          result = { code: 500, msg: '服务端数据解析异常' }
+        }
         const code = result.code || 200
         const msg = errorCode[code] || result.msg || errorCode['default']
         if (code === 200) {
@@ -38,7 +43,7 @@ export default function upload(config) {
           showConfirm("登录状态已过期，您可以继续留在该页面，或者重新登录?").then(res => {
             if (res.confirm) {
               useUserStore().logOut().then(res => {
-                uni.reLaunch({ url: '/pages/login/login' })
+                uni.reLaunch({ url: '/pages/login' })
               })
             }
           })

@@ -8,7 +8,7 @@ import { isRelogin } from '@/utils/hsj/service/index.js'
 import NProgress from 'nprogress'
 
 NProgress.configure({ showSpinner: false })
-const whiteList = ['/login', '/register']
+const whiteList = ['/login']
 const whiteNext = (next, to) => {
   if (whiteList.indexOf(to.path) !== -1) {
     // 在免登录白名单，直接进入

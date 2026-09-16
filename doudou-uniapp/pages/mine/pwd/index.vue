@@ -1,6 +1,6 @@
 <template>
   <view class="pwd-retrieve-container">
-    <uni-forms ref="form" :value="user" labelWidth="80px">
+    <uni-forms ref="form" :model="user" labelWidth="80px">
       <uni-forms-item name="oldPassword" label="旧密码">
         <uni-easyinput type="password" v-model="user.oldPassword" placeholder="请输入旧密码" />
       </uni-forms-item>

@@ -52,7 +52,7 @@
   function handleLogout() {
     proxy.$modal.confirm('确定注销并退出系统吗？').then(() => {
       useUserStore().logOut().then(() => {}).finally(()=>{
-        proxy.$tab.reLaunch('/pages/index')
+        proxy.$tab.reLaunch('/pages/login')
       })
     })
   }

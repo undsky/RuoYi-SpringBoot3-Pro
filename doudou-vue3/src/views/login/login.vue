@@ -22,8 +22,8 @@ const isDark = computed(() => configStore.layout.isDark)
 
 const formRef = ref()
 const form = reactive({
-  username: 'admin',
-  password: 'admin123',
+  username: '',
+  password: '',
   code: '',
   remember: false,
 })

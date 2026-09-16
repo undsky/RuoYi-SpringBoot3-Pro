@@ -48,8 +48,8 @@
   // 用户注册开关
   const register = ref(false)
   const loginForm = ref({
-    username: "admin",
-    password: "admin123",
+    username: "",
+    password: "",
     code: "",
     uuid: ""
   })
