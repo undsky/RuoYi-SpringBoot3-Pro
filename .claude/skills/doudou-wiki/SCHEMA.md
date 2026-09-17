@@ -122,7 +122,7 @@ slug 在 `raw/` 全集上一次性算好，不随 `--file` 的筛选范围变化
 - 影响的页面列表
 ```
 
-`operation` 取值：`add`、`convert`、`query`、`test`、`update`、`init`、`clear`。
+`operation` 取值：`add`、`query`、`test`、`update`、`init`、`clear`。
 
 前缀格式固定，便于 `grep "^## \[" log.md | head -5` 查最近操作。
 

@@ -23,11 +23,10 @@
       "computedHash": "dd0da48d32d50c83796c00601ce7e1670816cb5d8de6444288835c92502a4991"
     },
     "doudou-wiki": {
-      "source": "..\\doudou-llm-wiki-skill\\",
-      "sourceUrl": "..\\doudou-llm-wiki-skill\\",
-      "sourceType": "git",
+      "source": "undsky/doudou-llm-wiki-skill",
+      "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "517e5aa2b37be3614cdafb6ec03f1d6e4b813acd64744fef79f5a6bb303e7995"
+      "computedHash": "9587a7a5e2e79783abfa368c05eec8b46e46acc1474307402a6fa9b558353b57"
     },
     "frontend-design": {
       "source": "anthropics/skills",

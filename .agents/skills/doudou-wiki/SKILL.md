@@ -28,7 +28,7 @@ user-invocable: true
 ```
 <project>/kb/           ← 知识库根（<kb>），从当前目录逐级向上自动发现
 ├── raw/                原始素材：你往里丢文件
-├── gen/                中间产物：convert 的成果，LLM 的读取面
+├── gen/                中间产物：素材文本化的成果，LLM 的读取面
 └── wiki/               知识库：LLM 写的页面
 ```
 
@@ -77,8 +77,7 @@ PDF 一律走 doudou-ocr —— 它对有文字层的 PDF 会走文字层直抽�
 
 | 用户意图            | 映射子命令            | 示例                                                           |
 | ------------------- | --------------------- | -------------------------------------------------------------- |
-| 收录/添加素材       | `add`                 | "收录这篇文章"、"把这段录音整理进知识库"、"raw 里的新文件入库" |
-| 只转换不入库        | `convert`             | "先把这批 PDF 转成文本看看"                                    |
+| 收录/添加/转换素材 | `add`                 | "收录这篇文章"、"把这段录音整理进知识库"、"转换并收录这个文件" |
 | 提问/查询/对比/整理 | `query`               | "Memex 是什么"、"对比 RAG 和 Wiki 模式"、"整理一下 XX 的信息"  |
 | 反馈/偏好/纠正      | `query`（走反馈分支） | "回答要标注来源"、"你上次说错了"                               |
 | 检查/审计           | `test`                | "检查下知识库有没有问题"                                       |
@@ -113,7 +112,7 @@ python3 <skill-dir>/scripts/router.py <子命令> [参数]
   schema             — SCHEMA.md 路径（需要时非 null）
   kb                 — 知识库信息（id, name, root, raw, gen, wiki, lang, source）
                        source 为 "local" 表示就近发现的 kb/，"registry" 表示注册项
-  processors         — 三个文件处理技能的可用性（add/convert/doctor 时出现）
+  processors         — 三个文件处理技能的可用性（add/doctor 时出现）
   processors_missing — 未探测到的处理技能列表（可选）
   skill_dir          — skill 目录绝对路径
   multiple_kbs       — 是否有多个知识库（可选）
@@ -153,7 +152,6 @@ doudou-wiki — LLM 驱动的知识库
 命令:
   /doudou-wiki init                在当前项目下创建 kb/ 知识库
   /doudou-wiki add [文件]          收录新素材（不指定则收录 raw/ 中全部未收的）
-  /doudou-wiki convert [文件名]    只把素材转成文本，不入库
   /doudou-wiki query <问题>        基于知识库回答问题
   /doudou-wiki test                知识库健康检查
   /doudou-wiki clear [子命令]      重置/删除（all | <关键词> | gen | trash | restore | empty-trash）

@@ -17,7 +17,7 @@
 | 层 | 删除方式 | 可恢复性 |
 |----|---------|---------|
 | `wiki/` 页面 | 移入 `wiki/.trash/` | ✅ `restore` 可恢复 |
-| `gen/` 产物 | 直接删 | ✅ 重跑 `convert` 可复原 |
+| `gen/` 产物 | 直接删 | ✅ 重新文本转换可复原 |
 | `raw/` 原件 | **本工作流不删** | ❌ 需用户自己动手 |
 
 中间产物不进回收站 —— 它本身就是可重新生成的缓存，进回收站没意义。
@@ -59,7 +59,7 @@
       {"label": "全量重置", "description": "清空所有 wiki 页面到回收站，回到初始状态（raw/ 不受影响）"},
       {"label": "删除指定素材", "description": "删除一个素材及其产生的关联页面（移入回收站）"},
       {"label": "删除指定页面", "description": "删除一个或多个 entity/concept/analysis 页面（移入回收站）"},
-      {"label": "只清中间产物", "description": "清空 kb/gen/，wiki 页面不动（重跑 convert 可复原）"}
+      {"label": "只清中间产物", "description": "清空 kb/gen/，wiki 页面不动（重新文本转换可复原）"}
     ]
   }]
 }
@@ -84,7 +84,7 @@
     "multiSelect": false,
     "options": [
       {"label": "确认重置", "description": "所有 wiki 页面移入回收站，重置 index/overview，保留 gen/"},
-      {"label": "重置并清中间产物", "description": "同上，并清空 gen/（重跑 convert 可复原）"},
+      {"label": "重置并清中间产物", "description": "同上，并清空 gen/（重新文本转换可复原）"},
       {"label": "取消", "description": "不做任何操作"}
     ]
   }]
@@ -189,7 +189,7 @@
 ```json
 {
   "questions": [{
-    "question": "确认清空中间产物？\n\nkb/gen/ 共 N 个文件，约 X MB\n\n✅ wiki 页面完全不受影响\n✅ 重跑 convert 可完全复原（音视频需重新转写，较慢）",
+    "question": "确认清空中间产物？\n\nkb/gen/ 共 N 个文件，约 X MB\n\n✅ wiki 页面完全不受影响\n✅ 重新文本转换可完全复原（音视频需重新转写，较慢）",
     "header": "清中间产物",
     "multiSelect": false,
     "options": [
@@ -200,7 +200,7 @@
 }
 ```
 
-清完在 log.md 记一条，并提醒：之后若要下潜原话或重新收录，需先重跑 convert。
+清完在 log.md 记一条，并提醒：之后若要下潜原话或重新收录，需先重新进行文本转换。
 
 ### 5. 回收站操作
 
@@ -220,7 +220,7 @@
    - log.md 追加恢复记录
 4. 跑检查确认恢复后的一致性
 
-> 恢复的摘要页若其 `derived_file` 已被清，`test` 会报 `derived_file_missing` —— 按提示重跑 convert 即可。
+> 恢复的摘要页若其 `derived_file` 已被清，`test` 会报 `derived_file_missing` —— 按 convert.md 重转即可。
 
 #### `clear empty-trash` — 永久清空
 

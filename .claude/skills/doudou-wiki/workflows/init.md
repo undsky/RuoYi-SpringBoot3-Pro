@@ -191,7 +191,7 @@ tags: [meta]
 或嵌在更大的项目仓库里，两种情形都成立：
 
 ```gitignore
-# 中间产物：所有素材的文本化结果，删了重跑 convert 即可复原
+# 中间产物：所有素材的文本化结果，删了重新文本转换即可复原
 gen/
 
 # 回收站
@@ -240,7 +240,7 @@ wiki/.trash/
 路由结果里没有 `processors`（init 不探测），所以这里主动跑一次探测：
 
 ```bash
-python3 <skill-dir>/scripts/router.py convert
+python3 <skill-dir>/scripts/router.py add
 ```
 
 技能探测与知识库无关，所以这条命令即便返回 `status: "no_kb"`（init 早期还没建好 kb 时）

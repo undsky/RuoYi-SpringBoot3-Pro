@@ -364,7 +364,7 @@ def check_provenance(pages: list[Path]) -> list[dict]:
             if target is not None and not target.exists():
                 issues.append(issue("P1", "derived_file_missing", r,
                                     f"derived_file 指向的产物不存在: {df}"
-                                    "（可重跑 convert 再生成）"))
+                                    "（可按 convert.md 重转再生成）"))
 
         # 每份素材都该有中间产物 —— 纯文本也经 derive_text.py 归一化后落进 gen/。
         # 摘要内容取自产物，缺了这个字段就等于溯源链断在读取面这一环，故为 P0。

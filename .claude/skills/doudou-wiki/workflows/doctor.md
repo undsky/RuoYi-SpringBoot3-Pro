@@ -1,6 +1,6 @@
 # Doctor 工作流
 
-自动化测试知识库的核心工作流（convert、add、query、test），验证架构完整性。
+自动化测试知识库的核心工作流（add、query、test 等），验证架构完整性。
 
 > 📌 **路径约定**：`raw/`、`gen/`、`wiki/` 均指当前知识库（`<project>/kb/`）下的绝对路径，
 > 由 SKILL.md 路由时确定（`KB_RAW`、`KB_GEN`、`KB_WIKI`）。测试前需先选定知识库或跑 `init`。
@@ -45,15 +45,15 @@ Skill 结构:
 
 ```bash
 python3 <skill-dir>/scripts/router.py help
-python3 <skill-dir>/scripts/router.py convert
+python3 <skill-dir>/scripts/router.py add
 python3 <skill-dir>/scripts/scan.py --raw-dir <KB_RAW> --wiki-dir <KB_WIKI> --gen-dir <KB_GEN> --json
 python3 <skill-dir>/scripts/check.py --wiki-dir <KB_WIKI> --raw-dir <KB_RAW> --gen-dir <KB_GEN> --json
 ```
 
 ```
 - [ ] router.py help 返回 subcommand: "help"
-- [ ] router.py convert 返回 processors 字段，含三个技能的探测结果
-- [ ] 在不含 kb/ 的目录下跑 router.py convert，status 为 no_kb 但仍带 processors 字段
+- [ ] router.py add 返回 processors 字段，含三个技能的探测结果
+- [ ] 在不含 kb/ 的目录下跑 router.py add，status 为 no_kb 但仍带 processors 字段
       （init.md 第 6 步就是在还没有 kb 时靠它探测的）
 - [ ] router.py 未知子命令返回 status: "error"
 - [ ] kb 字段含 root / raw / gen / wiki 四个路径，且 gen 与 raw 平级
@@ -210,7 +210,7 @@ python3 <skill-dir>/scripts/derive_text.py \
 
 **需要三个技能都可用且配好 `.env`，会实际发请求。** 用户明确要求时才跑。
 
-准备一份小素材（一张带字的截图、一个短音频、一个小 docx），各跑一次 convert：
+准备一份小素材（一张带字的截图、一个短音频、一个小 docx），各跑一次文本转换验证（按 convert.md）：
 
 ```
 - [ ] doudou-doc  产物落在 gen/ 且非空

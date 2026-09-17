@@ -40,7 +40,7 @@ python3 <skill-dir>/scripts/check.py --wiki-dir <KB_WIKI> --raw-dir <KB_RAW> --g
 
 | 问题 | 性质 | 处理 |
 |------|------|------|
-| `missing_raw_file` / `missing_derived_file` | 字段本身没写，溯源链断了 | P0，补字段。产物真不存在就先重跑 convert |
+| `missing_raw_file` / `missing_derived_file` | 字段本身没写，溯源链断了 | P0，补字段。产物真不存在就先按 convert.md 重转 |
 | `raw_file_missing` | 原件被删或改名 | P0，问用户是原件移走了还是该删掉这个摘要页 |
 | `derived_file_missing` | 产物被清（如清过 `gen/`） | P1，重跑对应路线即可复原，属可自动修 |
 

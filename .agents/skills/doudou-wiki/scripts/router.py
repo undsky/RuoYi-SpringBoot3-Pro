@@ -8,7 +8,7 @@ doudou-wiki 确定性路由脚本。
 知识库布局（一律收在 kb/ 下）:
     <project>/kb/
     ├── raw/     原始素材，不可变
-    ├── gen/     convert 产物，LLM 的默认读取面，可重新生成
+    ├── gen/     文本化产物，LLM 的默认读取面，可重新生成
     └── wiki/    LLM 拥有的知识库页面
 
 **默认用当前项目根目录的 `kb/`**：从工作目录逐级向上找到第一个 `kb/` 即用它，
@@ -63,7 +63,7 @@ MAX_UPWARD_LEVELS = 8
 
 #   add     收录素材      test    知识库健康检查
 #   clear   重置/删除     doctor  技能自检（架构、脚本、分派、端到端）
-VALID_SUBCOMMANDS = {"init", "add", "convert", "query", "test", "clear", "doctor", "help"}
+VALID_SUBCOMMANDS = {"init", "add", "query", "test", "clear", "doctor", "help"}
 
 # 不需要选知识库的子命令
 NO_KB_REQUIRED = {"init", "help"}
@@ -72,7 +72,7 @@ NO_KB_REQUIRED = {"init", "help"}
 NEEDS_SCHEMA = {"add", "query", "test", "clear"}
 
 # 需要探测文件处理技能可用性的子命令
-NEEDS_PROCESSORS = {"add", "convert", "doctor"}
+NEEDS_PROCESSORS = {"add", "doctor"}
 
 # 三个外部文件处理技能：技能名 → (入口脚本相对路径, 环境变量名, 处理对象)
 # 纯文本不在此列 —— 它走本技能自带的 scripts/derive_text.py，无需探测。
@@ -285,6 +285,10 @@ def route(argv: list[str]) -> dict:
     else:
         subcommand = first
 
+    # 兼容历史 convert 命令，平滑重定向至 add
+    if subcommand == "convert":
+        subcommand = "add"
+
     remaining = " ".join(argv[1:]) if len(argv) > 1 else ""
 
     if subcommand not in VALID_SUBCOMMANDS:
@@ -306,7 +310,7 @@ def route(argv: list[str]) -> dict:
     }
 
     # 探测结果与知识库无关，即便后面走 no_kb / error 也要带上 ——
-    # init.md 第 6 步正是在还没有 kb 的时候跑 `router.py convert` 来探测技能的
+    # init.md 第 6 步正是在还没有 kb 的时候跑 `router.py add` 来探测技能的
     proc_fields = {}
     if subcommand in NEEDS_PROCESSORS:
         procs = detect_processors(overrides)
