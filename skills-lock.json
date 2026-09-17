@@ -7,11 +7,29 @@
       "skillPath": "skills/doudou-dev/SKILL.md",
       "computedHash": "7c7d1e88daeb867b02ec747e0073f0079a6fa044c48cd85a296f9ffc555e7c53"
     },
+    "doudou-doc": {
+      "source": "undsky/doudou-doc-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f0bf8448c67ef46d9e06e18d64a182f3bc4437a6d2140d146000dae5b8e15d3c"
+    },
+    "doudou-ocr": {
+      "source": "undsky/doudou-ocr-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "d0ee099886aaf2c90942f8e6ce9070fa939530b37f9258d6de705e313da0ad0f"
+    },
     "doudou-product": {
       "source": "undsky/doudou-ai-coding-skills",
       "sourceType": "github",
       "skillPath": "skills/doudou-product/SKILL.md",
       "computedHash": "0972e442be308bba0cb37936afcc6a0606b8bdde3e5682917d1fd5672878f9f8"
+    },
+    "doudou-stt": {
+      "source": "undsky/doudou-stt-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "6cd6f24f4105b441aa237d264848166152508f41159b10a09b04b5c49f255fc6"
     },
     "doudou-test": {
       "source": "undsky/doudou-ai-coding-skills",

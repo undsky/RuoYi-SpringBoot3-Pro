@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Config
+.env
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local documents / results
+resources/doc/*
+!resources/doc/.gitkeep
+resources/data/*
+!resources/data/.gitkeep
+test.docx
+test.png

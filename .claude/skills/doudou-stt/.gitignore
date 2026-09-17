@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+# Config
+.env
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local media / results
+resources/stt/*
+!resources/stt/.gitkeep
+resources/data/*
+!resources/data/.gitkeep
+*.srt
+*.vtt
+*.mp3
+*.wav
+*.mp4
+*.m4a
