@@ -2,23 +2,20 @@
   "version": 1,
   "skills": {
     "doudou-dev": {
-      "source": "..\\doudou-ai-coding-skills\\",
-      "sourceUrl": "..\\doudou-ai-coding-skills\\",
-      "sourceType": "git",
+      "source": "undsky/doudou-ai-coding-skills",
+      "sourceType": "github",
       "skillPath": "skills/doudou-dev/SKILL.md",
       "computedHash": "7c7d1e88daeb867b02ec747e0073f0079a6fa044c48cd85a296f9ffc555e7c53"
     },
     "doudou-product": {
-      "source": "..\\doudou-ai-coding-skills\\",
-      "sourceUrl": "..\\doudou-ai-coding-skills\\",
-      "sourceType": "git",
+      "source": "undsky/doudou-ai-coding-skills",
+      "sourceType": "github",
       "skillPath": "skills/doudou-product/SKILL.md",
-      "computedHash": "9f05e9c04d3e38f273d27c4aee007184ff89f69542d75572bdad1f6f255704ea"
+      "computedHash": "0972e442be308bba0cb37936afcc6a0606b8bdde3e5682917d1fd5672878f9f8"
     },
     "doudou-test": {
-      "source": "..\\doudou-ai-coding-skills\\",
-      "sourceUrl": "..\\doudou-ai-coding-skills\\",
-      "sourceType": "git",
+      "source": "undsky/doudou-ai-coding-skills",
+      "sourceType": "github",
       "skillPath": "skills/doudou-test/SKILL.md",
       "computedHash": "dd0da48d32d50c83796c00601ce7e1670816cb5d8de6444288835c92502a4991"
     },

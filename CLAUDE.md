@@ -1,7 +1,5 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## 仓库结构
 
 本仓库包含三个可独立运行的应用，而非根级工作区：

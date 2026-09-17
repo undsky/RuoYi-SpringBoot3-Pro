@@ -1,40 +1,95 @@
 # DouDou AI Coding
 
-> **愿景：人人都能做开发**
->
-> 豆豆（DouDou）AI 全流程开发平台，面向个人（编程小白）、小中型企业，覆盖后端服务、Web 管理端和移动端h5、APP、小程序开发。
->
-> 本仓库由三个可以独立运行的应用组成：Egg.js 后端、Vue 3 管理端和 UniApp 移动客户端。
+**愿景：人人都能做开发**
 
-按照步骤，一步步开启你的开发之旅。
+豆豆（DouDou）AI 全流程开发平台，面向个人（编程小白）、小中型企业，覆盖后端服务、Web 前端和移动端h5、APP、小程序开发。
 
-## 开发工具
+## 准备
 
-任意支持 AI 编程的 IDE 或编辑器：
-
-- **国外**：
-  - [VS Code](https://code.visualstudio.com/) - 配合 [claude-code](https://open-vsx.org/extension/Anthropic/claude-code) 等插件
-  - [Cursor](https://www.cursor.com/)
-  - [Windsurf](https://codeium.com/windsurf)
-  - [Kiro](https://kiro.dev/)
-  - [Claude Code](https://code.claude.com/docs/zh-CN/quickstart#step-1-install-claude-code)
-  - [Codex](https://chatgpt.com/zh-Hans-CN/codex)
-- **国内**：
-  - [Trae](https://www.trae.cn/)
-  - [Qoder](https://qoder.cn/)
-  - [CodeBuddy](https://www.codebuddy.cn/home/)
-- **移动端与小程序开发工具**：
-  - [HBuilderX](https://www.dcloud.io/hbuilderx.html)
-  - [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
-
-## 开发环境
-
-下载安装：
-
+- 任意支持 AI 终端、IDE
+- 移动开发需要安装 [HBuilderX](https://www.dcloud.io/hbuilderx.html)
 - [nodejs](https://nodejs.org/zh-cn/download)
 - [python](https://www.python.org/downloads/)
 
-这里不要出现任何技术性描述，只写傻瓜式开发流程！！！
+## 相关技能
+
+建议拿出几分钟了解下核心技能，当然你也可以直接开始你的开发之旅。
+
+- [doudou-llm-wiki-skill](https://github.com/undsky/doudou-llm-wiki-skill)
+- [doudou-ai-coding-skills](https://github.com/undsky/doudou-ai-coding-skills)
+- [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
+
+---
+
+## 开始开发之旅
+
+即使你**完全不会编程、一行代码都没写过**，也只要按照下面的 5 个步骤，在 AI 对话框里输入简单的一句话，就能把脑海里的一个点子，变成真正能点击、能使用的精美软件！
+
+**以下所有指令都是在 AI 对话框内输入**
+
+---
+
+### 第 1 步：给 AI 装上“专属大脑”
+
+```
+/doudou-wiki init
+```
+
+初始化你的知识库，然后将你所有的资料一股脑丢进 `kb/raw` 目录下
+
+```
+/doudou-wiki add
+```
+
+完成！你的知识库已经建立好了。
+
+### 第 2 步：启动环境
+
+```
+/doudou-dev 帮我把开发环境跑起来
+```
+
+完成！静待项目启动……
+
+---
+
+### 第 3 步：产品设计
+
+```
+/doudou-product
+```
+
+完成！产品需求文档、设计交付说明、数据库表结构、研发实现说明、测试验收用例，都将存储到 `resources/product` 目录下
+
+---
+
+### 第 4 步：系统开发
+
+- 接口开发
+
+```
+描述你的需求
+```
+
+代码将自动生成到`doudou-eggjs`、`doudou-vue3`、`doudou-uniapp`目录下
+
+- 页面开发
+
+```
+/ui-ux-pro-max 描述你的页面需求
+```
+
+完成！稍后页面会自动刷新，你可以直接在浏览器查看效果
+
+---
+
+### 第 5 步：自动测试
+
+```
+/doudou-test
+```
+
+完成！测试结果将保存到 `resources/test` 目录下
 
 ---
 

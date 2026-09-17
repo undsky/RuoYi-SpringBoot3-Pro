@@ -1,5 +1,16 @@
 {
-  "default": null,
-  "registries": {},
-  "processors": {}
+  "default": "doudou-kb",
+  "registries": {
+    "doudou-kb": {
+      "name": "doudou 知识库",
+      "path": "E:/me/doudou-ai-coding/kb",
+      "language": "zh",
+      "created": "2026-09-17"
+    }
+  },
+  "processors": {
+    "doudou-doc": "E:/me/doudou-doc-skill",
+    "doudou-ocr": "E:/me/doudou-ocr-skill",
+    "doudou-stt": "E:/me/doudou-stt-skill"
+  }
 }
