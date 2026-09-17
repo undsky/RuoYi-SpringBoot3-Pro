@@ -1,8 +1,20 @@
-# DouDou AI Coding
+<h1 align="center">DouDou AI Coding</h1>
 
-**愿景：人人都能做开发**
+<p align="center">
+  <b>简体中文</b> | <a href="README_EN.md">English</a>
+</p>
 
-豆豆（DouDou）AI 全流程开发平台，面向个人（编程小白）、小中型企业，覆盖后端服务、Web 前端和移动端h5、APP、小程序开发。
+<p align="center">
+  <b>愿景：人人都能做开发</b>
+</p>
+
+<p align="center">
+  豆豆（DouDou）AI 全流程开发平台，面向个人（编程小白）、小中型企业，覆盖后端服务、Web 前端和移动端h5、APP、小程序开发。
+</p>
+
+<p align="center">
+  <img src="./assets/cover.png" alt="DouDou AI Coding Banner" width="100%" />
+</p>
 
 ## 准备
 
@@ -24,6 +36,10 @@
 ## 开始开发之旅
 
 即使你**完全不会编程、一行代码都没写过**，也只要按照下面的 5 个步骤，在 AI 对话框里输入简单的一句话，就能把脑海里的一个点子，变成真正能点击、能使用的精美软件！
+
+<p align="center">
+  <img src="./assets/workflow.gif" alt="DouDou AI Coding Workflow" width="100%" />
+</p>
 
 **以下所有指令都是在 AI 对话框内输入**
 
